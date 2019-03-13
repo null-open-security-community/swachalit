@@ -1,0 +1,70 @@
+class EventSession < ActiveRecord::Base
+  audited
+
+  attr_accessible :event_id, :user_id, :name, :description
+  attr_accessible :session_type, :tags
+  attr_accessible :need_projector, :need_microphone, :need_whiteboard
+  attr_accessible :start_time, :end_time, :slug
+  attr_accessible :tag_ids
+  attr_accessible :presentation_url
+  attr_accessible :video_url
+  attr_accessible :placeholder
+
+  # This is required to skip validation for admin user
+  attr_accessor :is_admin_update
+
+  # For ActiveAdmin
+  # https://github.com/saepia/just-datetime-picker
+  just_define_datetime_picker :start_time, :add_to_attr_accessible => true
+  just_define_datetime_picker :end_time, :add_to_attr_accessible => true
+
+  acts_as_taggable
+
+  belongs_to :event
+  belongs_to :user
+
+  validates :event_id, :user_id, :name, :description, :presence => true
+  validates :start_time, :end_time, :presence => true
+  validate :date_time_validator, :unless => :is_admin_update
+
+  scope :public_sessions, lambda {
+    joins(:event).where(:events => { :public => true })
+  }
+
+  def initialize(*args)
+    super(*args)
+
+    unless self.event.nil?
+      self.start_time = self.event.start_time if self.start_time.nil?
+      self.end_time = self.event.end_time if self.end_time.nil?
+    end
+  end
+
+  def as_json
+    super(:only => [:id, :name, :description, :session_type, :tags, :start_time, :end_time,
+      :presentation_url, :video_url], :methods => [ :user ])
+  end
+
+  def speaker
+    self.user
+  end
+
+  def speaker_name
+    self.speaker.name rescue ''
+  end
+
+  def to_param
+    "#{self.id} #{self.name}".parameterize
+  end
+
+  private
+
+  def date_time_validator
+    if self.start_time and self.end_time
+      errors.add(:start_time, 'cannot be before event start') if self.event.start_time > self.start_time
+      errors.add(:end_time, 'cannot be after event end') if self.event.end_time < self.end_time
+      errors.add(:end_time, 'cannot modify after Event End Time') if self.event.end_time < (Time.now-30.days)
+    end
+  end
+
+end

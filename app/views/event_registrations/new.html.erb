@@ -1,0 +1,49 @@
+<div class='row'>
+  <div class='col-md-12'>
+    <h2>Event Registration
+      <small>
+        <%= link_to @event.name, event_path(@event), :style => 'text-decoration: none;' %>
+      </small>
+    </h2>
+    <hr/>
+  </div>
+</div>
+
+<%= render :partial => 'events/basic_event', :locals => { :event => @event } %>
+
+<div class='row'>
+  <div class='col-md-12'>
+  <%#= @event.registration_allowed? %>
+  <% unless @event.registration_allowed? %>
+    <% #max_reg=0 or event_reg < max_reg %>
+    <div class='alert alert-danger'>
+      <strong>Errrrr!</strong> All seats are gone. No more registration allowed for this event.
+    </div>
+  <% else %>
+    <% if !@event.registration_active? %>
+      <div class='alert alert-danger'>
+        <strong>Errrrr!</strong> Registration is not active for this event.
+          <% if @event.registerable_in_future? %>
+          Registrations starts in <%= distance_of_time_in_words(Time.now, @event.registration_start_time) %>
+          <% end %>
+      </div>
+    <% elsif current_user.registered_for_event?(@event) %>
+        <div class='alert alert-danger'>
+          <strong>Error:</strong> You have already registered for this event.
+        </div>
+    <% else %>
+      <% if @event.registration_active? and @event.has_registration_instructions? %>
+        <div class='panel panel-primary'>
+          <div class='panel-heading'>
+            <h4><%= fa_icon('info') %> Registration Instructions</h4>
+          </div>
+          <div class='panel-body'>
+            <%= markdown_html(@event.registration_instructions) %>
+          </div>
+        </div>
+      <% end %>
+      <%= render 'form' %>
+    <% end %>
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+module Leads::EventRegistrationsHelper
+end

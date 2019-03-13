@@ -1,0 +1,75 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ * Removed formtastic CSS to prevent bootstrap screw-up
+ *
+ *= require bootstrap.min
+ *= require bootstrap-default-theme
+ *= require yeti
+ *= require_self
+ *= require font-awesome
+ */
+
+body {
+  position: relative; /* For scrollyspy */
+  padding-top: 50px; /* Account for fixed navbar */
+}
+
+.container a {
+  text-decoration: none;
+}
+
+/* http://rvg.me/2013/11/using-bootstrap-3-with-rails-4/ */
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../assets/glyphicons-halflings-regular.eot');
+  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+       url('../assets/glyphicons-halflings-regular.woff') format('woff'),
+       url('../assets/glyphicons-halflings-regular.ttf') format('truetype'),
+       url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+#main-content {
+  min-height: 450px;
+}
+
+.red {
+  color: #d9534f;
+}
+
+.blue {
+  color: #428bca;
+}
+
+.green {
+  color: #5cb85c;
+}
+
+.orange {
+  color: #f0ad4e;
+}
+
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Autocomplete JS */
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-no-suggestion { padding: 2px 5px;}
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: bold; color: #000; }
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { font-weight: bold; font-size: 16px; color: #000; display: block; border-bottom: 1px solid #000; }
+
+.autocomplete-input input { font-size: 28px; padding: 10px; border: 1px solid #CCC; display: block; margin: 20px 0; }
+
+

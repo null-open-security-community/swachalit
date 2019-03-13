@@ -1,0 +1,87 @@
+<style>
+.btnz {
+   display: block;
+   float: left;
+   padding: 2px 10px 2px 10px;
+   margin-right: 5px;
+   margin-top: 5px;
+   border:none;
+   background-color: #ececec;
+   text-decoration: none;
+   font-size: 14px;
+   color: #FFF;
+}
+ 
+.btnz:hover {
+   color: #efefef;
+}
+
+.facebook {
+   background-color: #3b5998;
+}
+
+.twitter {
+   background-color: #55acee;
+}
+</style>
+<div id="fb-root"></div>
+<script>
+   jQuery(document).ready(function($) {
+   $('.share').click(function() {
+     var NWin = window.open($(this).prop('href'), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+     if (window.focus)
+     {
+       NWin.focus();
+     }
+     return false;
+    });
+});
+</script>
+<%- title(@event.name) %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h1>
+        <%= @event.name %> 
+        <span class='pull-right'>
+          <% if user_signed_in? and current_user.registered_for_event?(@event) %>
+            <!-- <small>Already registered for the event.</small> -->
+            <%= link_to event_event_registration_path(@event, current_user.registration_for_event(@event)), :class => 'btn btn-danger', :method => :delete, :confirm => 'Are you sure you want to unregister from this event?' do %>
+              <%= fa_icon('users') %> Cancel Registration
+            <% end %>
+          <% else %>
+            <%= link_to new_event_event_registration_path(@event), :class => 'btn btn-success' do %>
+              <%= fa_icon('users') %> <%= @event.register_name %>
+            <% end %>
+          <% end %>
+        </span>
+      </h1>
+      <p class='lead'>
+        <%= @event.start_time.strftime("%A %B %d %Y %I:%M %p") %>
+        <small><span class='label label-success'><%= @event.event_type.name %></span></small>
+        <small>
+          <%= link_to chapter_path(@event.chapter) do %>
+            <span class='label label-success'><%= @event.chapter.name %></span>
+          <% end %>
+        </small>
+        <small>
+          <!-- Facebook Share Button -->
+          <a class="btnz share facebook" href="http://www.facebook.com/sharer/sharer.php?u=http://null.co.in/events/<%= @event.id %>"><i class="fa fa-facebook"></i> Share</a>
+        </small>
+        <small>
+          <!-- Twitter Share Button -->
+          <a class="btnz share twitter" href="https://twitter.com/intent/tweet?text=I%20am%20attending%20null%20<%= @event.chapter.name %>%20<%= @event.event_type.name %>,%20A%20Information%20Security%20Event&url=http://null.co.in/events/<%= @event.id %>&via=null0x00"><i class="fa fa-twitter"></i> Tweet</a>
+        </small>
+
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <%= render :partial => 'events/event', :locals => { :event => @event } %>
+  </div>
+</div>
+
+

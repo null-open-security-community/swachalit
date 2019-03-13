@@ -1,0 +1,53 @@
+<%- title("Showing Venue - null Community") %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        <%= @venue.name %> 
+        <span class='pull-right'>
+          <div class='dropdown'>
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"> Venue Options <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation">
+                <%= link_to 'Venue List', leads_venues_path %>
+              </li>
+              <li role="presentation">
+                <%= link_to 'Edit Venue', edit_leads_venue_path(@venue) %>
+              </li>
+            </ul>
+          </div>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <h2>Contact Information</h2>
+    <div class='table-responsive'>
+      <table class='table table-condensed'>
+        <tr>
+          <th width='20%'>Contact Name</th>
+          <td><%= @venue.contact_name %></td>
+        </tr>
+        <tr>
+          <th>Contact Mobile</th>
+          <td><%= @venue.contact_mobile %></td>
+        </tr>
+        <tr>
+          <th>Contact Email</th>
+          <td><%= @venue.contact_email %></td>
+        </tr>
+      </table>
+    </div>   
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <h2>Venue Location</h2>    
+    <%= render :partial => 'venues/venue', :locals => { :venue => @venue } %>
+  </div>
+</div>

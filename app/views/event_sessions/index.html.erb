@@ -1,0 +1,74 @@
+<%- title "Sessions Archive - null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Sessions Archive
+        <small>
+          <%= page_entries_info(@event_sessions) %>
+        </small>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <% if @query %>
+      <span class='label label-default'><%= @query %></span>
+      <span class='label label-default'><%= link_to "[x] Remove Filter", event_sessions_path %></span>
+    <% else %>
+      <span class='label label-default'>No filter set</span>
+    <% end %>
+    <span class='pull-right'>
+      <form class="form-inline" method="get">
+        <div class="input-group">
+          <div class="input-group-addon">Query</div>
+          <%= text_field_tag :q, @query, :class => 'form-control' %>
+        </div>
+        <button type="submit" class="btn btn-default">Filter</button>
+      </form>
+    </span>
+  </div>
+</div>
+
+<br/>
+<div class='table-responsive'>
+  <table class='table table-condensed'>
+    <tr>
+      <th width='10%'>Date</th>
+      <th width='60%'>Topic</th>
+      <th>Speaker</th>
+      <th>Resources</th>
+    </tr>
+    <% @event_sessions.each do |event_session| %>
+    <% next unless event_session.event.public? %>
+    <tr>
+      <td>
+        <small><%= event_session.start_time.strftime("%Y-%m-%d") %></small>
+      </td>
+      <td>
+        <span class='label label-success'><%= event_session.event.event_type.name %></span>
+        <span class='label label-success'><%= event_session.event.chapter.name %></span>
+        <%= link_to event_session.name, event_session_path(event_session) %>
+      </td>
+      <td>
+        <%= link_to event_session.user.name, public_profile_path(event_session.user) %>
+      </td>
+      <td>
+        <% unless event_session.video_url.blank? %>
+          <%= link_to "", safe_url(event_session.video_url), :class => 'fa-file-video-o fa fa-2x', :target => '_blank' %>
+           <% end %>
+        <% unless event_session.presentation_url.blank? %>
+          <%= link_to "", safe_url(event_session.presentation_url), :class => 'fa-file-powerpoint-o fa fa-2x', :target => '_blank' %>
+          <% end %>
+      </td>
+    </tr>
+    <% end %>
+    <tr>
+      <td colspan=4>
+        <%= paginate @event_sessions %>
+      </td>
+    </tr>
+  </table>
+</div>

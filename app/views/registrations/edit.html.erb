@@ -1,0 +1,86 @@
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>Edit User Profile</h2>
+    </div>
+    <div class='page-body'>
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :multipart => true, :html => { :method => :put, :class => 'form' }) do |f| %>
+        <%= resource_error_messages!(resource) %>
+
+        <div class='row'>
+          <div class='col-md-6'>
+            <div class='form-group'>
+              <%= f.label :email %>
+              <%= f.email_field :email, :autofocus => true, :class => 'form-control' %>
+            </div>
+            <div class='form-group'>
+              <%= f.label :name %>
+              <%= f.text_field :name, :class => 'form-control' %>
+            </div>
+            <div class='form-group'>
+              <%= f.label :handle %>
+              <%= f.text_field :handle, :class => 'form-control' %>
+            </div>
+            <div class='form-group'>
+              <%= f.label :password %>
+              <%= f.password_field :password, :class => 'form-control' %>
+            </div>
+            <div class='form-group'>
+              <%= f.label :password_confirmation %>
+              <%= f.password_field :password_confirmation, :class => 'form-control' %>
+            </div>
+            <div class='form-group'>
+              <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+              <%= f.password_field :current_password, :class => 'form-control' %>
+            </div>
+            <div class='form-group'>
+              <%= f.label :avatar %>
+              <%= f.file_field :avatar %>
+            </div>
+          </div>
+          <div class='col-md-6'>
+            <div class='form-group'>
+              <div class='input-group'>
+                <span class="input-group-addon"><%= fa_icon('twitter') %></span>
+                <%= f.text_field :twitter_handle, :placeholder => 'http://www.twitter.com/example', :class => 'form-control' %>
+              </div>
+              <br/>
+              <div class='input-group'>
+                <span class="input-group-addon"><%= fa_icon('facebook') %></span>
+                <%= f.text_field :facebook_profile, :placeholder => 'http://www.facebook.com/example', :class => 'form-control' %>
+              </div>
+              <br/>
+              <div class='input-group'>
+                <span class="input-group-addon"><%= fa_icon('linkedin') %></span>
+                <%= f.text_field :linkedin_profile, :placeholder => 'http://www.linkedin.com/example', :class => 'form-control' %>
+              </div>
+              <br/>
+              <div class='input-group'>
+                <span class="input-group-addon"><%= fa_icon('github') %></span>
+                <%= f.text_field :github_profile, :placeholder => 'http://www.github.com/example', :class => 'form-control' %>
+              </div>
+              <br/>
+              <div class='input-group'>
+                <span class="input-group-addon"><%= fa_icon('home') %></span>
+                <%= f.text_field :homepage, :placeholder => 'http://www.example.com', :class => 'form-control' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-md-12'>
+            <div class='form-group'>
+              <%= f.label :about_me %>
+              <%= f.text_area :about_me, :class => 'form-control', :rows => 10 %>
+            </div>
+          </div>
+        </div>
+
+        <div class='form-group'>
+          <%= f.submit "Update", :class => 'btn btn-primary btn-lg' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

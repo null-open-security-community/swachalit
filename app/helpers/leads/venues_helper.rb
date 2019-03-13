@@ -1,0 +1,2 @@
+module Leads::VenuesHelper
+end

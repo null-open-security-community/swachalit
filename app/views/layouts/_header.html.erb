@@ -1,0 +1,158 @@
+<header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">n|u</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href='<%= upcoming_path %>'><%= fa_icon('calendar') %> Upcoming Events</a>
+        </li>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Archive <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href='<%= archives_path %>'><%= fa_icon('archive') %> Events</a></li>
+            <li><a href='<%= event_sessions_path %>'><%= fa_icon('code') %> Sessions</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chapter <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+          <% Chapter.active_chapters.order('name ASC').each do |chapter| %>
+            <li>
+              <%= link_to chapter_path(chapter) do %>
+                <%= fa_icon('arrow-circle-right') %> <%= chapter.name %>
+              <% end %>
+            </li>
+          <% end %>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Engage <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to 'Join Mailing List', 'https://groups.google.com/forum/#!forum/null-co-in', :target => '_blank' %>
+            </li>
+            <li>
+              <%= link_to 'Become a Volunteer', 'https://docs.google.com/forms/d/1w6I4lcYraiaGd9YvJ6fkmKrJyM7n9V0OmmXtyFeqUT4/viewform', :target => '_blank' %>
+            </li>
+            <li>
+              <%= link_to new_session_request_path do %>
+                Request a Session
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_session_proposal_path do %>
+                Propose a Session
+              <% end %>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to calendar_path do %>
+                <%= fa_icon('calendar-o') %> Calendar
+              <% end %>
+            </li>
+            <li>
+              <%= link_to 'https://www.twitter.com/swachalit', :target => '_blank' do %>
+                <%= fa_icon(:twitter) %> Twitter
+              <% end %>
+            </li>
+            <li>
+              <%= link_to forum_path do %>
+                <%= fa_icon(:jsfiddle) %> Forum
+              <% end %>
+            </li>
+            <li>
+              <%= link_to irc_path do %>
+                <%= fa_icon(:group) %> IRC
+              <% end %>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <% Page.published.order('title ASC').each do |page| %>
+            <li>
+              <%= link_to page.navigation_name, page_path(page) %>
+            </li>
+            <% end %>
+          </ul>
+        </li>
+        <li>
+          <a href='https://blog.null.co.in/' target='_blank'><%= fa_icon('rss') %> Blog</a> 
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+        <li>
+          <div style='margin-top: 10px;'>
+            <%= link_to(image_tag(current_user.avatar.url, :class => 'img-circle', :size => '30x30'), public_profile_path(current_user)) %>
+          </div>
+        </li>
+        <li class='dropdown'>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="<%= public_profile_path(current_user) %>"><%= fa_icon('globe') %> Public Profile</a></li>
+            <li><a href="<%= edit_user_registration_path(current_user) %>"><%= fa_icon('gears') %> Edit Profile</a></li>
+            <% unless current_user.managed_chapters.count.zero? %>
+              <li>
+                <a href='<%= leads_events_path %>'>
+                  <%= fa_icon('wrench') %> Event Management
+                </a>
+              </li>
+              <li>
+                <a href='<%= leads_chapters_path %>'>
+                  <%= fa_icon('paw') %> Chapter Management
+                </a>
+              <li>
+              <li>
+                <a href='<%= leads_venues_path %>'>
+                  <%= fa_icon('wrench') %> Venue Management
+                </a>
+              </li>
+            <% end %>
+            <li class="divider"></li>
+            <li>
+              <%= link_to destroy_user_session_path, :method => :delete do %>
+                <%= fa_icon('sign-out') %> Sign-out
+              <% end %>
+            </li>
+          </ul>
+        </li>
+        <% else %>
+        <li>
+          <%= link_to '/users/sign_up', :style => 'font-weight: bolder' do %>
+            <%= fa_icon(:group) %> Join the null Community
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_session_path(User) do %>
+            <%= fa_icon('sign-in') %> Login
+          <% end %>
+        </li>
+        <% end %>
+        <li>
+          <a href="<%= about_path %>">
+            <%= fa_icon('book') %> About
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <%= fa_icon('question') %> Support
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

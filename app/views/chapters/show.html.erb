@@ -1,0 +1,106 @@
+<%- title "#{@chapter.name} Chapter - null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <h2>
+      <%= @chapter.name %> Chapter
+      <small><%= @chapter.state %></small>
+      <% if user_signed_in? and current_user.managed_chapter?(@chapter) %>
+      <small><%= link_to fa_icon('edit'), edit_leads_chapter_path(@chapter) %></small>
+      <% end %>
+    </h2>
+    <div class='row'>
+      <div class='col-md-5'>
+        <div class='col-md-12'>
+          <%= image_tag @chapter.image_url, :class => 'img-rounded', :size => '400x350' %>
+        </div>
+        <div class='col-md-12'>
+          <center>
+            <ul class='nav navbar-nav'>
+              <% if @chapter.has_twitter_handle? %>
+                <li>
+                  <%= link_to safe_url(@chapter.twitter_handle), :target => '_blank' do %>
+                  <%= fa_icon('twitter 4x') %>
+                  <% end %>
+                </li>
+                  <% end %>
+              <% if @chapter.has_facebook_profile? %>
+                <li>
+                  <%= link_to safe_url(@chapter.facebook_profile), :target => '_blank' do %>
+                  <%= fa_icon('facebook 4x') %>
+                  <% end %>
+                </li>
+              <% end %>
+              <% if @chapter.has_github_profile? %>
+                <li>
+                  <%= link_to safe_url(@chapter.github_profile), :target => '_blank' do %>
+                  <%= fa_icon('github 4x') %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </center>
+        </div>
+      </div>
+      <div class='col-md-7'>
+        <div class='row'>
+          <div class='col-md-12'>
+            <%= safe_markdown_html(@chapter.description) %>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-md-12'>
+            <h3>Leaders</h3>
+            <ul>
+              <% @chapter.leads.each do |user| %>
+              <li><%= link_to user.name, public_profile_path(user) %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Upcoming Events
+        <small><%= @chapter.name %> Chapter</small>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='row' id='chapter-upcoming-events'>
+  <div class='col-md-12'>
+    <% if @chapter.upcoming_events.empty? %>
+    <div class='alert alert-danger'>No upcoming event for this chapter.</div>
+    <% else %>
+    <%= render :partial => 'events/list', :locals => 
+      { :events => @chapter.upcoming_events.order('start_time ASC') } %>
+    <% end %>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Past Events
+        <small><%= @chapter.name %> Chapter</small>
+      </h2>
+    </div>
+  </div>
+</div>
+<div class='row' id='chapter-upcoming-events'>
+  <div class='col-md-12'>
+    <% if @chapter.past_events.empty? %>
+    <div class='alert alert-danger'>No past event for this chapter.</div>
+    <% else %>
+    <%= render :partial => 'events/list', :locals => 
+      { :events => @chapter.past_events.order('start_time DESC') } %>
+    <% end %>
+  </div>
+</div>
+</div>

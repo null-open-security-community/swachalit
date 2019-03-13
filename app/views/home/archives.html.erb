@@ -1,0 +1,49 @@
+<%- title "Events Archive - null Community" %>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Events Archive
+        <small>
+          <%= page_entries_info(@events) %>
+        </small>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <% ymg = nil %>
+  <div class='col-md-12'>
+  <% @events.each do |event| %>
+    <% ym = event.start_time.strftime("%B %Y") %>
+    <% if ym != ymg %>
+      <%= "<br/>".html_safe unless ymg.nil? %>
+      <% ymg = ym %>
+      <p class='lead'>
+        <%= ym %>
+      </p>
+      <hr/>
+    <% end %>
+    <!-- Event goes here -->
+    <p>
+      <strong><u><%= event.start_time.strftime("%Y-%m-%d") %></u></strong> &nbsp; 
+      <%= link_to({ :chapter_id => event.chapter.id }) do %>
+        <span class='label label-info'>
+          <%= event.chapter.name %>
+        </span>
+      <% end %>  &nbsp; &nbsp;
+      <%= link_to event.name, event_path(event) %> 
+      <small>
+        <span class='label label-success'>Sessions: <%= event.event_sessions.count %></span> 
+        <span class='label label-info'>Registrations: <%= event.event_registrations.count %></span>
+      </small>
+    </p>
+  <% end %>
+  <br/>
+  <div>
+    <%= paginate @events %>
+  </div>
+  </div>
+</div>

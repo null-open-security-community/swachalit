@@ -1,0 +1,16 @@
+** This is an auto generated mail from Swachalit **
+
+You are receiving this mail as you have been assigned a speaker for:
+
+Session:       <%= @ev_session.name %>
+Event:         <%= @ev_session.event.name %>
+Start Time:    <%= @ev_session.start_time.strftime("%A %B %d %Y %I:%M %p") %>
+
+The session details are available at:
+<%= event_session_url(@ev_session) %>
+
+You are requested to edit the session description to suit your talk as soon as possible. To edit the session description, please sign-in to Swachalit platform using this email address and visit the following URL:
+
+<%= edit_event_session_url(@ev_session) %>
+
+We thank you for your contribution to the community.

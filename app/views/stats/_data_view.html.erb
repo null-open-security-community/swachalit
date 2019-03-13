@@ -1,0 +1,44 @@
+<div class='row'>
+  <div class='col-md-12'>
+    <table class='table table-bordered'>
+      <tr>
+        <td width='60%'><h2>Events</h2></td>
+        <td><h3><%= @stat.events.count %></h3></td>
+      </tr>
+      <% EventType.all.each do |event_type| %>
+      <tr>
+        <td><h4><%= event_type.name %></h4></td>
+        <td><h4><%= @stat.events.where(:event_type_id => event_type.id).count %>  (Sessions: <%= 
+        @stat.event_sessions.where(:event_id => @stat.events.where(:event_type_id => event_type.id).select(:id)).count %>)
+        </h4></td>
+      </tr>
+      <% end %>
+      <tr>
+        <td><h3>Participation</h3></td>
+        <td><h3><%= @stat.event_registrations.count %></h3></td>
+      </tr>
+      <tr>
+        <td><h3>Unique Speakers</h3></td>
+        <td><h3><%= @stat.speakers.count %></h3></td>
+      </tr>
+    </table>
+  </table>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <h3>Speakers</h3>
+    <table class='table table-condensed'>
+      <tr>
+        <th width='60%'>Name</th>
+        <th>Sessions Count</th>
+      </tr>
+      <% @stat.top_speakers(100000).each do |s| %>
+      <tr>
+        <td><%= link_to s[0].name, public_profile_path(s[0]) %></td>
+        <td><%= s[1] %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

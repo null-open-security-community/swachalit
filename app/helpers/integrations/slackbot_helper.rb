@@ -1,0 +1,2 @@
+module Integrations::SlackbotHelper
+end

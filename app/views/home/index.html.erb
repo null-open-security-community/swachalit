@@ -1,0 +1,156 @@
+<%- title("null Community Platform") %>
+<!-- <div class='row'>
+  <div class='col-md-12'>
+    <center>
+      <%= link_to(image_tag('hardwear_transparent.png', :style => 'width: 540px; height: auto'), "https://hardwear.io/", :target => '_blank') %>
+    </center>
+  </div>
+</div> -->
+<div class='row'>
+  <div class='col-md-12'>
+    <div class="jumbotron">
+      <h1>
+        <center>
+          Welcome to <strong>null</strong><br/>
+          <small>The Open Security Community</small>
+        <center>
+      </h1>
+      <p class='text-justify'>
+null is India's largest open security community. Registered as a non-profit society in 2010, we have been active since even before that. null is about spreading information security awareness. All our activities such as null Monthly Meets, null Humla, null Bachaav, null Puliya, null Job Portal are for the cause of that.
+      </p>
+      <center>
+        <% unless user_signed_in? %>
+          <%= link_to '/users/sign_up', :class => 'btn btn-danger btn-lg' do %>
+            <%= fa_icon('group') %> Join The null Community
+          <% end %>
+        <% end %>
+      </center>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-4'>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <center>Active Chapters</center>
+      </div>
+      <a href='#chapters-event-schedule' style='color: inherit'>
+        <div class='panel-body'>
+          <center>
+            <h1><%= ::Chapter.active_chapters.count %></h1>
+          </center>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class='col-md-4'>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <center>Upcoming Events</center>
+      </div>
+      <a href='/upcoming' style='color: inherit'>
+        <div class='panel-body'>
+          <center>
+            <h1><%= @events.count %></h1>
+          </center>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class='col-md-4'>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <center>Security Jobs</center>
+      </div>
+      <a href='http://jobs.null.co.in/' target='_blank' style='color: inherit'>
+        <div class='panel-body'>
+          <center>
+            <h1><%= fa_icon('external-link') %></h1>
+          </center>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class='row' style='margin-bottom: 1em;'>
+  <h1><center>Engage with <strong>null</strong></center></h1>
+  <hr/>
+  <div class='col-md-4'>
+    <div class='panel panel-default'>
+      <div class='panel-heading'><center><h3 class="panel-title">Mailing List</h3></center></div>
+      <div class='panel-body'>
+        <p class='lead text-justify' style='min-height: 360px;'>
+          Join the mailing list to keep yourself updated about our activities &amp; events. Join it for deep technical discussions revolving around computer security &amp; nothing else. Some of the best security professionals answer queries, discuss new findings and more, all in the mailing list.
+        </p>
+        <%= link_to 'https://groups.google.com/forum/#!forum/null-co-in', :class => 'btn btn-danger btn-block', :target => '_blank' do %>
+          <%= fa_icon('group') %> Subscribe to Group
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-4'>
+    <div class='panel panel-default'>
+      <div class='panel-heading'><center><h3 class="panel-title">Become a Volunteer</h3></center></div>
+      <div class='panel-body'>
+        <p class='lead text-justify' style='min-height: 360px;'>
+          null is purely driven by volunteers. Volunteers support and contribute in making the community the way it is. Benefits of being a volunteer include a cool @null.co.in email address, access to null events, mentorship opportunities with the best in the Industry and more. So become a volunteer, now!
+        </p>
+        <%= link_to 'https://docs.google.com/forms/d/1w6I4lcYraiaGd9YvJ6fkmKrJyM7n9V0OmmXtyFeqUT4/viewform', :class => 'btn btn-danger btn-block', :target => '_blank' do %>
+          <%= fa_icon('user-plus') %> Become a Volunteer
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-4'>
+    <div class='panel panel-default'>
+      <div class='panel-heading'><center><h3 class="panel-title">Start a Chapter</h3></center></div>
+      <div class='panel-body'>
+        <p class='lead text-justify' style='min-height: 360px;'>
+          Start a new chapter! A few conditions apply: A minimum of 3 interested people are required to begin the process of creating a new chapter. Once you have the required number, you need to conduct a pre-null meet and fulfill our criteria. If you think you are ready, get started by clicking below
+        </p>
+        <%= link_to '/pages/3-how-to-start-a-chapter', :class => 'btn btn-danger btn-block' do %>
+          <%= fa_icon('thumb-tack') %> Start a Chapter
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='row' id='chapters-event-schedule'>
+  <h1><center>Event Schedule</center></h1>
+  <div class='col-md-12'>
+    <table class='table table-bordered'>
+      <tr>
+        <th><h3><center><strong>Chapter</strong></center></h3></th>
+        <th><h3><center><strong>Upcoming Event</strong></center></h3></th>
+      </tr>
+      <% min = 0 %>
+      <% ::Chapter.active_chapters.order('name ASC').each do |chapter| %>
+        <% next if chapter.next_upcoming_event.nil? %>
+        <% min += 1 %>
+        <tr>
+          <td><h4><center><%= link_to(chapter.name, chapter_path(chapter)) %></center></h4></td>
+          <td>
+            <h4><center>
+            <% if chapter.next_upcoming_event %>
+              <%= link_to distance_of_time_in_words(Time.now, chapter.next_upcoming_event.start_time), chapter.next_upcoming_event %>
+            <% else %>
+              No upcoming event.
+            <% end %>
+            </center></h4>
+          </td>
+        </tr>
+      <% end %>
+      <% if min == 0 %>
+      <tr>
+        <td colspan=2>
+          <center>No upcoming meet currently.</center>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+

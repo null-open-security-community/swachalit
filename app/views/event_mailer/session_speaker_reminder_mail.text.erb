@@ -1,0 +1,16 @@
+** This is an auto generated mail from Swachalit **
+
+This is a reminder for your speaking/presentation session with below details:
+
+Session:       <%= @ev_session.name %>
+Event:         <%= @ev_session.event.name %>
+Start Time:    <%= @ev_session.start_time.strftime("%A %B %d %Y %I:%M %p") %>
+
+The session details are available at:
+<%= event_session_url(@ev_session) %>
+
+You may edit the description of your session if you want, however you must be signed-in to the Swachalit platform in order to do so. Please follow the link below to edit session description:
+
+<%= edit_event_session_url(@ev_session) %>
+
+We thank you for your contribution to the community.

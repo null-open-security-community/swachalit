@@ -1,0 +1,53 @@
+<%= semantic_form_for([:leads, @event, @event_session]) do |f| %>
+  <%= resource_error_messages!(@event_session) %>
+  
+  <%= f.inputs do %>
+    <%#= f.input :user, :as => :select, :collection => User.order('name ASC').map {|u| ["#{u.name} [#{u.id}] <#{truncate(u.email, :length => 10)}>", u.id] } %>
+    <%= f.input :user_id, :label => '&nbsp;', :as => :string, 
+      :input_html => { :style => 'display:none' } %>
+
+    <div class="string input required stringish form-group" id="event_session_user_input">
+      <label class="  control-label" for="event_session_user">User<abbr title="required">*</abbr></label>
+      <span class="form-wrapper">
+        <input class="form-control" id="ajax_user_input" maxlength="255" name="ajax_user_input" type="text" value="<%= @event_session.user.name + ' <'+ @event_session.user.email + '>' rescue '' %>">
+      </span>
+      <span class="help-block">Ajax autocomplete enabled for this field.</span>
+    </div>
+
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :start_time, :as => :datetime %>
+    <%= f.input :end_time, :as => :datetime %>
+    <%= f.input :need_projector %>
+    <%= f.input :need_microphone %>
+    <%= f.input :need_whiteboard %>
+    <%= f.input :presentation_url %>
+    <%= f.input :video_url %>
+
+    <%= f.input :placeholder, :hint => 'For misc. sessions like break, introduction etc.' %>
+  <% end %>
+
+  <br/>
+  <%= f.inputs do %>
+    <%= f.submit :class => 'btn btn-primary' %>
+  <% end %>
+<% end %>
+
+<script type='text/javascript'>
+  $('#ajax_user_input').devbridgeAutocomplete({
+    serviceUrl: '<%= suggest_user_leads_event_event_sessions_path(@event) %>',
+    paramName: 'q',
+    onSelect: function(suggestion) {
+      //alert(JSON.stringify(suggestion));
+      $('#event_session_user_id').val(suggestion.data)
+    },
+    transformResult: function(response) {
+      response = JSON.parse(response);
+      return {
+        suggestions: $.map(response, function(i) {
+          return { value: i.name + " <"+i.email+">", data: i.id };
+        })
+      };
+    }
+  });
+</script>

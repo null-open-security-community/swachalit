@@ -1,0 +1,32 @@
+<%- title("Showing Event - null Community") %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        <%= @event.name %> 
+        <span class='pull-right'>
+          <div class='dropdown'>
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"> Event Options <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation">
+                <%= link_to 'Event List', leads_events_path %>
+              </li>
+              <li role="presentation">
+                <%= link_to 'Edit Event', edit_leads_event_path(@event) %>
+              </li>
+              <li role="presentation">
+                <%= link_to 'Add/Edit Sessions', leads_event_event_sessions_path(@event) %>
+              </li>
+            </ul>
+          </div>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-12'>
+    <%= render :partial => 'events/event', :locals => { :event => @event } %>
+  </div>
+</div>

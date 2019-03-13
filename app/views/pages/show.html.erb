@@ -1,0 +1,31 @@
+<div class='row'>
+    <div class='col-md-12'>
+      <div class='page-header'>
+        <h1>
+          <%= @page.title %>
+
+          <% if can_current_user_manage_page?(@page) %>
+            <small class='pull-right'>
+              <%= link_to edit_page_path(@page), :class => 'btn btn-primary btn-sm' do %>
+                <i class='fa fa-edit'></i> Edit Page
+              <% end %>
+            </small>
+          <% end %>
+        </h1>
+      </div>
+    </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <%= safe_markdown_html(@page.content, {:no_images => false}) %>
+  </div>
+</div>
+
+<div class='row' style='padding-top: 1em;'>
+  <div class='col-md-12'>
+    <span class='pull-right'>
+      <small>Last edited: <%= @page.updated_at %></small>
+    </span>
+  </div>
+</div>

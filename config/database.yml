@@ -1,0 +1,32 @@
+# MySQL.  Versions 4.1 and 5.0 are recommended.
+#
+# Install the MySQL driver:
+#   gem install mysql2
+#
+# And be sure to use new-style password hashing:
+#   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: <%= ENV["MYSQL_DATABASE"] %>
+  pool: 5
+  username: <%= ENV["MYSQL_USERNAME"] %>
+  password: <%= ENV["MYSQL_PASSWORD"] %>
+  hostname: <%= ENV["MYSQL_SERVER"] %>
+ 
+test:
+  adapter: sqlite3
+  encoding: utf8
+  database: db/test.sqlite3
+ 
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: <%= ENV["MYSQL_DATABASE"] %>
+  pool: 5
+  username: <%= ENV["MYSQL_USERNAME"] %>
+  password: <%= ENV["MYSQL_PASSWORD"] %>
+  hostname: <%= ENV["MYSQL_SERVER"] %>
+

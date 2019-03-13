@@ -1,0 +1,48 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.5
+    volumes:
+      - swachalit-mysql:/var/lib/mysql
+    env_file:
+      - .env.mysql
+  redis:
+    image: devdb/redis:2.8.19
+    volumes:
+      - swachalit-redis:/var/lib/redis
+    command: redis-server --appendonly yes
+  app:
+    build: .
+    depends_on:
+      - db
+      - redis
+    command: script/run_docker_app.sh
+    volumes:
+      - .:/app
+    ports:
+      - "8800:8800"
+    env_file:
+      - .env
+  workers:
+    build: .
+    depends_on:
+      - db
+      - redis
+    command: script/run_workers.sh
+    env_file:
+      - .env
+  scheduler:
+    build: .
+    depends_on:
+      - db
+      - redis
+    command: script/run_scheduler.sh
+    env_file:
+      - .env
+
+volumes:
+  swachalit-mysql:
+  swachalit-redis:
+
+
+

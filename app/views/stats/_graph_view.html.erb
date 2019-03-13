@@ -1,0 +1,94 @@
+<div class='row'>
+  <div class='col-md-12'>
+    <h2>Event Stats <small>
+      Total Events: <%= @stat.events.count %>
+      Total Sessions: <%= @stat.event_sessions.count %>
+      Total Participation: <%= @stat.event_registrations.count %>
+    </small></h2> 
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <div id='stat_events_timeline' style='min-height: 400px;'>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-6'>
+    <h2>Event Type</h2>
+    <div id='stat_event_type'></div>
+  </div>
+  <div class='col-md-6'>
+    <h2>Top 5 Speakers</h2>
+    <ul>
+      <% @stat.top_speakers.each do |a| %>
+      <li>
+        <span class='label label-success'><%= a[1] %></span>
+        <%= link_to(a[0].name, public_profile_path(a[0])) %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<script type='text/javascript'>
+  $('#stat_filter_form').submit(function() {
+    document.location = '/stats/' + $('#year').val() + '?chapter_id=' + $('#chapter_id').val();
+    return false;
+  });
+</script>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["timeline", "corechart"]});
+  google.setOnLoadCallback(drawChart);
+  google.setOnLoadCallback(drawPieChart);
+
+  function drawChart() {
+    var container = document.getElementById('stat_events_timeline');
+    var chart = new google.visualization.Timeline(container);
+    var dataTable = new google.visualization.DataTable();
+    var options = {
+      tooltip: { isHtml: true },
+      timeline: {
+        showBarLabels: false
+      }
+    };
+
+    dataTable.addColumn({ 'type': 'string', 'id': 'Event' });
+    dataTable.addColumn({ 'type': 'string', 'id': 'Name' });
+    dataTable.addColumn({ 'type': 'date', 'id': 'Start' });
+    dataTable.addColumn({ 'type': 'date', 'id': 'End' });
+
+    <% EventType.all.each do |event_type| %>
+      <% @stat.events.where(:event_type_id => event_type.id).each do |event| %>
+        dataTable.addRow(['<%= event_type.name %>', '<%= event.name %>',
+          new Date(<%= "%d,%d,%d,%d,%d,0,0" % [event.start_time.year, event.start_time.month - 1, event.start_time.day, event.start_time.hour, event.start_time.min] %>), 
+          new Date(<%= "%d,%d,%d,%d,%d,0,0" % [event.end_time.year, event.end_time.month - 1, event.end_time.day,event.end_time.hour, event.end_time.min] %>)]);
+      <% end %>
+    <% end %>
+
+    chart.draw(dataTable,options);
+  }
+
+  function drawPieChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Type', 'Count'],
+      <% EventType.all.each do |event_type| %>
+        <% events = @stat.events.where(:event_type_id => event_type.id) %>
+        ['<%= event_type.name %>', <%= events.count %>],
+      <% end %>
+    ]);
+
+    var options = {
+          title: '',
+          is3D: true,
+        };
+    var container = document.getElementById('stat_event_type');
+    var chart = new google.visualization.PieChart(container);
+
+    chart.draw(data, options);
+  }
+</script>

@@ -1,0 +1,36 @@
+<%- title "Create Event Mailer Task - Null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Event Mailer Task
+        <span class='pull-right'>
+          <%= link_to "Back to Event Mailer Tasks", leads_event_event_mailer_tasks_path(), :class => 'btn btn-primary' %>
+          <%= link_to "Back to Event List", leads_events_path(), :class => 'btn btn-primary' %>
+          <%= link_to "Edit", edit_leads_event_event_mailer_task_path(@event, @event_mailer_task), :class => 'btn btn-primary' %>
+          <%= link_to "Execute", execute_leads_event_event_mailer_task_path(@event, @event_mailer_task, :token => form_authenticity_token), :class => 'btn btn-danger', :confirm => 'Are you sure you want to execute mailer task?' %>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <div style='margin-bottom: 2em;'>
+      <h4><small>
+        Ready for Delivery? - <strong><%= @event_mailer_task.ready_for_delivery? %></strong> 
+        Executed? - <strong><%= @event_mailer_task.executed? %></strong>
+      </small></h4>
+    </div>
+    <div style='margin-bottom: 3em;'>
+      <h4>Subject</h4>
+      <hr/> <%= @event_mailer_task.subject %>
+    </div>
+
+    <div>
+      <h4>Body</h4>
+      <hr/> <%= safe_markdown_html(@event_mailer_task.body) %>
+    </div>
+  </div>
+</div>

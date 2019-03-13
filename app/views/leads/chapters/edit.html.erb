@@ -1,0 +1,19 @@
+<%- title "Edit Chapter - null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Edit Chapter #<%= @chapter.id %>
+        <span class='pull-right'>
+          <%= link_to "Back to Chapter List", leads_chapters_path(), :class => 'btn btn-primary' %>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <%= render 'form' %>
+  </div>
+</div>

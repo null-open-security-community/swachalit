@@ -1,0 +1,14 @@
+<%= semantic_form_for([:leads, @event, @event_mailer_task]) do |f| %>
+  <%= resource_error_messages!(@event) %>
+
+  <%= f.inputs do %>
+    <%= f.input :subject %>
+    <%= f.input :body, :hint => 'Markdown is supported.' %>
+    <%= f.input :registration_state, :as => :select, :collection => EventRegistration::STATE_ALL, 
+        :hint => "Keep this blank to send to all registered users." %>
+    <%= f.input :ready_for_delivery %>
+    <%= f.inputs do %>
+      <%= f.submit :class => 'btn btn-primary' %>
+    <% end %>
+  <% end %>
+<% end %>

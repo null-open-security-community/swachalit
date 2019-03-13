@@ -1,0 +1,13 @@
+** This is an auto generated mail from Swachalit **
+
+Gentle Reminder for the upcoming event!
+
+<%= strip_tags(@event.event_type.description.to_s) %>
+
+<%= render :partial => 'event_mailer/event', :locals => { :event => @event } %>
+
+For further details and Registration/RSVP please visit the following URL:
+<%= event_url(@event) %>
+
+p.s: You are receiving this e-mail because you registered for the event at our website.
+

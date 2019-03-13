@@ -1,0 +1,129 @@
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='bs-callout bs-callout-info2'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <%= markdown_html(event.event_type.description) rescue '' %>
+        </div>
+      </div>
+
+      <div class='row' style='padding: 1em;'>
+        <div class='col-md-12'>
+          <h4>Proposed sessions for this event:</h4>
+          <ul>
+            <% event.event_sessions.order('start_time ASC').each do |event_session| %>
+              <% next if event_session.placeholder? %>
+              <li>
+                <%= event_session.name %> by <strong><%= event_session.user.name rescue '' %></strong>
+              </li>
+            <% end %>
+          </ul>
+
+          <small>Note: The session details including schedule are available below.</small>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-md-12'>
+          <%= markdown_html(event.description) %>
+        </div>
+      </div>
+    </div>
+    <table class='table table-bordered'>
+      <tr>
+        <th width='20%'>Date</th>
+        <td><%= event.start_time.strftime("%A %B %d %Y") %></td>
+      </tr>
+      <tr>
+        <th>Chapter</th>
+        <td><%= link_to event.chapter.name, chapter_path(event.chapter) %></td>
+      </tr>
+      <tr>
+        <th>Registrations</th>
+        <td><%= link_to event.event_registrations.count, event_event_registrations_path(event) %>
+      </tr>
+      <tr>
+        <th>Max Registrations</th>
+        <td><%= (event.max_registration.to_i == 0) ? "Unlimited" : event.max_registration.to_i %>
+      </tr>
+      <tr>
+        <th>Event Type</th>
+        <td><%= event.invite_only? ? "Invite Only" : "Open to Everybody" %></td>
+      </tr>
+      <tr>
+        <th>Start Time</th>
+        <td><%= event.start_time.strftime("%I:%M %p") %></td>
+      </tr>
+      <tr>
+        <th>End Time</th>
+        <td><%= event.end_time.strftime("%I:%M %p") %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class='row' id='event_sessions'>
+  <div class='col-md-12'>
+    <h3>Session Schedule</h3>
+    <table class='table table-condensed table-striped'>
+      <tr>
+        <th width='40%'>Name</th>
+        <th width='25%'>Speaker</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Resources</th>
+      </tr>
+      <% event.event_sessions.order('start_time ASC').each do |ev_session| %>
+      <tr>
+        <% if ev_session.placeholder? %>
+          <td colspan=2>
+            <strong><%= ev_session.name %></strong>
+          </td>
+        <% else %>
+          <td><%= link_to ev_session.name, event_session_path(ev_session) %></td>
+          <td><%= link_to ev_session.speaker_name, public_profile_path(ev_session.speaker) %></td>
+        <% end %>
+        <td><%= ev_session.start_time.strftime("%I:%M %p") %></td>
+        <td><%= ev_session.end_time.strftime("%I:%M %p") %></td>
+        <td><% unless ev_session.presentation_url.blank? %>
+          <%= link_to "", safe_url(ev_session.presentation_url), :class => 'fa-file-powerpoint-o fa fa-2x', :target => '_blank' %>
+          <% end %>
+        <% unless ev_session.video_url.blank? %>
+          <%= link_to "", safe_url(ev_session.video_url), :class => 'fa-file-video-o fa fa-2x', :target => '_blank' %>
+           <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+<% if user_signed_in? and current_user.registered_for_event?(event) and event.has_registration_instructions? %>
+<div class='row' id='registration instruction'>
+  <div class='col-md-12'>
+    <h3>Registration Instructions</h3>
+    <hr>
+    <div class='panel panel-primary'>
+      <div class='panel-heading'>
+        <h4><%= fa_icon('info') %> Registration Instructions</h4>
+      </div>
+      <div class='panel-body'>
+        <%= markdown_html(event.registration_instructions) %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<div class='row' id='event_venue'>
+  <div class='col-md-12'>
+    <h3>Venue</h3>
+    <hr/>
+    <% if event.invite_only? %>
+      <div class='alert alert-danger'>
+        This is an invite only event. If you are selected you will receive further information via e-mail.
+      </div>
+    <% else %>
+      <%= render :partial => 'venues/venue', :locals => { :venue => event.venue } %>
+    <% end %>
+  </div>
+</div>
+

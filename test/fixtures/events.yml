@@ -1,0 +1,58 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: 
+  name: null Meet August 2014
+  description: Random description for the event
+  chapter_id: 1
+  venue_id: 1
+  event_type_id: 1
+  public: true
+  can_show_on_homepage: true
+  can_show_on_archive: true
+  accepting_registration: true
+  state: 
+  start_time: 2014-08-01 04:30:00.000000000 Z
+  end_time: 2014-08-01 10:30:00.000000000 Z
+  created_at: 2014-07-13 13:58:01.975131000 Z
+  updated_at: 2014-07-13 14:26:49.651065000 Z
+  registration_start_time: 2014-06-30 18:30:00.000000000 Z
+  registration_end_time: 2014-07-31 18:30:00.000000000 Z
+  registration_instructions: ''
+  slug: bangalore-null-meet-august-2014-9
+  ready_for_announcement: true
+  announced_at: 
+  ready_for_notifications: true
+  notifications_sent_at: 
+  ready_for_reminders: true
+  calendar_event_id: 
+  notification_state: Reminder2
+
+two:
+  name: null Meet August 2014
+  description: Random description for the event
+  chapter_id: 1
+  venue_id: 1
+  event_type_id: 1
+  public: true
+  can_show_on_homepage: true
+  can_show_on_archive: true
+  accepting_registration: true
+  state: 
+  start_time: 2014-08-01 04:30:00.000000000 Z
+  end_time: 2014-08-01 10:30:00.000000000 Z
+  created_at: 2014-07-13 13:58:01.975131000 Z
+  updated_at: 2014-07-13 14:26:49.651065000 Z
+  registration_start_time: 2014-06-30 18:30:00.000000000 Z
+  registration_end_time: 2014-07-31 18:30:00.000000000 Z
+  registration_instructions: ''
+  slug: bangalore-null-meet-august-2014-9
+  ready_for_announcement: true
+  announced_at: 
+  ready_for_notifications: true
+  notifications_sent_at: 
+  ready_for_reminders: true
+  calendar_event_id: 

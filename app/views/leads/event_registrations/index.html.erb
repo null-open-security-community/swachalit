@@ -1,0 +1,85 @@
+<%- title "Event Registrations - null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Registrations
+        <small><%= @event.name %></small>
+      </h2>
+    </div>
+    <div>
+      <h4>
+        <span class='pull-right'>
+          <%= link_to "Back to Event", leads_event_path(@event), :class => 'btn btn-sm btn-primary' %>
+          <%= link_to "Update Registration State", '#', :class => 'btn btn-sm btn-danger', :id => 'registration_update_btn' %>
+          <%= link_to "Export Report", '#', :class => 'btn btn-sm btn-primary', :id => 'export_report' %>
+        </span>
+      </h4>
+    </div>
+  </div>
+</div>
+
+<div class='table-responsive'>
+  <table class='table table2excel table-condensed'>
+    <tr>
+      <th width='5%'>#</th>
+      <th width='20%'>Name</th>
+      <th width='20%'>Email</th>
+      <th width='20%'>Registered On</th>
+      <th width='10%'>Id Type</th>
+      <th width='10%'>Id #</th>
+      <th>State</th>
+    </tr>
+    <% @event_registrations.each do |event_registration| %>
+    <tr>
+      <td><%= event_registration.id %></td>
+      <td>
+        <%= link_to(event_registration.user.name, public_profile_path(event_registration.user)) rescue 'Error' %> &nbsp;
+        <%= user_attendance_brief(event_registration.user) rescue 'Error' %>
+      </td>
+      <td><%= event_registration.user.email rescue 'Error' %></td>
+      <td><%= event_registration.created_at.strftime('%Y-%m-%d %I:%M %p') %></td>
+      <td><%= event_registration.gov_id_type %></td>
+      <td><%= event_registration.gov_id_number %></td>
+      <td>
+        <%= select_tag "evr_state_#{event_registration.id}", options_for_select(EventRegistration::STATE_ALL, event_registration.state), {:class => 'event_registration_select', 'data-registration-id' => event_registration.id} %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+<script src="/static/javascripts/table2CSV.js"></script>
+<script type='text/javascript'>
+  $('#registration_update_btn').click(function() {
+    var update_map = { 
+      'event_registrations': [],
+      'token': '<%= form_authenticity_token %>'
+    };
+
+    $.each($('.event_registration_select'), function(index, value) {
+      update_map['event_registrations'].push({
+        'id': $(value).attr('data-registration-id'),
+        'state': $(value).val()
+      });
+    });
+
+    $.ajax({
+      'type': 'PUT',
+      'url': '<%= mass_update_leads_event_event_registrations_path(@event) %>',
+      'data': JSON.stringify(update_map),
+      'contentType': 'application/json',
+      'success': function(result) {
+        alert('Successfully updated records.');
+      },
+      'error': function(err) {
+        alert('Failed to update records.');    
+      }
+    });
+    return false;
+  }); 
+
+
+  $('#export_report').click(function() {
+        $('.table2excel').TableCSVExport();
+      });
+</script>

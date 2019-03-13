@@ -1,0 +1,1 @@
+require File.join(File.dirname(__FILE__), 'workers/background_job_worker')

@@ -1,0 +1,19 @@
+** This is an auto generated mail from Swachalit for event create notification **
+** You are receiving this e-mail if you are an admin or a chapter lead for the corresponding event **
+
+Name: <%= @event.name %>
+Type: <%= @event.event_type.name %>
+Chapter: <%= @event.chapter.name %>
+Date: <%= @event.start_time.strftime("%A %B %d %Y") %>
+
+Note: For events created by Chapter Leads, it is not published by default. An authenticated admin user
+must manually mark the event to be public by enabling the 'public' flag in order to publish the event.
+
+For further details and Registration/RSVP please visit the following URL:
+<%= event_url(@event) %>
+
+The event can be managed by corresponding chapter leads following the URL:
+<%= leads_event_url(@event) %>
+
+
+

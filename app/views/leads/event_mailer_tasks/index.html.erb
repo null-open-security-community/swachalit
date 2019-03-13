@@ -1,0 +1,53 @@
+<%- title "Event Mailer Management - null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Event Mailer Tasks
+        <span class='pull-right'>
+          <%= link_to "Create Mailer Task", new_leads_event_event_mailer_task_path(), :class => 'btn btn-primary' %>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='table-responsive' style='min-height: 200px;'>
+  <table class='table table-condensed'>
+    <tr>
+      <th width='5%'>#</th>
+      <th width='45%'>Subject</th>
+      <th width='15%'>Registration State</th>
+      <th width='15%'>Ready for Delivery?</th>
+      <th width='10%'>Executed?</th>
+      <th></th>
+    </tr>
+    <% if @event_mailer_tasks.empty? %>
+      <tr>
+        <td colspan=6>
+          <div class='alert alert-danger'>Err.. No event mailer tasks found. Why don't you create one?</div>
+        </td>
+      </tr>
+    <% else %>
+    <% @event_mailer_tasks.order('created_at DESC').each do |emt| %>
+      <tr>
+        <td><%= emt.id %></td>
+        <td><%= link_to truncate(emt.subject.to_s, :length => 50), leads_event_event_mailer_task_path(@event, emt) %></td>
+        <td><%= emt.registration_state.to_s %></td>
+        <td><%= emt.ready_for_delivery.to_s %></td>
+        <td><%= emt.executed.to_s %></td>
+        <td>
+          <% unless emt.executed? %>
+            <%= link_to execute_leads_event_event_mailer_task_path(@event, emt, :token => form_authenticity_token), :class => '', :confirm => 'Are you sure you want to execute mailer task?' do %>
+              <%= fa_icon('plane') %> Execute
+            <% end %> &nbsp;
+            <%= link_to edit_leads_event_event_mailer_task_path(@event, emt) do %>
+              <%= fa_icon('edit') %> Edit
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <% end %>
+  </table>
+</div>

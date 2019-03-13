@@ -1,0 +1,43 @@
+<%- title("null Community Event Statistics for Year #{@stat.year}") %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Statistics For <%= @stat.year %> <small><%= @stat.chapter.name if @stat.chapter %></small>
+        <div class='pull-right'>
+          <small> Filter by Chapter and Year </small> &nbsp; &nbsp; &nbsp;
+          <form class='form-horizontal form-inline pull-right' id='stat_filter_form'>
+            <div class='form-group'>
+              <%= select_tag 'chapter_id', options_for_select([["ALL"]] + Chapter.all.map {|c| [c.name, c.id]}, @chapter), :class => 'form-control' %>
+              <%= select_tag 'year', options_for_select((2010 ... Time.now.year+1).to_a.reverse, @year ||Time.now.year-1), :class => 'form-control' %>
+              <%= submit_tag 'Filter', :class => 'btn btn-primary' %>
+            </div>
+          </form>
+        </div>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#graph_view" aria-controls="graph_view" role="tab" data-toggle="tab">Graph</a>
+    </li>
+    <li role="presentation">
+      <a href="#data_view" aria-controls="data_view" role="tab" data-toggle="tab">Data</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="graph_view">
+      <%= render :partial => 'graph_view' %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="data_view">
+      <%= render :partial => 'data_view' %>
+    </div>
+  </div>
+
+</div>

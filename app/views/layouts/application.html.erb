@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@null0x00" />
+  <meta name="twitter:title" content="null : The Open Security Community" />
+  <meta name="twitter:description" content="null is India's largest open security community" />
+  <meta name="twitter:image" content="http://null.co.in/assets/null-logo-c178313e4f36cb5d26404c94207a9193.jpeg" />
+  <meta property="og:title" content="null : The Open Security Community" />
+  <meta property="og:url" content="http://null.co.in" />
+  <meta property="og:description" content="null is India's largest open security community" />
+  <meta property="og:image" content="http://www.null.co.in/assets/null-blog-banner_white.png" />
+  <title><%= content_for?(:title) ? content_for(:title) : "null Community Platform" %></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= render :partial => 'layouts/header' %>
+  <%= render :partial => 'layouts/notification' %>
+  <div id='main-content' class='container'>
+    <%= yield %>
+  </div>
+  <%= render :partial => 'layouts/footer' %>
+  <%= render :partial => 'layouts/analytics' %>
+  <%= render :partial => 'layouts/postscripts' %>
+</body>
+</html>

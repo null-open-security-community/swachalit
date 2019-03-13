@@ -1,0 +1,21 @@
+<%= semantic_form_for(@page) do |f| %>
+<%= resource_error_messages!(@page) %>
+
+<%= f.inputs "Post Info" do %>
+  <%= f.input :name %>
+  <%= f.input :navigation_name, :hint => 'This is the name that shows up in UI' %>
+  <%= f.input :description %>
+  <%= f.input :published %>
+<% end %>
+
+<%= f.inputs "Page Content" do %>
+  <%= f.input :title %>
+  <%= f.input :content, :hint => 'Markdown supported field' %>
+<% end %>
+
+<br/>
+<%= f.inputs do %>
+  <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
+
+<% end %>

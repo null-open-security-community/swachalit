@@ -1,0 +1,45 @@
+<%- title "Event Management - null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Managed Sessions
+        <small><%= @event.name %></small>
+        <span class='pull-right'>
+          <%= link_to "Back to Event", leads_event_path(@event), :class => 'btn btn-primary' %>
+          <%= link_to "Create Session", new_leads_event_event_session_path(@event), :class => 'btn btn-primary' %>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='table-responsive'>
+  <table class='table table-condensed'>
+    <tr>
+      <th width='5%'>#</th>
+      <th width='35%'>Name</th>
+      <th width='25%'>Presenter</th>
+      <th width='10%'>Start</th>
+      <th></th>
+    </tr>
+    <% @event_sessions.each do |event_session| %>
+    <tr>
+      <td><%= link_to "##{event_session.id}", event_session_path(event_session) %></td>
+      <td><%= link_to truncate(event_session.name, :length => 30), leads_event_event_session_path(@event, event_session) %></td>
+      <td><%= link_to event_session.user.name, public_profile_path(event_session.user) %></td>
+      <td>
+        <%= event_session.start_time.strftime("%H:%M %p") %>
+      </td>
+      <td>
+        <%= link_to edit_leads_event_event_session_path(@event, event_session), :style => 'text-decoration: none;' do %>
+          <%= fa_icon(:edit) %> Edit Session
+        <% end %> &nbsp;
+        <%= link_to leads_event_event_session_path(@event, event_session), :method => :delete , :style => 'text-decoration: none;', :confirm => 'Are you sure you want to delete this session?'  do %>
+          <%= fa_icon('exclamation-circle') %> Delete Session
+        <% end %>
+      </td> 
+    </tr>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,30 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  id: 1
+  name: Meet
+  description: null meets are free for anyone to attend. There are absolutely no fees. Just come with an open mind and willingness to share and learn.
+  max_participant: 10000
+  public: true
+  registration_required: false
+  invitation_required: false
+  created_at: 2014-03-10 06:29:12.000000000 Z
+  updated_at: 2014-04-26 11:55:23.000000000 Z
+
+two:
+  id: 2
+  name: Humla
+  description: null offensive hacking hands-on training.
+  max_participant: 10000
+  public: true
+  registration_required: true
+  invitation_required: true
+  created_at: 2014-03-10 06:29:46.000000000 Z
+  updated_at: 2014-04-10 10:36:58.000000000 Z
+
+
+

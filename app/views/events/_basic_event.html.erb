@@ -1,0 +1,27 @@
+<div class='row'>
+  <div class='col-md-12'>
+    <% unless event.description.to_s.empty? %>
+      <div class='bs-callout bs-callout-info2'>
+        <p><%= markdown_html(event.description) %></p>
+      </div>
+    <% end %>
+    <table class='table table-bordered'>
+      <tr>
+        <th width='20%'>Date</th>
+        <td><%= event.start_time.strftime("%A %B %d %Y") %></td>
+      </tr>
+      <tr>
+        <th>Event Type</th>
+        <td><%= event.invite_only? ? "Invite Only" : "Open to Everybody" %></td>
+      </tr>
+      <tr>
+        <th>Start Time</th>
+        <td><%= event.start_time.strftime("%I:%M %p") %></td>
+      </tr>
+      <tr>
+        <th>End Time</th>
+        <td><%= event.end_time.strftime("%I:%M %p") %></td>
+      </tr>
+    </table>
+  </div>
+</div>

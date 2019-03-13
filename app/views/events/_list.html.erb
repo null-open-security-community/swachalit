@@ -1,0 +1,42 @@
+<style>
+  .bs-example:after {
+    content: 'Event List';
+  }
+</style>
+
+<div class='table-responsive'>
+  <table class='table table-condensed'>
+    <% events.each do |event| %>
+    <tr>
+      <td>
+        <span class='label label-info'><%= event.event_type.name %></span>
+        <strong><u><%= event.start_time.strftime("%Y-%m-%d") %></u></strong> &nbsp; 
+        <%= link_to event_path(event), :style => 'text-decoration: none' do %>
+          <strong><%= truncate(event.name, :length => 60) %></strong>
+        <% end %>
+        <span class='label label-success'><%= link_to event.chapter.name, chapter_path(event.chapter), :style => 'text-decoration: none; color: inherit;' %></span>
+        <% if (Time.now > event.start_time+8.hour) %>
+          <span class='label label-warning'>Archive</span>
+        <% elsif (Time.now > event.start_time) %>
+          <span class='label label-warning'>In-progress</span>
+        <% else %>
+          <span class='label label-warning'>Upcoming: <%= distance_of_time_in_words(Time.now, event.start_time) %></span>
+        <% end %>
+        </span>
+        <span class='label label-danger'>Sessions: <%= event.event_sessions.count %></span>
+      </td>
+      <td width='20%' style='font-size: 90%'>
+        <%= link_to new_event_event_registration_path(event), :style => 'text-decoration: none;' do %>
+          <%= event.register_name %> [<%= event.event_registrations.count %>]
+        <% end %> |
+        <%= link_to event_path(event, :anchor => "event_sessions"), :style => 'text-decoration: none;' do %>
+          Sessions
+        <% end %> |
+        <%= link_to event_path(event, :anchor => "event_venue"), :style => 'text-decoration: none;' do %>
+          Venue
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

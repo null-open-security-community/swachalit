@@ -1,0 +1,80 @@
+<%- title "Event Management - null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Managed Events
+        <span class='pull-right'>
+          <%= link_to "Create Event", new_leads_event_path(), :class => 'btn btn-primary' %>
+          <%= link_to "Show Old Events", leads_events_path(:show_old => true), 
+            :class => 'btn btn-primary' %>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='table-responsive' style='min-height: 200px;'>
+  <table class='table table-condensed'>
+    <tr>
+      <th width='5%'>#</th>
+      <th width='15%'>Chapter</th>
+      <th width='45%'>Name</th>
+      <th width='10%'>Sessions</th>
+      <th width='10%'>Registrations</th>
+      <th></th>
+    </tr>
+    <% if @events.empty? %>
+      <tr>
+        <td colspan=6>
+          <div class='alert alert-danger'>
+            Err.. No events found. Why don't you create one?
+            <%= link_to "Show Old Events", leads_events_path(:show_old => true) %>
+          </div>
+        </td>
+      </tr>
+    <% else %>
+    <% @events.order('start_time ASC').each do |event| %>
+      <tr>
+        <td><%= link_to "##{event.id}", event_path(event) %></td>
+        <td><%= event.chapter.name %></td>
+        <td>
+          <%= link_to truncate(event.name, :length => 55), leads_event_path(event) %>
+          <% if event.public? %>
+            <span class='label label-success'>Published</span>
+          <% else %>
+            <span class='label label-warning'>Unpublished</span>
+          <% end %>
+        </td>
+        <td><%= link_to event.event_sessions.count, leads_event_event_sessions_path(event) %></td>
+        <td><%= link_to event.event_registrations.count, leads_event_event_registrations_path(event) %></td>
+        <td>
+          <div class='dropdown'>
+            <button class="btn btn-danger btn-default btn-xs dropdown-toggle" type="button" id="LeadOptionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <%= fa_icon('cogs') %>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="LeadOptionsDropdown">
+              <li>
+                <%= link_to edit_leads_event_path(event), :style => 'text-decoration: none;' do %>
+                  <%= fa_icon(:edit) %> Edit Event
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_leads_event_event_session_path(event), :style => 'text-decoration: none;' do %>
+                  <%= fa_icon('plus-square') %> Add Session
+                <% end %>
+              </li>
+              <li>
+                <%= link_to leads_event_event_mailer_tasks_path(event), :style => 'text-decoration: none;' do %>
+                  <%= fa_icon('envelope') %> Mailers
+                <% end %>
+              </li>
+            </ul>
+          </div>   
+        </td>
+      </tr>
+    <% end %>
+    <% end %>
+  </table>
+</div>

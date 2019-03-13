@@ -1,0 +1,23 @@
+<%= semantic_form_for([:leads, @chapter]) do |f| %>
+  <%= resource_error_messages!(@chapter) %>
+
+  <%= f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :chapter_email %>
+    <%= f.input :description, :hint => 'Markdown supported for this field.' %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :country %>
+    <%= f.input :image %>
+    <%= f.input :twitter_handle, :placeholder =>  'https://www.twitter.com/chapter_name' %> 
+    <%= f.input :facebook_profile, :placeholder => 'https://www.facebook.com/chapter_name' %> 
+    <%= f.input :github_profile, :placeholder => 'https://github.com/chapter_name' %> 
+    <%= f.input :linkedin_profile, :placeholder => 'https://www.linkedin.com/in/chapter_name' %> 
+    <%= f.input :slideshare_profile, :placeholder => 'https://www.slideshare.net/chapter_name' %>
+  <% end %>
+
+  <br/>
+  <%= f.inputs do %>
+    <%= f.submit :class => 'btn btn-primary' %>
+  <% end %>
+<% end %>

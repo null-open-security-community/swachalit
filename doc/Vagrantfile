@@ -1,0 +1,80 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "ubuntu/trusty64"
+
+  # config.vm.box_check_update = false
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  config.vm.network "private_network", ip: "172.168.33.10"
+
+  # config.vm.network "public_network"
+
+  # config.vm.synced_folder "../data", "/vagrant_data"
+
+  # config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+  #   vb.memory = "1024"
+  # end
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+     id
+     sudo locale-gen UTF-8
+     sudo add-apt-repository ppa:chris-lea/redis-server
+     sudo apt-get update
+     gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+     curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+     sudo apt-get remove rpcbind -y
+     sudo apt-get update
+     sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
+     sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
+     sudo apt-get install redis-server git mysql-server mysql-client libmysqlclient-dev git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev libgdbm-dev libncurses5-dev automake libtool bison -y
+     curl -L https://get.rvm.io | bash -s stable
+     source /home/vagrant/.rvm/scripts/rvm
+     echo "source /home/vagrant/.rvm/scripts/rvm" >> /home/vagrant/.bashrc
+     rvm install 2.1.5
+     rvm use 2.1.5 --default
+     ruby -v 
+     echo "gem: --no-ri --no-rdoc" > ~/.gemrc  
+     gem install bundler
+     mysql -uroot -proot -e "create database test"
+     mysql -uroot -proot -e "create database prod"
+     mysql -uroot -proot -e "create database dev"
+     cd /vagrant/null-automation-framework
+     bundle install
+     gem install activemodel
+     gem install mysql2
+     #./script/run_build.sh
+  SHELL
+
+  #config.vm.provision "ansible" do | ansible| 
+  #  ansible.playbook = "provisioning/setup.yml" 
+  #  ansible.verbose = "v"
+  #end
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+      # Configure cached packages to be shared between instances of the same base box.
+      # More info on http://fgrehm.viewdocs.io/vagrant-cachier/usage
+      config.cache.scope = :box
+
+      # OPTIONAL: If you are using VirtualBox, you might want to use that to enable
+      # NFS for shared folders. This is also very useful for vagrant-libvirt if you
+      # want bi-directional sync
+      config.cache.synced_folder_opts = {
+        type: :nfs,
+        # The nolock option can be useful for an NFSv3 client that wants to avoid the
+        # NLM sideband protocol. Without this option, apt-get might hang if it tries
+        # to lock files needed for /var/cache/* operations. All of this can be avoided
+        # by using NFSv4 everywhere. Please note that the tcp option is not the default.
+        mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
+      }
+    end
+end

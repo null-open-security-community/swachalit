@@ -1,0 +1,41 @@
+<%- title "Chapter Management - null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Managed Chapters
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='table-responsive'>
+  <table class='table table-condensed'>
+    <tr>
+      <th width='5%'>#</th>
+      <th width='15%'>State</th>
+      <th width='55%'>Name</th>
+      <th></th>
+    </tr>
+    <% if @chapters.empty? %>
+      <tr>
+        <td colspan=4>
+          <div class='alert alert-danger'>Err.. No chapter found.</div>
+        </td>
+      </tr>
+    <% else %>
+    <% @chapters.each do |chapter| %>
+      <tr>
+        <td><%= link_to "##{chapter.id}", chapter_path(chapter) %></td>
+        <td><%= chapter.state %></td>
+        <td><%= link_to truncate(chapter.name, :length => 60), chapter_path(chapter) %></td>
+        <td>
+          <%= link_to edit_leads_chapter_path(chapter), :style => 'text-decoration: none;' do %>
+            <%= fa_icon(:edit) %> Edit Chapter
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,44 @@
+<%= semantic_form_for([:leads, @event]) do |f| %>
+  <%= resource_error_messages!(@event) %>
+  <%= f.inputs "Basic Information" do %>
+    <%= f.input :event_type %>
+    <%= f.input :chapter, :as => :select, :collection => current_user.managed_chapters %>
+    <%= f.input :name, :hint => "Use a short name such as 'Monthly Meet', 'Android Testing' etc. Actual Event title will be generated using Name, Chapter, Month, Year etc." %>
+    <%= f.input :venue, :as => :select, :collection => current_user.managed_venues.
+      order('created_at ASC').map {|v| ["#{v.chapter.name}: #{v.name}", v.id] } %>
+    <%= f.input :description %>
+    <%= f.input :can_show_on_homepage %>
+    <%= f.input :can_show_on_archive %>
+    <%= f.input :accepting_registration %>
+  <% end %>
+  <br/>
+  <%= f.inputs "Schedule" do %>
+    <%= f.input :start_time, :as => :datetime %>
+    <%= f.input :end_time, :as => :datetime %>
+  <% end %>
+  <br/>
+  <%= f.inputs "Registration" do %>
+    <%= f.input :registration_start_time, :as => :datetime %>
+    <%= f.input :registration_end_time, :as => :datetime %>
+    <%= f.input :registration_instructions %>
+    <%= f.input :max_registration, :hint => "0 for Unlimited" %>
+  <% end %>
+  <br/>
+  <%= f.inputs "Notification Settings" do %>
+    <%= f.input :ready_for_announcement %>
+    <%= f.input :ready_for_notifications %>
+    <%= f.input :ready_for_reminders %>
+  <% end %>
+  
+  <% unless @event.new_record? %>
+  <br/>
+  <%= f.inputs "Event Publishing" do %>
+    <%= f.input :public %>
+  <% end %>
+  <% end %>
+
+  <br/>
+  <%= f.inputs do %>
+    <%= f.submit :class => 'btn btn-primary' %>
+  <% end %>
+<% end %>

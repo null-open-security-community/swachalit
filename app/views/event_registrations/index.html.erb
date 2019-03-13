@@ -1,0 +1,26 @@
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Event Registrations
+        <small><%= link_to @event.name, event_path(@event) %></small>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<% ev_registrations = @event_registrations %>
+<% until ev_registrations.empty? %>
+  <% evrs = ev_registrations.slice!(0, 12) %>
+  <div class='row'>
+    <% evrs.each do |er| %>
+      <div class='col-md-1'>
+        <%= link_to(image_tag(er.user.avatar.url, :class => 'img img-rounded', :size => '80x80'), 
+          public_profile_path(er.user)) %>
+        <small>
+          <%= link_to truncate(er.user.name, :length => 10), public_profile_path(er.user), :style => 'text-decoration: none;' %>
+        </small>
+      </div>
+    <% end %>
+  </div>
+<% end %>

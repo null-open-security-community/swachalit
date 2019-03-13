@@ -1,0 +1,24 @@
+<table class='table table-bordered'>
+  <tr>
+    <th width='30%'>Name</th>
+    <td><%= @user.name %></td>
+  </tr>
+  <tr>
+    <th>Handle</th>
+    <td><%= @user.handle %></td>
+  </tr>
+  <tr>
+    <th>Registered On</th>
+    <td>
+      <%= @user.created_at.strftime("%B %d %Y") %>
+    </td>
+  </tr>
+  <tr>
+    <th colspan=2>About Me</th>
+  </tr>
+  <tr>
+    <td colspan=2>
+      <%= safe_markdown_html(@user.about_me) %><br/>
+    </td>
+  </tr>
+</table>

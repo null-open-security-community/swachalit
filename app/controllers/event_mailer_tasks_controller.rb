@@ -1,0 +1,2 @@
+class EventMailerTasksController < ApplicationController
+end

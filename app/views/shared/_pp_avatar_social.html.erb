@@ -1,0 +1,35 @@
+<div class='row'>
+  <%= image_tag(user.avatar.url, :class => 'img img-rounded', :size => '200x200') %>
+</div>
+<div class='row'>
+  <ul class='nav navbar-nav'>
+    <% if user.has_twitter_handle? %>
+      <li>
+        <%= link_to safe_url(user.twitter_handle), :target => '_blank' do %>
+          <%= fa_icon('twitter 4x') %>
+        <% end %>
+      </li>
+    <% end %>
+    <% if user.has_facebook_profile? %>
+      <li>
+        <%= link_to safe_url(user.facebook_profile), :target => '_blank' do %>
+          <%= fa_icon('facebook 4x') %>
+        <% end %>
+      </li>
+    <% end %>
+    <% if user.has_github_profile? %>
+      <li>
+        <%= link_to safe_url(user.github_profile), :target => '_blank' do %>
+          <%= fa_icon('github 4x') %>
+        <% end %>
+      </li>
+    <% end %>
+    <% if user.has_homepage? %>
+      <li>
+        <%= link_to safe_url(user.homepage), :target => '_blank' do %>
+          <%= fa_icon('home 4x') %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,23 @@
+Date: <%= event.start_time.strftime("%A %B %d %Y") %>
+Sessions:
+
+<% event.event_sessions.order('start_time ASC').each do |evs| %>
+  <% if evs.placeholder? %>
+  <%= evs.start_time.strftime("%I:%M%p") %> <%= evs.name %>
+  <% else %>
+  <%= evs.start_time.strftime("%I:%M%p") %> <%= evs.name %> by <%= evs.user.name %>
+  <% end %>
+<% end %>
+
+<% unless event.invite_only? %>
+Venue:
+
+<%= strip_tags(event.venue.name) %>
+<%= strip_tags(event.venue.address) %>
+
+<% unless event.venue.map_url.to_s.empty? %>
+Map URL:
+  <%= strip_tags(event.venue.map_url) %>
+<% end %>
+
+<% end %>

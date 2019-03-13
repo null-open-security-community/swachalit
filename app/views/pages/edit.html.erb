@@ -1,0 +1,19 @@
+<%- title "Edit Page #{@page.name}" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Edit Page #<%= @page.id %>
+        <span class='pull-right'>
+          <%= link_to "View Page", page_path(@page), :class => 'btn btn-primary' %>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <%= render 'form' %>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+pipelines:
+  tags:
+    release-*:
+      - step:
+          script:
+            #- bundle install
+            #- rake test
+            #- ssh swachalit@null.co.in bash -c /home/swachalit/null-automation-framework/update.sh $BITBUCKET_TAG
+            - echo $BITBUCKET_TAG > public/static/release_version.txt
+            - echo $SWACHALIT_SECRETS | base64 -d > .env
+            - echo $MYSQL_SECRETS | base64 -d > .env.mysql
+            - echo $GOOGLE_CALENDAR_KEY_FILE | base64 -d > config/google_api_key.p12
+            - ssh swachalit@null.co.in mkdir -p /home/swachalit/build-workspaces/$BITBUCKET_TAG
+            - rsync -avz --delete . swachalit@null.co.in:/home/swachalit/build-workspaces/$BITBUCKET_TAG/
+            - ssh swachalit@null.co.in "cd /home/swachalit/build-workspaces/$BITBUCKET_TAG && ./prodrun.sh"
+            - ssh swachalit@null.co.in rm -rf /home/swachalit/build-workspaces/$BITBUCKET_TAG
+            - rm -rf .env .env.mysql config/google_api_key.p12
+options:
+  docker: true

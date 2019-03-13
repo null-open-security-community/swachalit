@@ -1,0 +1,14 @@
+<%= semantic_form_for(@session_proposal) do |f| %>
+  <%= resource_error_messages!(@session_proposal) %>
+  <%= f.inputs do %>
+    <%= f.input :chapter, :as => :select, :collection => ::Chapter.active_chapters %>
+    <%= f.input :event_type, :as => :select, :collection => ::EventType.all %>
+    <%= f.input :session_topic %>
+    <%= f.input :session_description %>
+  <% end %>
+
+  <br/>
+  <%= f.inputs do %>
+    <%= f.action :submit, :label => 'Create Session Proposal', :button_html => { :class => 'btn btn-primary' } %>
+  <% end %>
+<% end %>

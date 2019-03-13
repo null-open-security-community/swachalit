@@ -1,0 +1,47 @@
+<%- title "Venue Management - null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Managed Venues
+        <span class='pull-right'>
+          <%= link_to "Create Venue", new_leads_venue_path(), :class => 'btn btn-primary' %>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='table-responsive'>
+  <table class='table table-condensed'>
+    <tr>
+      <th width='5%'>#</th>
+      <th width='15%'>Chapter</th>
+      <th width='55%'>Name</th>
+      <th></th>
+    </tr>
+    <% if @venues.empty? %>
+      <tr>
+        <td colspan=5>
+          <div class='alert alert-danger'>Err.. No venues found. Why don't you create one?</div>
+        </td>
+      </tr>
+    <% else %>
+    <% @venues.order('created_at ASC').each do |venue| %>
+      <tr>
+        <td><%= link_to "##{venue.id}", venue_path(venue) %></td>
+        <td><%= venue.chapter.name %></td>
+        <td><%= link_to truncate(venue.name, :length => 60), leads_venue_path(venue) %></td>
+        <td>
+          <%= link_to edit_leads_venue_path(venue), :style => 'text-decoration: none;' do %>
+            <%= fa_icon(:edit) %> Edit Venue
+          <% end %> &nbsp;
+          <%= link_to leads_venue_path(venue), :method => :delete, :style => 'text-decoration: none;', :confirm => 'Are you sure you want to delete this venue?' do %>
+            <%= fa_icon('exclamation-circle') %> Delete Venue
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,23 @@
+** This is an auto generated mail from Swachalit for event announcement **
+
+<%= strip_tags(@event.event_type.description.to_s) %>
+
+<%= render :partial => 'event_mailer/event', :locals => { :event => @event } %>
+
+<% unless @event.registration_start_time.to_s.empty?  %>
+Registration Start Time : <%= @event.registration_start_time %>
+<% end %>
+<% unless @event.registration_end_time.to_s.empty?  %>
+Registration End Time : <%= @event.registration_end_time %>
+<% end %>
+
+<% unless @event.max_registration.to_i == 0 %>
+  LIMITED Seats, Registration closes when <%= @event.max_registration %> Registrations received or at 
+  <%= @event.registration_end_time %>
+<% end %>
+
+For further details and Registration/RSVP please visit the following URL:
+<%= event_url(@event) %>
+
+
+

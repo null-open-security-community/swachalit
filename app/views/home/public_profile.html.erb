@@ -1,0 +1,97 @@
+<%- title "#{@user.name} - null Community Profile" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        <%= @user.name %>
+        <span class='pull-right'>
+          <small>null Community Profile</small>
+        </span>
+      </h2>
+      <% if @user.managed_chapters.count > 0 %>
+      <p class='lead'>
+        <i class='glyphicon glyphicon-star red'></i>
+        Leader of <%= @user.managed_chapters.first.name rescue '...' %> chapter
+      </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-4'>
+    <%= render :partial => 'shared/pp_avatar_social', :locals => { :user => @user } %>
+  </div>
+  <div class='col-md-8'>
+    <div class='row'>
+      <div class="col-md-12"> 
+        <center>
+        <div class="col-md-6"> 
+          <h3 class="bg-info2" style="padding: 0.5em;">Speaker / Champion Count</h3> 
+          <h3 class="bg_info2"><%= @user.speaker_sessions.count %></h3> 
+        </div> 
+        <div class="col-md-6"> <h3 class="bg-info2" style="padding: 0.5em;">Attended</h3> 
+          <h3 class="bg_info2"><%= @user.registered_participation.count %></h3> 
+        </div>
+        </center>
+      </div>
+      <div class='col-md-12'>
+        <h3 class='bg-info2' style='padding: 0.5em;'>User Brief</h3>
+        <%= render :partial => 'shared/pp_brief' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-6'>
+    <h4 class='bg-info2' style='padding: 0.5em;'>Session (Speaker | Champion)</h4>
+    <table class='table table-bordered' style='font-size: 90%'>
+      <tr>
+        <th width='65%'>Session</th>
+        <th>Date</th>
+      </tr>
+      <% @user.speaker_sessions.limit(10).each do |sess| %>
+      <% next unless sess.event.public? %>
+      <tr>
+        <td>
+          <%= link_to truncate(sess.name, :length => 32), event_session_path(sess) %> 
+          <span class='label label-success'><%= sess.event.event_type.name %></span>
+          <span class='label label-success'><%= sess.event.chapter.name %></span>
+          <span>
+            <% unless sess.presentation_url.blank? %>
+              <%= link_to "", safe_url(sess.presentation_url), :class => 'fa-file-powerpoint-o fa fa-2x', :target => '_blank' %>&nbsp;
+            <% end %>
+            <% unless sess.video_url.blank? %>
+              <%= link_to "", safe_url(sess.video_url), :class => 'fa-file-video-o fa fa-2x', :target => '_blank' %>&nbsp;
+            <% end %>
+          </span>
+        </td>
+        <td>
+          <%= sess.start_time.strftime("%A %B %d %Y") %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class='col-md-6'>
+    <h4 class='bg-info2' style='padding: 0.5em;'>Session Participation</h4>
+    <table class='table table-bordered' style='font-size: 90%'>
+      <tr>
+        <th width='65%'>Session</th>
+        <th>Date</th>
+      </tr>
+      <% @user.registered_participation.limit(10).includes(:event).map {|e| e.event }.compact.each do |pe| %>
+      <tr>
+        <td>
+          <%= link_to truncate(pe.name, :length => 32), event_path(pe) %> 
+          <span class='label label-success'><%= pe.event_type.name %></span>
+        </td>
+        <td>
+          <%= pe.start_time.strftime("%A %B %d %Y") %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

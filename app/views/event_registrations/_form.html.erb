@@ -1,0 +1,29 @@
+<%= form_for([@event, @event_registration], :html => { :class => 'form' }) do |f| %>
+  <%= resource_error_messages!(@event_registration) %>
+  <div class='form-group'>
+    <label>
+      Government Photo Id Type
+      <%= f.select :gov_id_type, options_for_select([""] + ::EventRegistration::GOV_ID_TYPE_ALL), {}, :class => 'form-control' %>
+    </label>
+  </div>
+  <div class='form-group'>
+    <label>
+      Government Photo Id Number
+      <%= f.text_field :gov_id_number, :class => 'form-control' %>
+      <small>This information will not be made public</small><br/>
+      <small>This information is optional unless explicitly required for the event.</small>
+    </label>
+  </div>
+  <div class='form-group'>
+    <label>
+      My Registration is visible to all
+      <%= f.check_box :visible %>
+    </label>
+  </div>
+  <div class='form-group'>
+    <%= recaptcha_tags %>
+  </div>
+  <div class='form-group'>
+    <%= f.submit "Confirm Registration", :class => 'btn btn-lg btn-primary' %>
+  </div>
+<% end %>

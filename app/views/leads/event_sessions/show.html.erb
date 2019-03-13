@@ -1,0 +1,58 @@
+<%- title("Showing Event Session - null Community") %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        <%= @event_session.name %>
+        <small><%= @event.name %></small>
+        <span class='pull-right'>
+          <div class='dropdown'>
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"> Session Options <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation">
+                <%= link_to 'Edit Session', edit_leads_event_event_session_path(@event, @event_session) %>
+              </li>
+              <li role="presentation">
+                <%= link_to 'List Sessions', leads_event_event_sessions_path(@event) %>
+              </li>
+            </ul>
+          </div>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <h3>
+      Abstract
+      <small>
+        <% if can? :edit, @event_session %>
+          <%= link_to edit_event_session_path(@event_session), :class => 'btn btn-primary btn-sm' do %>
+            <%= fa_icon(:edit) %> Edit Description
+          <% end %>
+        <% end %>
+      </small>
+    </h3>
+    <blockquote>
+      <%= safe_markdown_html(@event_session.description.to_s) %>
+    </blockquote>
+
+    <h3>Speaker</h3>
+    <p style='font-size: 110%'>
+      <strong>
+        <%= link_to @event_session.user.name, public_profile_path(@event_session.user), :style => 'text-decoration: none;' %>
+      </strong>
+    </p>
+    <p>
+      <%= safe_markdown_html(@event_session.user.about_me.to_s) %>
+    </p>
+
+    <h3>Timing</h3>
+    <p>
+      Starts at <strong><%= @event_session.start_time.strftime("%A %B %d %Y, %I:%M %p") %></strong>. The sessions runs for <strong><%= distance_of_time_in_words(@event_session.end_time, @event_session.start_time) %></strong>.
+    </p>
+  </div>
+</div>

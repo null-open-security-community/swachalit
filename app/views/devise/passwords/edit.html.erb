@@ -1,0 +1,24 @@
+<div class='row'>
+  <div class='col-md-6'>
+    <h3>Change your password</h3>
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+      <%= resource_error_messages!(resource) %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class='form-group'>
+        <%= f.label :password %>
+        <%= f.password_field :password, :autofocus => true, :class => 'form-control' %>
+      </div>
+
+      <div class='form-group'>
+        <%= f.label :password_confirmation, "Confirm new password" %>
+        <%= f.password_field :password_confirmation, :class => 'form-control' %>
+      </div>
+
+      <%= f.submit "Change my password", :class => 'btn btn-lg btn-primary' %> <br/><br/>
+      <%= link_to 'Need an Account? Sign-up Here', new_registration_path(resource_name) %> <br/>
+      <%= link_to 'Re-send confirmation mail?', new_confirmation_path(resource_name) %>
+    <% end %>
+  </div>
+</div>
+

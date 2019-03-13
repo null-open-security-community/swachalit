@@ -1,0 +1,22 @@
+<%= semantic_form_for([:leads, @venue]) do |f| %>
+  <%= resource_error_messages!(@venue) %>
+  
+  <%= f.inputs do %>
+    <%= f.input :chapter, :as => :select, :collection => current_user.managed_chapters %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :address %>
+    <%= f.input :map_url, :label => 'Map URL', :hint => "URL for Google Maps" %>
+    <%= f.input :map_embedd_code, :label => 'Map Embed Code', 
+      :hint => "IFrame embed code for Google Maps" %>
+    <%= f.input :contact_name %>
+    <%= f.input :contact_email %>
+    <%= f.input :contact_mobile %>
+    <%= f.input :contact_notes %>
+  <% end %>
+
+  <br/>
+  <%= f.inputs do %>
+    <%= f.submit :class => 'btn btn-primary' %>
+  <% end %>
+<% end %>

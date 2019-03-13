@@ -1,0 +1,19 @@
+<%- title "Create Event Session - null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        Create Event Session
+        <span class='pull-right'>
+          <%= link_to "Back to Session List", leads_event_event_sessions_path(@event), :class => 'btn btn-primary' %>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <%= render 'form' %>
+  </div>
+</div>

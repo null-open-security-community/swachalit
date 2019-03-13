@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  id: 1
+  name: Bangalore
+  code: BLR
+  description: null Chapter Bangalore
+  city: Bangalore
+  state: Karnataka
+  country: India
+  birthday: 2009-07-31 18:30:00.000000000 Z
+  active: true
+  created_at: 2014-03-10 06:23:52.000000000 Z
+  updated_at: 2014-03-13 03:56:03.000000000 Z
+
+two:
+  id: 2
+  name: Mumbai
+  code: MUM
+  description: null Chapter Mumbai
+  city: Mumbai
+  state: Maharashtra
+  country: India
+  birthday: 2012-01-02 18:30:00.000000000 Z
+  active: true
+  created_at: 2014-03-10 06:37:35.000000000 Z
+  updated_at: 2014-03-10 06:37:35.000000000 Z
