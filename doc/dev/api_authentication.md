@@ -17,7 +17,7 @@ Input Parameters:
 Output on-success (HTTP code: 200):
 
 ```
-{"error":"Success","access_token":"c7537227b1c7ba5f1a06de9c8e5a5f384f9cd878762cfa14a19211d6b5bb7421"}
+{"error":"Success","access_token":"ACCESS-TOKEN"}
 ```
 
 Output on-failure (HTTP code: 401):
@@ -31,7 +31,7 @@ Output on-failure (HTTP code: 401):
 Successful authentication:
 
 ```
-$ curl -i --data "email=abhisek@null.co.in&password=GOODPASSWORD&client_name=CURL" http://127.0.0.1:3000/api/authenticate
+$ curl -i --data "email=user@example.com&password=GOODPASSWORD&client_name=CURL" http://127.0.0.1:3000/api/authenticate
 
 HTTP/1.1 200 OK 
 X-Frame-Options: DENY
@@ -51,7 +51,7 @@ Content-Length: 101
 Connection: Keep-Alive
 Set-Cookie: sessid=0f65b2a1c6ed51f462b769db1a5c6d0a; path=/; HttpOnly
 
-{"error":"Success","access_token":"c7537227b1c7ba5f1a06de9c8e5a5f384f9cd878762cfa14a19211d6b5bb7421"}
+{"error":"Success","access_token":"ACCESS-TOKEN"}
 ```
 
 Failed authentication:
@@ -84,7 +84,7 @@ Set-Cookie: sessid=d18007cde83082d92e41604c5072b447; path=/; HttpOnly
 Successful validation:
 
 ```
-$ curl --head -H 'X-Access-Token: 990b45f8a47aa93ace7eade4249753b50e7e11773890f93f265aa1ea4d0a347c' http://127.0.0.1:3000/api/is_authenticated
+$ curl --head -H 'X-Access-Token: ACCESS-TOKEN' http://127.0.0.1:3000/api/is_authenticated
 
 HTTP/1.1 200 OK 
 X-Frame-Options: DENY
