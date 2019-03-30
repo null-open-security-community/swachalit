@@ -4,8 +4,8 @@ This repository contains source code of application used to run https://null.co.
 
 ## Developer Documentation
 
-[Developer Documentation](doc/developer-guide-docker-compose.md)
-[Testing](doc/testing.md)
+* [Developer Documentation](doc/developer-guide-docker-compose.md)
+* [Testing](doc/testing.md)
 
 ## Production
 
