@@ -13,7 +13,7 @@ class ChaptersController < ApplicationController
 
     respond_to do |format|
       format.json do
-        render :json => @chapter.leads.to_json(:only => [:id, :name])
+        render :json => @chapter.leads.map {|u| {id: u.id, name: u.name } }
       end
     end
   end
@@ -26,6 +26,11 @@ class ChaptersController < ApplicationController
         render :json => @chapter.upcoming_events
       end
     end
+  end
+
+  def calendar
+    @chapter = Chapter.find(params[:id])
+    send_data @chapter.upcoming_events_ics, :type => 'text/calendar', :disposition => 'inline', :filename => 'calendar.ics'
   end
 
 end

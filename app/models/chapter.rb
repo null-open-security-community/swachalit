@@ -63,6 +63,21 @@ class Chapter < ActiveRecord::Base
     Event.future_public_events.where(:chapter_id => self.id)
   end
 
+  def upcoming_events_ics
+    cal = Icalendar::Calendar.new
+    cal.x_wr_calname = "null #{self.name} Events"
+    cal.timezone do |t|
+      t.tzid = "Asia/Kolkata"
+    end
+
+    upcoming_events.each do |ev|
+      cal.add_event(ev.to_ics_event)
+    end
+
+    cal.publish()
+    return cal.to_ical
+  end
+
   def to_param
     "#{self.id} #{self.name}".parameterize
   end

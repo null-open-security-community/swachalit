@@ -1,8 +1,10 @@
 ::SecureHeaders::Configuration.configure do |config|
-  config.hsts = {:max_age => 20.years.to_i, :include_subdomains => true}
+  config.cookies = { secure: true, httponly: true }
   config.x_frame_options = 'DENY'
   config.x_content_type_options = "nosniff"
-  config.x_xss_protection = {:value => 1, :mode => 'block'}
+  config.hsts = "max-age=#{20.years.to_i}; includeSubdomains"
+  config.csp = ::SecureHeaders::OPT_OUT
+  config.referrer_policy = "origin"
 end
 
 

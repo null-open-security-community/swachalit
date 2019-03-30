@@ -1,7 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  page_access_permission: MyString
+one: {}
 
-two:
-  page_access_permission: MyString
+two: {}

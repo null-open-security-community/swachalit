@@ -216,6 +216,23 @@ class Event < ActiveRecord::Base
       calendar.update_event(self.calendar_event_id, c_event)
     end
   end
+
+  def to_ics_event
+    c_event = ::Icalendar::Event.new
+    c_event.dtstart = self.start_time
+    c_event.dtend = self.end_time
+    c_event.summary = self.descriptive_name
+    c_event.description = self.description
+    c_event.location = self.venue.map_url || self.venue.address
+    c_event.created = self.created_at
+    c_event.last_modified = self.updated_at
+    c_event.uid = "swachalit-event-#{self.id}"
+    c_event.url = url_helpers.event_url(self)
+    c_event.organizer = Icalendar::Values::CalAddress.new("https://null.co.in", cn: 'null Open Security Community')
+
+    return c_event
+  end
+
   #
   # END
   # Callback methods from scheduler

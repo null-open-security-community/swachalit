@@ -25,6 +25,7 @@ NullifyPlatform::Application.routes.draw do
     member do
       get 'leaders'
       get 'upcoming_events'
+      get 'calendar.ics', action: 'calendar', :as => 'calendar'
     end
   end
 

@@ -16,7 +16,7 @@ ActiveAdmin.register EventSession do
   form do |f|
     f.inputs "Event Session" do
       f.input :event
-      f.input :user, :as => :select, :collection => User.order('name ASC').map {|u| ["#{u.name} <#{u.email}>", u.id] }
+      f.input :user, :as => :select, :collection => [ f.object.user ].compact(), :input_html => { :class => 'need-user-autocomplete' }      
       f.input :name
       f.input :description
       f.input :need_projector

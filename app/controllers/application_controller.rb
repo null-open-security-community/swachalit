@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  ensure_security_headers(:csp => false)
 
   rescue_from CanCan::AccessDenied do |exception|
     render :text => 'Access Denied!'

@@ -4,6 +4,9 @@
     <h2>
       <%= @chapter.name %> Chapter
       <small><%= @chapter.state %></small>
+      <%= link_to calendar_chapter_path(@chapter) do %>
+        <%= fa_icon('calendar') %><small>Export Calendar</small>
+      <% end %>
       <% if user_signed_in? and current_user.managed_chapter?(@chapter) %>
       <small><%= link_to fa_icon('edit'), edit_leads_chapter_path(@chapter) %></small>
       <% end %>

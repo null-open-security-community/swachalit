@@ -3,4 +3,5 @@ config.symbolize_keys!
 
 Resque.redis = "#{config[:host]}:#{config[:port]}"
 Resque.redis.namespace = "resque:#{config[:namespace]}"
+Resque.inline = Rails.env.test?
 

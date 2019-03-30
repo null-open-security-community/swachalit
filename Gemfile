@@ -57,7 +57,7 @@ gem 'carrierwave'
 gem 'acts-as-taggable-on'
 gem 'redcarpet'
 gem "resque"
-gem 'secure_headers'
+gem 'secure_headers', '~> 6.1.0'
 gem 'formtastic', '~> 2.2.1'
 #gem 'jquery-ui-rails'
 gem "just-datetime-picker"
@@ -72,5 +72,5 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'dotenv'
 gem 'test-unit'
 gem 'omniauth-google-oauth2'
-
+gem 'icalendar'
 
