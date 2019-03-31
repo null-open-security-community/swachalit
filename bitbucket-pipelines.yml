@@ -2,10 +2,16 @@ pipelines:
   tags:
     release-*:
       - step:
+          name: Build and Test
+          image: ruby:2.2.5
           script:
-            #- bundle install
-            #- rake test
-            #- ssh swachalit@null.co.in bash -c /home/swachalit/null-automation-framework/update.sh $BITBUCKET_TAG
+            - bundle install
+            - RAILS_ENV=test RUBYOPT=-W0 rake db:create
+            - RAILS_ENV=test RUBYOPT=-W0 rake db:migrate
+            - RAILS_ENV=test RUBYOPT=-W0 rake test
+      - step:
+          name: Deployment
+          script:
             - echo $BITBUCKET_TAG > public/static/release_version.txt
             - echo $SWACHALIT_SECRETS | base64 -d > .env
             - echo $MYSQL_SECRETS | base64 -d > .env.mysql

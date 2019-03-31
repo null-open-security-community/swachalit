@@ -8,13 +8,14 @@ class UserApiToken < ActiveRecord::Base
   validates :user,        :presence => true
   validates :token,       :uniqueness => true
 
-  before_save :generate_token!
+  before_validation :generate_token!
 
   def self.create_for_request(user, client_name, request)
     user.user_api_tokens.new do |uapi|
       uapi.client_name = client_name
       uapi.user_agent = request.user_agent
       uapi.ip_address = (request.headers["X-Real-IP"] || request.remote_ip)
+      
       uapi.save!
     end
   end
@@ -22,7 +23,7 @@ class UserApiToken < ActiveRecord::Base
   private
 
   def generate_token!
-    self.token = Digest::SHA2.hexdigest("--%d-%s--" % [user.id, Devise.friendly_token]) if self.token.to_s.empty?
+    self.token = Digest::SHA2.hexdigest("--%d-%s--" % [user.id, Devise.friendly_token]) if self.new_record?
   end
 
 end
