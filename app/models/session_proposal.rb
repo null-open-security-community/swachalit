@@ -16,9 +16,11 @@ class SessionProposal < ActiveRecord::Base
   private
 
   def notify_users
-    self.chapter.leads.each do |n_user|
-      MiscMailer.session_proposal_mail(n_user.email, self).deliver()
+    target_emails = self.chapter.leads.map do |n_user|
+      n_user.email
     end
+
+    MiscMailer.session_proposal_mail(target_emails, self).deliver()
   end
 
 end
