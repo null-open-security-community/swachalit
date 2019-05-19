@@ -10,7 +10,7 @@ ActiveAdmin.register EventSession do
     column :name
     column :user
     column :start_time
-    default_actions
+    actions
   end
 
   form do |f|

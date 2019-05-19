@@ -28,16 +28,34 @@ class EventTest < ActiveSupport::TestCase
     e = get_random_new_event()
     e.save
 
+    mc = ::ActionMailer::Base.deliveries.count
+
     assert e.notification_state == ::EventNotification::STATE_INIT, "state: #{e.notification_state}"
     e.execute_notifications()
     e.reload()
+
     assert e.notification_state == ::EventNotification::STATE_INITIAL_NOTIFICATIONS, "state: #{e.notification_state}"
+    assert ::ActionMailer::Base.deliveries.count > mc
+    mc = ::ActionMailer::Base.deliveries.count
+
     e.execute_first_reminder()
     e.reload()
+    
     assert e.notification_state == ::EventNotification::STATE_FIRST_REMINDER, "state: #{e.notification_state}"
+    assert ::ActionMailer::Base.deliveries.count > mc
+    mc = ::ActionMailer::Base.deliveries.count
+
     e.execute_second_reminder()
     e.reload()
+
     assert e.notification_state == ::EventNotification::STATE_SECOND_REMINDER, "state: #{e.notification_state}"
+    assert ::ActionMailer::Base.deliveries.count > mc
+    mc = ::ActionMailer::Base.deliveries.count
+
+    e.execute_presentation_update_reminder()
+    e.reload()
+
+    assert e.notification_state == ::EventNotification::STATE_PRESENTATION_UPDATE, "state: #{e.notification_state}"
   end
 
   test "descriptive name" do
@@ -65,6 +83,19 @@ class EventTest < ActiveSupport::TestCase
     assert u.managed_venues.is_a?(::ActiveRecord::Relation)
     assert u.managed_venues.map(&:id).include?(1)
     assert !u.managed_venues.map(&:id).include?(2)
+  end
+
+  test "calendar update" do
+    e = events(:one)
+
+    begin
+      e.event_update_calendar()
+      assert false, "Should trigger exception"
+    rescue => e
+      # We are not supplying a valid key file during testing
+      assert e.class.to_s == "ArgumentError"
+      assert e.message == "Invalid keyfile or passphrase"
+    end
   end
 
 end

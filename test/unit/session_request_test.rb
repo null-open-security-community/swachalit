@@ -3,7 +3,7 @@ require 'test_helper'
 class SessionRequestTest < ActiveSupport::TestCase
   test "basic create and send mail" do
     sr = ::SessionRequest.new
-    assert_false sr.save
+    assert !sr.save
 
     sr.user = users(:one)
     sr.chapter = chapters(:one)

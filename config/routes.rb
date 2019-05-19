@@ -55,7 +55,7 @@ NullifyPlatform::Application.routes.draw do
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  #ActiveAdmin.routes(self)
 
   devise_for :users, :controllers => {
     :registrations => 'registrations',
@@ -84,10 +84,13 @@ NullifyPlatform::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   # Omniauth Callback
-  match '/auth/:provider/callback'  => 'omniauths#create'
+  match '/auth/:provider/callback'  => 'omniauths#create', via: [:get, :post]
 
   # Resque Web
   # ResqueWeb::Engine.eager_load!
+
+  # Mount Grape APIs
+  mount ::API::Swachalit => '/api-v2'
 
   authenticate :admin_user do
     #mount ResqueWeb::Engine, :at => '/admin/resque', :as => :resque

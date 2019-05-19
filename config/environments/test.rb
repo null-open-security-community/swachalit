@@ -8,7 +8,7 @@ NullifyPlatform::Application.configure do
   config.cache_classes = true
 
   # Configure static asset server for tests with Cache-Control for performance
-  config.serve_static_assets = true
+  config.serve_static_files = true
   config.static_cache_control = "public, max-age=3600"
 
   # Log error messages when you accidentally call methods on nil
@@ -28,10 +28,16 @@ NullifyPlatform::Application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
+  config.action_mailer.default_url_options = { :host => 'localhost:8800' }
 
   # Raise exception on mass assignment protection for Active Record models
   config.active_record.mass_assignment_sanitizer = :strict
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Rails 4 upgrade fix
+  config.active_record.raise_in_transactional_callbacks = true
+  config.active_support.test_order = :sorted
+  config.eager_load = false
 end

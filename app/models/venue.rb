@@ -11,5 +11,5 @@ class Venue < ActiveRecord::Base
   validates :contact_name, :presence => true
 
   belongs_to :chapter
-  has_many :events, :dependent => :restrict
+  has_many :events, :dependent => :restrict_with_error
 end

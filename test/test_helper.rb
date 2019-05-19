@@ -17,4 +17,5 @@ class ActiveSupport::TestCase
       :start_time => Time.now + 1.days, 
       :end_time => Time.now + 5.days})
   end
+
 end

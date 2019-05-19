@@ -1,7 +1,7 @@
 ActiveAdmin.register Event do
   menu :label => 'Event List', :parent => 'Events'
 
-  action_item :only => [:show] do
+  action_item :view, :only => [:show] do
     link_to "View Event", event_path(event), :target => '_blank'
   end
 
@@ -21,7 +21,7 @@ ActiveAdmin.register Event do
     column :public
     column :start_time
 
-    default_actions
+    actions
   end
 
   form do |f|

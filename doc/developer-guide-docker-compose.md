@@ -21,9 +21,6 @@ MYSQL_PASSWORD=s0m3p4ssw0rd
 MAILCATCHER_HOST=192.168.1.151
 MAILCATCHER_PORT=1025
 
-RECAPTCHA_SITEKEY=NOT_REQUIRED_FOR_DEV
-RECAPTCHA_SECRET=NOT_REQUIRED_FOR_DEV
-
 GOOGLE_API_USER_EMAIL=NOT_REQUIRED_FOR_DEV
 GOOGLE_API_KEY_PASSPHRASE=NOT_REQUIRED_FOR_DEV
 GOOGLE_API_CALENDAR_ID=NOT_REQUIRED_FOR_DEV
@@ -35,6 +32,8 @@ OAUTH_NULL_CONSUMER_SECRET=NOT_REQUIRED_FOR_DEV
 
 GOOGLE_CLIENT_ID=NOT_REQUIRED_FOR_DEV
 GOOGLE_CLIENT_SECRET=NOT_REQUIRED_FOR_DEV
+
+SECRET_KEY_BASE=SECRET-KEY-DEV-TEST
 ```
 
 Create `.env.mysql` in source root with the following content
@@ -68,8 +67,23 @@ The full application stack consist of following components
 The entire stack can be started with following command
 
 ```
-docker-compose up
+docker-compose -f docker-compose-full-stack.yml up
 ```
+
+## Users for Development Environment
+
+Create users for use in development environment
+
+```
+docker-compose -f docker-compose-app.yml rake db:seed
+```
+
+This will create 2 users
+
+1. Admin User
+2. Normal User
+
+Credentials are available available in `db/seed.rb`
 
 ## Accessing Application
 

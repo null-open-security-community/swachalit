@@ -32,7 +32,7 @@ ActiveAdmin.register EventMailerTask do
     column :ready_for_delivery
     column :executed
 
-    default_actions
+    actions
   end
 end
 

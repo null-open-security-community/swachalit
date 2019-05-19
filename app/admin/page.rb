@@ -10,7 +10,7 @@ ActiveAdmin.register Page do
     column :navigation_name
     column :published
     
-    default_actions
+    actions
   end
   
   form do |f|

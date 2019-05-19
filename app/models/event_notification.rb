@@ -100,17 +100,17 @@ class EventNotification < ::Event
 
   def twitter_notify()
     m = "[Announcement] #{self.event.descriptive_name[0 ... 100]} #{self.event.external_url}"
-    ::IftttMailer.twitter_status_update(m).deliver!()
+    ::IftttMailer.twitter_status_update(m).deliver_now!()
   end
 
   def twitter_reminder1()
     m = "[Reminder] #{self.event.descriptive_name[0 ... 100]} #{self.event.external_url}"
-    ::IftttMailer.twitter_status_update(m).deliver!()
+    ::IftttMailer.twitter_status_update(m).deliver_now!()
   end
 
   def twitter_reminder2()
     m = "[Reminder] #{self.event.descriptive_name[0 ... 100]} #{self.event.external_url}"
-    ::IftttMailer.twitter_status_update(m).deliver!()
+    ::IftttMailer.twitter_status_update(m).deliver_now!()
 
     self.event.event_sessions.each do |event_session|
       next if event_session.placeholder?
@@ -118,7 +118,7 @@ class EventNotification < ::Event
       # Check if speaker has Twitter handle and send tagged announcement
       if (h = event_session.user.twitter_handle_name.to_s).present?
         m = "[Reminder] @#{h} speaking on #{event_session.name[0 ... 60]} #{self.event.external_url}"
-        ::IftttMailer.twitter_status_update(m).deliver!()
+        ::IftttMailer.twitter_status_update(m).deliver_now!()
       end
     end
   end

@@ -3,7 +3,7 @@ require 'test_helper'
 class SessionProposalTest < ActiveSupport::TestCase
   test "creation of session proposal" do    
     sp = ::SessionProposal.new
-    assert_false sp.save
+    assert !sp.save
 
     sp.user = users(:one)
     sp.chapter = chapters(:one)

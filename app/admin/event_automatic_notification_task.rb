@@ -7,7 +7,7 @@ ActiveAdmin.register EventAutomaticNotificationTask do
     column :mode
     column :executed
 
-    default_actions
+    actions
   end
 
   form do |f|

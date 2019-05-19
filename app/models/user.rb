@@ -11,16 +11,18 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :name, :homepage, :about_me, :twitter_handle, :facebook_profile
   attr_accessible :github_profile, :linkedin_profile, :handle, :avatar
+  attr_accessible :unconfirmed_email
 
   validates :name, :presence => true
 
-  has_many :event_sessions, :dependent => :restrict
-  has_many :event_registrations, :dependent => :restrict
+  has_many :event_sessions, :dependent => :restrict_with_error
+  has_many :event_registrations, :dependent => :restrict_with_error
   has_many :chapter_leads, :dependent => :destroy
   has_many :user_api_tokens, :dependent => :destroy
   has_many :user_auth_profiles, :dependent => :destroy
 
   before_save :delete_api_tokens_if_password_changed?
+  #after_create :deliver_confirmation_mail!
 
   mount_uploader :avatar, AvatarUploader
 
@@ -135,4 +137,15 @@ class User < ActiveRecord::Base
 
     true
   end
+
+  # Devise stopped sending initial confirmation mail after Rails 4.x upgrade
+  # Here we force confirmation mail delivery if not already delivered
+  # def deliver_confirmation_mail!
+  #   unless self.confirmation_sent_at
+  #     self.send_confirmation_instructions()
+  #   end
+
+  #   true
+  # end
+
 end

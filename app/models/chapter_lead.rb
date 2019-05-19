@@ -8,5 +8,5 @@ class ChapterLead < ActiveRecord::Base
   belongs_to :chapter
   belongs_to :user
 
-  scope :active, where(:active => true)
+  scope :active, lambda { where(:active => true) }
 end

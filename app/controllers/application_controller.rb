@@ -5,6 +5,15 @@ class ApplicationController < ActionController::Base
     render :text => 'Access Denied!'
   end
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
+    devise_parameter_sanitizer.permit(:account_update,
+      keys: [:name, :handle, :twitter_handle, :facebook_profile, :linkedin_profile,
+      :github_profile, :homepage, :about_me, :avatar])
+  end
+
   # This will *ONLY* ensure that current user is a leader of 1 or more chapter
   def authorize_leader!
     raise CanCan::AccessDenied if current_user.managed_chapters.count.zero?

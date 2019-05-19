@@ -3,7 +3,7 @@
 ## Running Test Cases
 
 ```
-RUBYOPT=-W0 rake test
+RUBYOPT=-W0 RAILS_ENV=test rake test
 ```
 
 > The `RUBYOPT` environment variable is required to suppress deprecation warnings.
@@ -12,7 +12,7 @@ Running in `docker` environment
 
 ```
 docker-compose -f docker-compose-app.yml run app bash
-RUBYOPT=-W0 rake test
+RUBYOPT=-W0 rake RAILS_ENV=test test
 ```
 
 1. Drop to shell inside the container
@@ -23,3 +23,22 @@ The `docker-compose-app.yml` mounts current directory inside the container so de
 ## Example Test
 
 Refer to `test/unit/event_test.rb`
+
+## Writing Test Cases
+
+Refer to official getting started:
+https://guides.rubyonrails.org/testing.html
+
+Use rails helper to generate new test case
+
+```
+rails generate integration_test some_test
+```
+
+Look inside existing test cases in
+
+* `test/unit`
+* `test/integration`
+
+* https://guides.rubyonrails.org/testing.html#unit-testing
+* https://guides.rubyonrails.org/testing.html#integration-testing

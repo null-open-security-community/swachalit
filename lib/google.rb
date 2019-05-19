@@ -6,3 +6,4 @@ module GoogleAPI
   autoload :CalendarEvent, File.join(File.dirname(__FILE__), 'google', 'calendar')
   autoload :CalendarV3, File.join(File.dirname(__FILE__), 'google', 'calendar')
 end
+

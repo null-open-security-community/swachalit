@@ -4,8 +4,10 @@ This repository contains source code of application used to run https://null.co.
 
 ## Developer Documentation
 
-* [Developer Documentation](doc/developer-guide-docker-compose.md)
-* [Testing](doc/testing.md)
+* [Developer Environment Setup with Docker Compose](doc/developer-guide-docker-compose.md)
+* [Developer Testing](doc/testing.md)
+* [Development Environment Setup with Vagrant](doc/vagrant.md)
+* [Exposing API Services](doc/exposing-api-services.md)
 
 ## Production
 
@@ -16,6 +18,13 @@ release-x.x.x
 ```
 
 The `x.x.x` conforms to semantic versioning.
+
+Push a release through git
+
+```
+git tag -a -m "Release for XYZ" release-X.Y.Z
+git push origin --tags
+```
 
 ### Production Environment
 

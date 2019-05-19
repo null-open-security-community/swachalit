@@ -54,7 +54,8 @@ module NullifyPlatform
     # This will create an empty whitelist of attributes available for mass-assignment for all models
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
-    config.active_record.whitelist_attributes = true
+    # Deprecated in Rails 4+
+    # config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
     config.assets.enabled = true
@@ -88,3 +89,7 @@ require File.join(Rails.root.to_s, 'config', 'recaptcha')
 require File.join(Rails.root.to_s, 'lib', 'scheduler', 'resque_helper')
 require File.join(Rails.root.to_s, 'lib', 'google')
 require File.join(Rails.root.to_s, 'lib', 'integrations', 'twitter')
+require File.join(Rails.root.to_s, 'lib', 'patches')
+require File.join(Rails.root.to_s, 'lib', 'api')
+
+

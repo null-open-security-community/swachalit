@@ -8,7 +8,7 @@
 one:
   id: 1
   email: blah@test.test.com
-  encrypted_password: $2a$10$rz9.3ATcUIBbUSihyssOFu3tLeMrzBVhWKTLV0G4X.6aN2VrGF1Va
+  encrypted_password: $2a$10$GaUM07YySMl2nUI2EsqiAeyUV3S72ISOK.glyGQ4Q8eQeg5WP4Mdy
   reset_password_token: 
   reset_password_sent_at: 
   remember_created_at: 
@@ -18,8 +18,8 @@ one:
   current_sign_in_ip: 1.2.3.4
   last_sign_in_ip: 1.2.3.4
   confirmation_token: 
-  confirmed_at: 
-  confirmation_sent_at: 
+  confirmed_at: 2014-03-10 06:21:13.000000000 Z
+  confirmation_sent_at: 2014-03-10 06:21:13.000000000 Z
   unconfirmed_email: 
   failed_attempts: 0
   unlock_token: 

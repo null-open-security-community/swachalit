@@ -43,11 +43,11 @@ two:
   accepting_registration: true
   state: 
   start_time: 2014-08-01 04:30:00.000000000 Z
-  end_time: 2014-08-01 10:30:00.000000000 Z
+  end_time: 2030-08-01 10:30:00.000000000 Z
   created_at: 2014-07-13 13:58:01.975131000 Z
   updated_at: 2014-07-13 14:26:49.651065000 Z
   registration_start_time: 2014-06-30 18:30:00.000000000 Z
-  registration_end_time: 2014-07-31 18:30:00.000000000 Z
+  registration_end_time: 2030-07-31 18:30:00.000000000 Z
   registration_instructions: ''
   slug: bangalore-null-meet-august-2014-9
   ready_for_announcement: true

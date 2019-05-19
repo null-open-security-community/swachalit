@@ -18,7 +18,7 @@ class SessionRequest < ActiveRecord::Base
       n_user.email
     end
 
-    MiscMailer.session_request_mail(target_emails, self).deliver()
+    MiscMailer.session_request_mail(target_emails, self).deliver_now()
   end
 
 end

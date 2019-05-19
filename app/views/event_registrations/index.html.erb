@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<% ev_registrations = @event_registrations %>
+<% ev_registrations = @event_registrations.to_a %>
 <% until ev_registrations.empty? %>
   <% evrs = ev_registrations.slice!(0, 12) %>
   <div class='row'>

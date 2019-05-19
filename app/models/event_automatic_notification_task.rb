@@ -49,34 +49,34 @@ class EventAutomaticNotificationTask < ActiveRecord::Base
 
   def event_announcement()
     CFG_NOTIFICATION_ANNOUNCEMENT_DEFAULT_ADDRESSES.each do |address|
-      EventMailer.announcement_mail(address, self).deliver!()
+      EventMailer.announcement_mail(address, self).deliver_now!()
     end
   end
 
   def speaker_notification()
     self.event.event_sessions.each do |ev_session|
       next if ev_session.placeholder?
-      EventMailer.session_speaker_notification_mail(ev_session).deliver!()
+      EventMailer.session_speaker_notification_mail(ev_session).deliver_now!()
     end
   end
 
   def event_reminder()
     CFG_NOTIFICATION_ANNOUNCEMENT_DEFAULT_ADDRESSES.each do |address|
-      EventMailer.reminder_mail(address, self.event).deliver!()
+      EventMailer.reminder_mail(address, self.event).deliver_now!()
     end
   end
 
   def speaker_reminder()
     self.event.event_sessions.each do |ev_session|
       next if ev_session.placeholder?
-      EventMailer.session_speaker_reminder_mail(ev_session).deliver!()
+      EventMailer.session_speaker_reminder_mail(ev_session).deliver_now!()
     end
   end
 
   def rsvp_user_reminder()
     self.event.event_registrations.each do |registration|
       next unless registration.confirmed?
-      EventMailer.rsvp_user_reminder_mail(registration.user, event).deliver() unless registration.user.nil?
+      EventMailer.rsvp_user_reminder_mail(registration.user, event).deliver_now() unless registration.user.nil?
     end
   end
 
@@ -86,15 +86,15 @@ class EventAutomaticNotificationTask < ActiveRecord::Base
     targets = targets.uniq()
 
     targets.each do |t|
-      EventMailer.admin_on_create_notification_mail(t, self.event).deliver!()
+      EventMailer.admin_on_create_notification_mail(t, self.event).deliver_now!()
     end
   end
 
   def speaker_remind_presentation_update
     self.event.event_sessions.each do |ev_session|
       next if ev_session.placeholder?
-      next unless ev_session.presentation_url.nil?
-      EventMailer.session_speaker_presentation_update_mail(ev_session).deliver()
+      next unless ev_session.presentation_url.to_s.empty?
+      EventMailer.session_speaker_presentation_update_mail(ev_session).deliver_now()
     end   
   end
 

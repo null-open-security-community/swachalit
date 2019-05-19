@@ -8,6 +8,6 @@ ActiveAdmin.register Venue do
     column :contact_name
     column :contact_mobile
 
-    default_actions
+    actions
   end
 end

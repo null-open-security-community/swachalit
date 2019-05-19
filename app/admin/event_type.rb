@@ -7,6 +7,6 @@ ActiveAdmin.register EventType do
     column :public
     column :created_at
 
-    default_actions
+    actions
   end
 end

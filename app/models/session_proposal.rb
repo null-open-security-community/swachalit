@@ -20,7 +20,7 @@ class SessionProposal < ActiveRecord::Base
       n_user.email
     end
 
-    MiscMailer.session_proposal_mail(target_emails, self).deliver()
+    MiscMailer.session_proposal_mail(target_emails, self).deliver_now()
   end
 
 end

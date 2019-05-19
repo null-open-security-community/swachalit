@@ -12,6 +12,6 @@ ActiveAdmin.register Chapter do
     column :city
     column :active
 
-    default_actions
+    actions
   end
 end

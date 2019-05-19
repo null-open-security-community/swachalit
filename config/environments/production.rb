@@ -9,7 +9,7 @@ NullifyPlatform::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = true
+  config.serve_static_files = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -61,9 +61,14 @@ NullifyPlatform::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
+  # Required for Rails 4.x
+  config.log_level = :info
+
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  config.eager_load = true
+  config.active_record.raise_in_transactional_callbacks = true
 
   config.action_mailer.default_url_options = { :host => 'www.null.co.in' }
   config.action_mailer.delivery_method = :smtp

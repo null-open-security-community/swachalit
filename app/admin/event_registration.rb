@@ -65,7 +65,7 @@ ActiveAdmin.register EventRegistration do
     column :state
     column :created_at
 
-    default_actions
+    actions
   end
 
   form do |f|

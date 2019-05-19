@@ -27,4 +27,19 @@ class UserTest < ActiveSupport::TestCase
     ft = ::UserApiToken.where(:token => token.token).first()
     assert ft.nil?
   end
+
+  test "ensure confirmation mail is sent" do
+    #mc = ::ActionMailer::Base.deliveries.count
+
+    u = ::User.new
+    u.name = "Test User for Confirmation Mail"
+    u.email = "test-user-confirmation-mail@localhost.local"
+    u.password = u.password_confirmation = "Password1234"
+
+    assert u.save
+    assert u.confirmation_sent_at
+    assert u.confirmation_token.to_s.size > 0
+
+    #assert ::ActionMailer::Base.deliveries.count == (mc + 1)
+  end
 end

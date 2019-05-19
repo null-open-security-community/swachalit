@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+unless Rails.env.production?
+  AdminUser.create(:email => 'admin@example.com', :password => 'password', :password_confirmation => 'password')
+  
+  User.create(:name => 'Developer User', :email => 'developer@localhost.local', 
+    :password => 'password',:password_confirmation => 'password')
+end

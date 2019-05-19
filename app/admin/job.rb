@@ -12,6 +12,6 @@ ActiveAdmin.register Job do
     column :type
     column("State") {|job| job.state_name }
 
-    default_actions
+    actions
   end
 end

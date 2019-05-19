@@ -13,7 +13,7 @@ class Chapter < ActiveRecord::Base
 
   scope :active_chapters, lambda { where(:active => true) }
 
-  has_many :events, :dependent => :restrict
+  has_many :events, :dependent => :restrict_with_error
   has_many :chapter_leads, :dependent => :destroy
 
   def has_twitter_handle?
@@ -45,7 +45,6 @@ class Chapter < ActiveRecord::Base
   def has_homepage?
     !self.homepage.to_s.empty?
   end
-
 
   def leads
     self.chapter_leads.active.includes(:user).map {|cv| cv.user }
@@ -80,6 +79,10 @@ class Chapter < ActiveRecord::Base
 
   def to_param
     "#{self.id} #{self.name}".parameterize
+  end
+
+  def as_json(*args)
+    super(*args).except("created_at", "updated_at")
   end
 
 end

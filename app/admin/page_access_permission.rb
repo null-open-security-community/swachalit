@@ -10,7 +10,7 @@ ActiveAdmin.register PageAccessPermission do
     column :user
     column :permission_type
 
-    default_actions
+    actions
   end
 
   form do |f|

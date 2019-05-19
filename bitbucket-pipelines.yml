@@ -3,8 +3,9 @@ pipelines:
     release-*:
       - step:
           name: Build and Test
-          image: ruby:2.2.5
+          image: ruby:2.6.2-slim
           script:
+            - apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs libsqlite3-dev default-libmysqlclient-dev
             - bundle install
             - RAILS_ENV=test RUBYOPT=-W0 rake db:create
             - RAILS_ENV=test RUBYOPT=-W0 rake db:migrate

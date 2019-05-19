@@ -10,7 +10,7 @@ ActiveAdmin.register ChapterLead do
     column('Lead') {|c| link_to(c.user.name, admin_user_path(c.user)) }
     column :active
 
-    default_actions
+    actions
   end
 
   form do |f|
