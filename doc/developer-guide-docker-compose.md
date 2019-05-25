@@ -8,7 +8,7 @@
 
 ## Setting up Development Environment
 
-Create `.env` in source root with the following contents
+Create a file named `.env` in source root with the following contents
 
 ```
 RAILS_ENV=development
@@ -18,7 +18,7 @@ MYSQL_DATABASE=swachalit
 MYSQL_USERNAME=root
 MYSQL_PASSWORD=s0m3p4ssw0rd
 
-MAILCATCHER_HOST=192.168.1.151
+MAILCATCHER_HOST=10.10.10.10
 MAILCATCHER_PORT=1025
 
 GOOGLE_API_USER_EMAIL=NOT_REQUIRED_FOR_DEV
@@ -36,7 +36,7 @@ GOOGLE_CLIENT_SECRET=NOT_REQUIRED_FOR_DEV
 SECRET_KEY_BASE=SECRET-KEY-DEV-TEST
 ```
 
-Create `.env.mysql` in source root with the following content
+Create a file named `.env.mysql` in source root with the following content
 
 ```
 MYSQL_ROOT_PASSWORD=s0m3p4ssw0rd
@@ -45,7 +45,7 @@ MYSQL_ROOT_PASSWORD=s0m3p4ssw0rd
 Start *only* the application server and MySQL
 
 ```
-docker-compose -f docker-compose-app.yml up
+docker-compose -f docker-compose.yml up
 ```
 
 This will build the docker image based on `Dockerfile` and bring up
@@ -53,16 +53,23 @@ This will build the docker image based on `Dockerfile` and bring up
 1. MySQL Server
 2. Rails Application Server (in Development Mode)
 
-Check `script/run_docker_app.sh` to see what commands are executed to start the `Rails` application server and bootstrap swachalit.
+Once both the containers are running, point your browser to `http://localhost:8800`
+
+**Optional:** Check `script/run_docker_app.sh` to see what commands are executed to start the `Rails` application server and bootstrap swachalit.
 
 > This is enough for almost all development activities. The entire stack is not required.
 
+## Full Stack Developer Environment
+
+> *Optional:* The full stack is NOT required for developing the core application backend and frontend. This is required only if you are working on background jobs.
+
 The full application stack consist of following components
 
-1. MySQL Server
-2. Redis Server
-3. Resque Scheduler
-4. Resque Workers
+1. Rails Application Server
+2. MySQL Server
+3. Redis Server
+4. Resque Scheduler
+5. Resque Workers
 
 The entire stack can be started with following command
 
@@ -70,12 +77,12 @@ The entire stack can be started with following command
 docker-compose -f docker-compose-full-stack.yml up
 ```
 
-## Users for Development Environment
+## Dummy Data for Development Environment
 
-Create users for use in development environment
+Populate the database with dummy data for use in development environment *AFTER* your application is up and running with `docker-compose` and you are able to access Swachalit using your web browser.
 
 ```
-docker-compose -f docker-compose-app.yml rake db:seed
+docker-compose run app rake db:seed
 ```
 
 This will create 2 users
@@ -84,6 +91,14 @@ This will create 2 users
 2. Normal User
 
 Credentials are available available in `db/seed.rb`
+
+To drop all data and re-populate seed data:
+
+```
+docker-compose run app rake db:migrate VERSION=0
+docker-compose run app rake db:migrate
+docker-compose run app rake db:seed
+```
 
 ## Accessing Application
 
