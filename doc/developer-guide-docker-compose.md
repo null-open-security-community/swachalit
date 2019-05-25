@@ -6,6 +6,8 @@
 2. Docker Compose
 3. Visual Studio Code
 
+> *Note:* If you are on Windows, you might want to use the [Vagrantfile](https://github.com/null-open-security-community/swachalit/blob/master/Vagrantfile) with [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html). Refer to [Setting up Development Environment with Vagrant](vagrant.md)
+
 ## Clone Repository
 
 ```

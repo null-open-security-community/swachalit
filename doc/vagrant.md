@@ -9,7 +9,7 @@
 
 ## Virtual Machine Setup
 
-Setup virtual machine with `Vagrant`
+Setup virtual machine with `Vagrant` after cloning the repository.
 
 ```
 vagrant up
@@ -18,6 +18,8 @@ vagrant up
 > This will setup the VM with `docker` and `docker-compose`
 
 If you get an error related to port mapping, open `Vagrantfile` and fix the config related to `forwarded_port`.
+
+SSH login to the virtual machine and access the code base from inside the VM
 
 ```
 vagrant ssh
