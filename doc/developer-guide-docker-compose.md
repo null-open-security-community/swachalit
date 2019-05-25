@@ -55,7 +55,7 @@ MYSQL_ROOT_PASSWORD=s0m3p4ssw0rd
 Start *only* the application server and MySQL
 
 ```
-docker-compose -f docker-compose.yml up
+docker-compose up
 ```
 
 This will build the docker image based on `Dockerfile` and bring up
