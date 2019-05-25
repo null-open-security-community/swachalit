@@ -150,7 +150,7 @@ class Event < ActiveRecord::Base
 
   # ActiveRecord :on_create
   def notify_admin_on_create
-    notification_manager.admin_notify_on_create()
+    notification_manager.admin_notify_on_create() unless disable_background_tasks?
   end
 
   def notification_manager
@@ -159,22 +159,24 @@ class Event < ActiveRecord::Base
 
   # State machine for notifications/reminders
   def execute_notifications
-    notification_manager.initial_notifications()
+    notification_manager.initial_notifications() unless disable_background_tasks?
   end
 
   def execute_first_reminder
-    notification_manager.reminder1()
+    notification_manager.reminder1() unless disable_background_tasks?
   end
 
   def execute_second_reminder
-    notification_manager.reminder2()
+    notification_manager.reminder2() unless disable_background_tasks?
   end
 
   def execute_presentation_update_reminder
-    notification_manager.speaker_presentation_update()
+    notification_manager.speaker_presentation_update() unless disable_background_tasks?
   end
 
   def setup_scheduled_tasks
+    return if disable_background_tasks?
+
     remove_scheduled_tasks()
 
     if self.public?
@@ -231,6 +233,10 @@ class Event < ActiveRecord::Base
     c_event.organizer = Icalendar::Values::CalAddress.new("https://null.co.in", cn: 'null Open Security Community')
 
     return c_event
+  end
+
+  def disable_background_tasks?
+    !! ENV["SWACHALIT_DISABLE_BACKGROUND_TASKS"]
   end
 
   #

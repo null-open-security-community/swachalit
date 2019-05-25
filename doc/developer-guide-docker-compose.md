@@ -6,6 +6,14 @@
 2. Docker Compose
 3. Visual Studio Code
 
+## Clone Repository
+
+```
+git clone https://github.com/null-open-security-community/swachalit
+```
+
+> *Note:* The above command clones over HTTP anonymously. If you have Github account and configured SSH keys then you must clone over SSH to push changes to your forked repository.
+
 ## Setting up Development Environment
 
 Create a file named `.env` in source root with the following contents
@@ -18,7 +26,7 @@ MYSQL_DATABASE=swachalit
 MYSQL_USERNAME=root
 MYSQL_PASSWORD=s0m3p4ssw0rd
 
-MAILCATCHER_HOST=10.10.10.10
+MAILCATCHER_HOST=127.0.0.1
 MAILCATCHER_PORT=1025
 
 GOOGLE_API_USER_EMAIL=NOT_REQUIRED_FOR_DEV
@@ -53,7 +61,7 @@ This will build the docker image based on `Dockerfile` and bring up
 1. MySQL Server
 2. Rails Application Server (in Development Mode)
 
-Once both the containers are running, point your browser to `http://localhost:8800`
+Once both the containers are running, point your browser to `http://localhost:8800`. Refer to `dummy data seeding` later in the document on how to seed database and create dummy users.
 
 **Optional:** Check `script/run_docker_app.sh` to see what commands are executed to start the `Rails` application server and bootstrap swachalit.
 
@@ -90,7 +98,7 @@ This will create 2 users
 1. Admin User
 2. Normal User
 
-Credentials are available available in `db/seed.rb`
+Credentials are available available in `db/seed.rb` or read `Accessing Application` section in this document.
 
 To drop all data and re-populate seed data:
 
@@ -102,7 +110,12 @@ docker-compose run app rake db:seed
 
 ## Accessing Application
 
-Point your browser to `http://localhost:8800`
+Point your browser to `http://localhost:8800` and login with
+
+```
+developer@localhost.local
+password
+```
 
 The admin interface is accessible through `http://localhost:8800/admin`, use the following credentials that are created as part of database setup
 

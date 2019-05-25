@@ -1,10 +1,10 @@
 <div class='row'>
   <div class='col-md-5'>
     <address>
-      <%= markdown_html(venue.address) %>
+      <%= markdown_html(venue.address.to_s) %>
     </address>
   </div>
   <div class='col-md-7'>
-    <%= venue.map_embedd_code.html_safe %>
+    <%= venue.map_embedd_code.to_s.html_safe %>
   </div>
 </div>
