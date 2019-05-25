@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.string   "resource_type", limit: 255,   null: false
     t.integer  "author_id",     limit: 4
     t.string   "author_type",   limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.integer  "user_id",    limit: 4
     t.integer  "chapter_id", limit: 4
     t.boolean  "active",               default: true
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "chapter_leads", ["chapter_id"], name: "index_chapter_leads_on_chapter_id", using: :btree
@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.string   "country",            limit: 255
     t.datetime "birthday"
     t.boolean  "active",                                default: true
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "chapter_email",      limit: 255
     t.string   "image",              limit: 255
     t.string   "twitter_handle",     limit: 255
@@ -107,8 +107,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.boolean  "ready_for_delivery",               default: false
     t.boolean  "executed",                         default: false
     t.string   "status",             limit: 255
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "head_note",          limit: 65535
   end
 
@@ -116,8 +116,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.integer  "event_id",   limit: 4
     t.string   "mode",       limit: 255
     t.boolean  "executed",               default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "event_mailer_tasks", force: :cascade do |t|
@@ -128,8 +128,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.boolean  "ready_for_delivery",                  default: false
     t.boolean  "executed",                            default: false
     t.string   "status",                limit: 255
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "registration_state",    limit: 255
   end
 
@@ -137,8 +137,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.integer  "event_id",      limit: 4
     t.integer  "user_id",       limit: 4
     t.boolean  "visible",                   default: true
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "accepted"
     t.string   "state",         limit: 255
     t.string   "gov_id_type",   limit: 255
@@ -157,8 +157,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.boolean  "need_whiteboard",                default: false
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "slug",             limit: 255
     t.string   "presentation_url", limit: 255
     t.boolean  "placeholder",                    default: false
@@ -174,8 +174,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.boolean  "public"
     t.boolean  "registration_required",               default: false
     t.boolean  "invitation_required",                 default: false
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", force: :cascade do |t|
@@ -191,8 +191,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.string   "state",                     limit: 255
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.datetime "registration_start_time"
     t.datetime "registration_end_time"
     t.text     "registration_instructions", limit: 65535
@@ -218,16 +218,16 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.binary   "response",      limit: 65535
     t.string   "error_message", limit: 255
     t.text     "error_detail",  limit: 65535
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "page_access_permissions", force: :cascade do |t|
     t.string   "permission_type", limit: 255
     t.integer  "page_id",         limit: 4
     t.integer  "user_id",         limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -238,8 +238,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.string   "title",           limit: 255
     t.text     "content",         limit: 4294967295
     t.boolean  "published"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "session_proposals", force: :cascade do |t|
@@ -248,8 +248,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.integer  "event_type_id",       limit: 4
     t.string   "session_topic",       limit: 255
     t.text     "session_description", limit: 65535
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "session_requests", force: :cascade do |t|
@@ -257,23 +257,23 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.integer  "user_id",             limit: 4
     t.string   "session_topic",       limit: 255
     t.text     "session_description", limit: 65535
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255,   null: false
     t.text     "data",       limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "stats", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -309,8 +309,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.string   "achievement_type", limit: 255
     t.string   "info",             limit: 255
     t.string   "reference",        limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_api_tokens", force: :cascade do |t|
@@ -319,8 +319,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.string   "client_name", limit: 255
     t.string   "ip_address",  limit: 255
     t.string   "token",       limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_auth_profiles", force: :cascade do |t|
@@ -329,8 +329,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.binary   "extra",      limit: 65535
     t.string   "uid",        limit: 255
     t.string   "provider",   limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -359,8 +359,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.string   "slideshare_profile",     limit: 255
     t.string   "github_profile",         limit: 255
     t.string   "avatar",                 limit: 255
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "homepage",               limit: 255
     t.text     "about_me",               limit: 65535
   end
@@ -379,8 +379,8 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.string   "contact_email",   limit: 255
     t.string   "contact_mobile",  limit: 255
     t.text     "contact_notes",   limit: 65535
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
