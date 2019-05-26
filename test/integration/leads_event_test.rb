@@ -12,6 +12,16 @@ class LeadsEventTest < ActionDispatch::IntegrationTest
     ENV["SWACHALIT_DISABLE_BACKGROUND_TASKS"] = nil
   end
 
+  test "Access list of events" do
+    get leads_events_path
+    assert_response :ok
+
+    sign_out users(:one)
+
+    get leads_events_path
+    assert_response :redirect
+  end
+
   test "Leads create event" do
     event = {
       :name => "Test Event Integration Test",
