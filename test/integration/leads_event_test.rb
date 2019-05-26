@@ -29,13 +29,32 @@ class LeadsEventTest < ActionDispatch::IntegrationTest
     assert !e.nil?
   end
 
+  test "Non lead user cannot create event" do
+    sign_in users(:two)
+    
+    event = {
+      :name => "Test Event Integration Test::Non Lead",
+      :chapter_id => chapters(:one).id,
+      :event_type_id => event_types(:one).id,
+      :venue_id => event_types(:one).id,
+      :start_time => Time.now + 5.days,
+      :end_time => Time.now + 10.days
+    }
+
+    post leads_events_path, event: event
+    assert_response :ok   # 200-ok means error is rendered 30x-redirect means resource created
+
+    e = ::Event.where(name: event["name"]).first
+    assert e.nil?
+  end
+
   test "Leads delete event" do
     event = events(:one)
     
     delete leads_event_path(event)
     assert_response :redirect
 
-    # We DO NOT actually delete the event currently - Refer to leads/events_controller#destroy
+    #* We DO NOT actually delete the event currently - Refer to leads/events_controller#destroy
     e = ::Event.where(id: event.id).first
     assert !e.nil?
   end
@@ -50,8 +69,25 @@ class LeadsEventTest < ActionDispatch::IntegrationTest
 
     assert_response :redirect
 
-    e = ::Event.where(name: event.read_attribute(:name)).first
+    e = ::Event.where(id: event.id).first
     assert e.start_time == event.start_time
+  end
+
+  test "Non lead user cannot update event" do
+    sign_in users(:two)
+
+    event = events(:one)
+    original_start_time = event.start_time
+    event.start_time += 2.days
+
+    patch leads_event_path(event), event: {
+      start_time: event.start_time
+    }
+
+    assert_response :ok
+
+    e = ::Event.where(id: event.id).first
+    assert e.start_time == original_start_time
   end
 end
 
