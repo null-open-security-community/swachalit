@@ -15,8 +15,10 @@ class EventsTest < ActionDispatch::IntegrationTest
       :end_time => Time.now + 10.days
     }
 
-    assert_raise (AbstractController::ActionNotFound) {get events_path}
-    assert_raise (AbstractController::ActionNotFound) {post events_path, event: new_event}
+    get events_path
+    assert_response :redirect
+
+    assert_raise (AbstractController::ActionNotFound) { post events_path, event: new_event }
   end
 
   test "Unspported methods by event" do
