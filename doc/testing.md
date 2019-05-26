@@ -40,5 +40,21 @@ Look inside existing test cases in
 * `test/unit`
 * `test/integration`
 
+## Writing Test Cases
+
+### Writing Unit Test
+
+### Writing Integration Test
+
+### Authenticated Integration Test
+
+```
+setup do
+  ENV["SWACHALIT_DISABLE_BACKGROUND_TASKS"] = "1"
+  sign_in users(:one)
+end
+```
+
+
 * https://guides.rubyonrails.org/testing.html#unit-testing
 * https://guides.rubyonrails.org/testing.html#integration-testing
