@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   rescue_from CanCan::AccessDenied do |exception|
-    render :text => 'Access Denied!'
+    render :status => 401, :text => 'Access Denied!'
   end
 
   before_action :configure_permitted_parameters, if: :devise_controller?
