@@ -22,6 +22,10 @@ class LeadsEventTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
+  test "Non leads accesses new event" do
+  
+  end
+
   test "Leads create event" do
     event = {
       :name => "Test Event Integration Test",

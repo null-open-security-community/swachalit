@@ -25,6 +25,11 @@ unless Rails.env.production?
     :password => 'password',:password_confirmation => 'password')
 
   User.where(email: 'developer@localhost.local').first.confirm()
+
+  User.create(name: 'Test User', email: 'testuser@localhost.local',
+    password: 'password', password_confirmation: 'password')
+
+  User.where(email: 'testuser@localhost.local').first.confirm()
   
   %w(Meet Humla Puliya).each do |type|
     EventType.create(name: type, max_participant: 10, public: true, registration_required: false, invitation_required: false)
