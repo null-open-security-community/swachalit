@@ -24,7 +24,7 @@ one:
   failed_attempts: 0
   unlock_token: 
   locked_at: 
-  name: Test User Name
+  name: Test Lead 1
   handle: ''
   twitter_handle: ''
   facebook_profile: ''
@@ -35,4 +35,36 @@ one:
   created_at: 2014-03-10 06:21:13.000000000 Z
   updated_at: 2014-03-11 14:36:24.000000000 Z
   homepage: ''
-  about_me: AAAAA
+  about_me: I AM A LEAD
+
+two:
+  id: 2
+  email: user2@local.host
+  encrypted_password: $2a$10$GaUM07YySMl2nUI2EsqiAeyUV3S72ISOK.glyGQ4Q8eQeg5WP4Mdy
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: 3
+  current_sign_in_at: 2019-05-11 14:35:09.000000000 Z
+  last_sign_in_at: 2019-05-10 12:09:39.000000000 Z
+  current_sign_in_ip: 1.2.3.4
+  last_sign_in_ip: 1.2.3.4
+  confirmation_token: 
+  confirmed_at: 2014-03-10 06:21:13.000000000 Z
+  confirmation_sent_at: 2014-03-10 06:21:13.000000000 Z
+  unconfirmed_email: 
+  failed_attempts: 0
+  unlock_token: 
+  locked_at: 
+  name: Test User 2
+  handle: ''
+  twitter_handle: ''
+  facebook_profile: ''
+  linkedin_profile: ''
+  slideshare_profile: 
+  github_profile: ''
+  avatar: 
+  created_at: 2014-03-10 06:21:13.000000000 Z
+  updated_at: 2014-03-11 14:36:24.000000000 Z
+  homepage: ''
+  about_me: I AM NOT A LEAD
