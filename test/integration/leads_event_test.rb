@@ -19,4 +19,25 @@ class LeadsEventTest < ActionDispatch::IntegrationTest
     assert !e.nil?
   end
 
+  test "Leads delete event" do
+    event = events(:one)
+    
+    delete leads_event_path(event)
+    assert_response :redirect
+
+    e = ::Event.where(name: event.name).first
+    assert e.nil?
+  end
+
+  test "Leads update event" do
+    event = events(:one)
+    event.start_time += 2.days
+
+    patch leads_event_path(event), event:event
+    assert_response :redirect
+
+    e = ::Event.where(name: event.name).first
+    assert e.start_time == event.start_time
+  end
 end
+
