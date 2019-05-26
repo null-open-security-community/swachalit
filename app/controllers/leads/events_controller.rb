@@ -91,7 +91,13 @@ class Leads::EventsController < ApplicationController
     @event = ::Event.find(params[:id])
     authorize! :delete, @event
 
-    redirect_to :action => :index
+    #@event.destroy()
+
+    respond_to do |format|
+      format.html do
+        redirect_to :action => :index
+      end
+    end
   end
 
 end
