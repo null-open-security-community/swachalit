@@ -87,7 +87,7 @@ class LeadsEventTest < ActionDispatch::IntegrationTest
     post leads_events_path, event: event
     assert_response(401)   # 200-ok means error is rendered 30x-redirect means resource created
 
-    e = ::Event.where(name: event["name"]).first
+    e = ::Event.where(name: event[:name]).first
     assert e.nil?
   end
 
