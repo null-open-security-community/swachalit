@@ -5,7 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 one: 
-  name: null Meet August 2014
+  name: null Meet August 2090
   description: Random description for the event
   chapter_id: 1
   venue_id: 1
