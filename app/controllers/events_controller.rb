@@ -7,6 +7,10 @@ class EventsController < ApplicationController
       format.html { render :action => 'show' }
     end
   end
+  
+  def index
+    redirect_to upcoming_path
+  end
 
   def show
     @event = Event.find(params[:id].to_i)
