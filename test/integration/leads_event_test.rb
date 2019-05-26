@@ -23,7 +23,10 @@ class LeadsEventTest < ActionDispatch::IntegrationTest
   end
 
   test "Non leads accesses new event" do
-  
+    sign_in users(:two)
+
+    get leads_events_path
+    assert_response(401)
   end
 
   test "Leads create event" do
@@ -56,7 +59,7 @@ class LeadsEventTest < ActionDispatch::IntegrationTest
     }
 
     post leads_events_path, event: event
-    assert_response :ok   # 200-ok means error is rendered 30x-redirect means resource created
+    assert_response(401)   # 200-ok means error is rendered 30x-redirect means resource created
 
     e = ::Event.where(name: event["name"]).first
     assert e.nil?
@@ -98,7 +101,7 @@ class LeadsEventTest < ActionDispatch::IntegrationTest
       start_time: event.start_time
     }
 
-    assert_response :ok
+    assert_response(401)
 
     e = ::Event.where(id: event.id).first
     assert e.start_time == original_start_time
