@@ -7,13 +7,15 @@ module GoogleAPI
   CFG_APPLICATION_NAME      = GOOGLE_API_APPLICATION_NAME
   CFG_APPLICATION_VERSION   = GOOGLE_API_APPLICATION_VERSION
 
+  GOOGLE_API_CLIENT_USER_AGENT = "#{CFG_APPLICATION_NAME}/#{CFG_APPLICATION_VERSION} google-api-client"
+
   class ServiceClient
     attr_reader :client
 
     def initialize(scope)
       @scope = scope
       @client = ::Google::APIClient.new(:application_name => CFG_APPLICATION_NAME, 
-        :application_version => CFG_APPLICATION_VERSION)
+        :application_version => CFG_APPLICATION_VERSION, :user_agent => GOOGLE_API_CLIENT_USER_AGENT)
     end
 
     def authorize()
