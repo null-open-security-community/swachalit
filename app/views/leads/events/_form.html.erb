@@ -13,13 +13,13 @@
   <% end %>
   <br/>
   <%= f.inputs "Schedule" do %>
-    <%= f.input :start_time, :as => :datetime %>
-    <%= f.input :end_time, :as => :datetime %>
+    <%= f.input :start_time, :as => :datetime_select %>
+    <%= f.input :end_time, :as => :datetime_select %>
   <% end %>
   <br/>
   <%= f.inputs "Registration" do %>
-    <%= f.input :registration_start_time, :as => :datetime %>
-    <%= f.input :registration_end_time, :as => :datetime %>
+    <%= f.input :registration_start_time, :as => :datetime_select %>
+    <%= f.input :registration_end_time, :as => :datetime_select %>
     <%= f.input :registration_instructions %>
     <%= f.input :max_registration, :hint => "0 for Unlimited" %>
   <% end %>
