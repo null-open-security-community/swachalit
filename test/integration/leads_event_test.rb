@@ -46,6 +46,32 @@ class LeadsEventTest < ActionDispatch::IntegrationTest
     assert !e.nil?
   end
 
+  test "Leads cannot create event in past" do
+    event = {
+      :name => "Test Event Integration Test",
+      :chapter_id => chapters(:one).id,
+      :event_type_id => event_types(:one).id,
+      :venue_id => event_types(:one).id,
+      :start_time => Time.now - 1.days,
+      :end_time => Time.now + 10.days
+    }
+
+    post leads_events_path, event: event
+    assert_response :ok   # 200-ok means error is rendered 30x-redirect means resource created
+
+    e = ::Event.where(name: "Test Event Integration Test").first
+    assert e.nil?
+
+    event['start_time'] = Time.now
+    event['end_time'] = Time.now - 1.hours
+
+    post leads_events_path, event: event
+    assert_response :ok   # 200-ok means error is rendered 30x-redirect means resource created
+
+    e = ::Event.where(name: "Test Event Integration Test").first
+    assert e.nil?
+  end
+
   test "Non lead user cannot create event" do
     sign_in users(:two)
     
