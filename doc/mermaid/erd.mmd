@@ -1,0 +1,15 @@
+graph LR
+
+Event---|Has Many|EventSession
+Event---|Has Many|EventRegistration
+Event---|Belongs To|Chapter
+EventSession---|Belongs To|User
+Chapter---|Has Many|ChapterLead
+ChapterLead---|Belongs To|User
+EventRegistration---|Belongs To|User
+PageAccessPermission---|Belongs To|User
+PageAccessPermission---|Belongs To|Page
+User---|Has Many|UserAuthProfile
+Event---|Belongs To|Venue
+Chapter---|Has Many|Venue
+
