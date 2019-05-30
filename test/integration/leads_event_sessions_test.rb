@@ -72,7 +72,7 @@ class LeadsEventsSessionsTest < ActionDispatch::IntegrationTest
   end
 
   test "Non lead user cannot create session" do
-    sign_in(users(:two))
+    sign_in users(:two)
     event = events(:one)
     speaker = users(:two)
     session = {
@@ -92,7 +92,7 @@ class LeadsEventsSessionsTest < ActionDispatch::IntegrationTest
   end
 
   test "Non lead user cannot update session" do
-    sign_in(users(:two))
+    sign_in users(:two)
 
     session = event_sessions(:two)
     event = events(:one)
