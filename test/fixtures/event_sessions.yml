@@ -16,5 +16,14 @@ one:
   need_microphone: True
   need_whiteboard: True
   
-two: {}
-#  column: value
+two:
+  id: 2
+  event_id: 1
+  user_id: 2
+  name: Session_2_1_2
+  description: Fixture Session
+  start_time: 2090-08-01 04:50:00.000000000 Z
+  end_time: 2090-08-01 04:55:00.000000000 Z 
+  need_projector: True
+  need_microphone: True
+  need_whiteboard: True
