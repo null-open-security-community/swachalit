@@ -29,4 +29,45 @@ class LeadsEventsSessionsTest < ActionDispatch::IntegrationTest
     assert !sess.nil?
     assert sess.speaker_name == speaker.name
   end
-end 
+
+  test "Leads delete event session" do
+    session = event_sessions(:one)
+    event = events(:one)
+    
+    delete leads_event_event_session_path(event, session)
+    assert_response :redirect
+
+    s = EventSession.where(id: session.id).first  #TODO: Sessions are currently not deleted
+    assert !s.nil?
+  end
+
+  test "Leads update event session" do
+    session = event_sessions(:one)
+    event = events(:one)
+    update = {
+      name: "Session name updated"
+    }
+    patch leads_event_event_session_path(event, session), event_session: update
+    assert_response :redirect
+
+    s = EventSession.where(id: session.id).first
+    assert s.name = update[:name]
+  end
+
+  test "Session management pages are accessible" do
+    event = events(:one)
+    session = event_sessions(:one)
+
+    get leads_event_event_sessions_path(event)
+    assert_response :ok
+
+    get leads_event_event_sessions_path(event)
+    assert_response :ok
+
+    get new_leads_event_event_session_path(event)
+    assert_response :ok
+
+    get edit_leads_event_event_session_path(event, session)
+    assert_response :ok
+  end
+end
