@@ -4,8 +4,17 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
+one: 
+  id: 1
+  event_id: 1
+  user_id: 1
+  name: Session_1_1_1
+  description: Fixture Session
+  start_time: 2090-08-01 04:30:00.000000000 Z
+  end_time: 2090-08-01 04:40:00.000000000 Z 
+  need_projector: True
+  need_microphone: True
+  need_whiteboard: True
+  
 two: {}
 #  column: value

@@ -4,7 +4,8 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: 
+one:
+  id: 1   # Need to refer in event_sessions fixture 
   name: null Meet August 2090
   description: Random description for the event
   chapter_id: 1
