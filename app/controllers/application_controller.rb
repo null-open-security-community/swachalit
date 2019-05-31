@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   def token_authenticate_user!
     api_token = ::UserApiToken.where(:token => request.headers['X-Access-Token']).first()
-    if api_token
+    if api_token and api_token.user
       user = api_token.user
 
       request.env["devise.skip_trackable"] = true
