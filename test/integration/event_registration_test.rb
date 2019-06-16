@@ -24,14 +24,15 @@ class EventRegistrationsTest < ActionDispatch::IntegrationTest
     event = events(:one)
     
     get new_event_event_registration_path(event)
-    assert_response :redirect #TODO: check for redirect location.
+    assert_redirected_to new_user_session_path
   end
 
   test "Successfull registration redirects to event page" do
+    sign_in users(:two)
     event = events(:one)
     registration = event_registrations(:one)
     
     post event_event_registrations_path(event), event_registrations: registration 
-    assert_response :redirect #TODO: check for redirect location. 
+    assert_redirected_to event_path(event) 
   end
 end
