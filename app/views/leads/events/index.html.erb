@@ -39,7 +39,7 @@
         <td><%= link_to "##{event.id}", event_path(event) %></td>
         <td><%= event.chapter.name %></td>
         <td>
-          <%= link_to truncate(event.name, :length => 55), leads_event_path(event) %>
+          <%= link_to truncate(event.descriptive_name, :length => 55), leads_event_path(event) %>
           <% if event.public? %>
             <span class='label label-success'>Published</span>
           <% else %>

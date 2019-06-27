@@ -37,12 +37,12 @@
     });
 });
 </script>
-<%- title(@event.name) %>
+<%- title(@event.descriptive_name) %>
 <div class='row'>
   <div class='col-md-12'>
     <div class='page-header'>
       <h1>
-        <%= @event.name %> 
+        <%= @event.descriptive_name %> 
         <span class='pull-right'>
           <% if user_signed_in? and current_user.registered_for_event?(@event) %>
             <!-- <small>Already registered for the event.</small> -->

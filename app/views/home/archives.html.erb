@@ -34,7 +34,7 @@
           <%= event.chapter.name %>
         </span>
       <% end %>  &nbsp; &nbsp;
-      <%= link_to event.name, event_path(event) %> 
+      <%= link_to event.descriptive_name, event_path(event) %> 
       <small>
         <span class='label label-success'>Sessions: <%= event.event_sessions.count %></span> 
         <span class='label label-info'>Registrations: <%= event.event_registrations.count %></span>

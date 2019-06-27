@@ -64,7 +64,7 @@
 
     <% EventType.all.each do |event_type| %>
       <% @stat.events.where(:event_type_id => event_type.id).each do |event| %>
-        dataTable.addRow(['<%= event_type.name %>', '<%= event.name %>',
+        dataTable.addRow(['<%= event_type.name %>', '<%= event.descriptive_name %>',
           new Date(<%= "%d,%d,%d,%d,%d,0,0" % [event.start_time.year, event.start_time.month - 1, event.start_time.day, event.start_time.hour, event.start_time.min] %>), 
           new Date(<%= "%d,%d,%d,%d,%d,0,0" % [event.end_time.year, event.end_time.month - 1, event.end_time.day,event.end_time.hour, event.end_time.min] %>)]);
       <% end %>

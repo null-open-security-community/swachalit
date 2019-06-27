@@ -12,7 +12,7 @@
         <span class='label label-info'><%= event.event_type.name %></span>
         <strong><u><%= event.start_time.strftime("%Y-%m-%d") %></u></strong> &nbsp; 
         <%= link_to event_path(event), :style => 'text-decoration: none' do %>
-          <strong><%= truncate(event.name, :length => 60) %></strong>
+          <strong><%= truncate(event.descriptive_name, :length => 60) %></strong>
         <% end %>
         <span class='label label-success'><%= link_to event.chapter.name, chapter_path(event.chapter), :style => 'text-decoration: none; color: inherit;' %></span>
         <% if (Time.now > event.start_time+8.hour) %>

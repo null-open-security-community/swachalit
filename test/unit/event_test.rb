@@ -98,4 +98,14 @@ class EventTest < ActiveSupport::TestCase
     end
   end
 
+  test "event name update" do
+    e = events(:one)
+    e.name = "NEW NAME 1111"
+    assert e.save
+
+    assert e.name == "NEW NAME 1111"
+    assert !e.descriptive_name.index("NEW NAME 1111").nil?
+    assert !e.descriptive_name.index(chapters(:one).name).nil?
+  end
+
 end

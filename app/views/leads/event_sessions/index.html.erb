@@ -4,7 +4,7 @@
     <div class='page-header'>
       <h2>
         Managed Sessions
-        <small><%= @event.name %></small>
+        <small><%= @event.descriptive_name %></small>
         <span class='pull-right'>
           <%= link_to "Back to Event", leads_event_path(@event), :class => 'btn btn-primary' %>
           <%= link_to "Create Session", new_leads_event_event_session_path(@event), :class => 'btn btn-primary' %>

@@ -6,7 +6,7 @@
         <%= @event_session.name %>
         <small>
           <%= link_to event_path(@event_session.event), :style => 'text-decoration: none;' do %>
-            <span class='label label-success'><%= @event_session.event.name %></span>
+            <span class='label label-success'><%= @event_session.event.descriptive_name %></span>
           <% end %>
         </small>
       </h2>

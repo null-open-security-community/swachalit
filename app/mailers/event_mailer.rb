@@ -22,13 +22,13 @@ class EventMailer < ActionMailer::Base
     @task = task
 
     mail(:from => CFG_NOTIFICATION_ANNOUNCEMENT_SENDER_ADDRESSES, 
-      :to => target, :subject => "[Announcement] #{@event.name}")
+      :to => target, :subject => "[Announcement] #{@event.descriptive_name}")
   end
 
   def reminder_mail(target, event)
     @event = event
     mail(:from => CFG_NOTIFICATION_ANNOUNCEMENT_SENDER_ADDRESSES,
-      :to => target, :subject => "[Reminder] #{@event.name}")
+      :to => target, :subject => "[Reminder] #{@event.descriptive_name}")
   end
 
   def session_speaker_notification_mail(event_session)
@@ -43,7 +43,7 @@ class EventMailer < ActionMailer::Base
 
   def admin_on_create_notification_mail(target, event)
     @event = event
-    mail(:to => target, :subject => "[Event Creation] New event created: #{event.name}")
+    mail(:to => target, :subject => "[Event Creation] New event created: #{event.descriptive_name}")
   end
 
   def session_speaker_presentation_update_mail(event_session)
@@ -53,6 +53,6 @@ class EventMailer < ActionMailer::Base
 
   def rsvp_user_reminder_mail(user, event)
     @event = event
-    mail(:to => user.email, :subject => "[null Event] Reminder: #{event.name}")
+    mail(:to => user.email, :subject => "[null Event] Reminder: #{event.descriptive_name}")
   end
 end

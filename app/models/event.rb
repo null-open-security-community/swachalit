@@ -77,13 +77,14 @@ class Event < ActiveRecord::Base
   end
 
   ## Override self.name attribute read
-  def name
-    if self.new_record?
-      super
-    else
-      self.descriptive_name
-    end
-  end
+  ## This is a bad idea - Results in crazy bugs
+  # def name
+  #   if self.new_record? or self.changed?
+  #     super
+  #   else
+  #     self.descriptive_name
+  #   end
+  # end
 
   def descriptive_start_time
     self.start_time.strftime("%A %B %d %Y")
