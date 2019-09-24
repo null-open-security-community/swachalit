@@ -3,6 +3,14 @@ module ApplicationHelper
     content_for(:title) { page_title }
   end
 
+  def content_for_or_default(key, default)
+    if content_for?(key)
+      content_for(key)
+    else
+      default
+    end
+  end
+
   def resource_error_messages!(resource)
     return '' if resource.errors.empty?
 
