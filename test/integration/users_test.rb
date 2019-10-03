@@ -7,6 +7,10 @@ class UsersTest < ActionDispatch::IntegrationTest
     ENV["SWACHALIT_DISABLE_BACKGROUND_TASKS"] = "1"
   end
 
+  teardown do
+    ENV["SWACHALIT_DISABLE_BACKGROUND_TASKS"] = nil
+  end
+
   test "Unauthenticated user can access passsword recovery page" do
     get new_user_password_path
     assert_response :ok
