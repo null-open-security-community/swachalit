@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
     render :status => 401, :text => 'Access Denied!'
   end
 
+  rescue_from ::ArgumentError do |exception|
+    render :status => 500, :text => 'Uh oh! Something went wrong. Did you run a scanner?'
+  end
+
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters

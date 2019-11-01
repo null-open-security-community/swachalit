@@ -30,7 +30,11 @@
               <%= recaptcha_tags %>
             </div>
 
-            <%= f.submit "Register", :class => 'btn btn-lg btn-primary' %> <br/><br/>
+            <%= f.submit "Register", :class => 'btn btn-lg btn-primary' %>
+            <%= link_to "/auth/google_oauth2" do %>
+              <%= image_tag 'google/btn_google_signin_sm.png' %>
+            <% end %>
+            <br/><br/>
             <%= link_to 'Already registered? Sign-in Here', new_session_path(resource_name) %>
 
           <% end %>

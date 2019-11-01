@@ -2,6 +2,8 @@
 
 This repository contains source code of application used to run https://null.co.in
 
+[![CircleCI](https://circleci.com/gh/null-open-security-community/swachalit/tree/master.svg?style=svg)](https://circleci.com/gh/null-open-security-community/swachalit/tree/master)
+
 ## Developer Documentation
 
 * [Developer Environment Setup with Docker Compose](doc/developer-guide-docker-compose.md)

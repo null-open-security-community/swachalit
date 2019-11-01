@@ -1,0 +1,14 @@
+version: 2.1
+jobs:
+  build:
+    docker: 
+      - image: ruby:2.6.2-slim
+    steps:
+      - checkout
+      - run: apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs libsqlite3-dev default-libmysqlclient-dev
+      - run: bundle install
+      - run: RAILS_ENV=test RUBYOPT=-W0 rake db:create
+      - run: RAILS_ENV=test RUBYOPT=-W0 rake db:migrate
+      - run: RAILS_ENV=test RUBYOPT=-W0 SECRET_KEY_BASE=Test-Run-123 rake test
+
+
