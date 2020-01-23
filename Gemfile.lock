@@ -340,7 +340,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    secure_headers (6.1.0)
+    secure_headers (6.3.0)
     signet (0.11.0)
       addressable (~> 2.3)
       faraday (~> 0.9)
