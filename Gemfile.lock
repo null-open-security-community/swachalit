@@ -257,7 +257,7 @@ GEM
       activemodel (>= 4.0.1, < 5.0)
     public_suffix (3.0.3)
     raabro (1.1.6)
-    rack (1.6.11)
+    rack (1.6.12)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-protection (1.5.5)
