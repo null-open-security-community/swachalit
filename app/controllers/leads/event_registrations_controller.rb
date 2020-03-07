@@ -14,14 +14,27 @@ class Leads::EventRegistrationsController < ApplicationController
   def mass_update
     @event_registrations = @event.event_registrations
 
+    errors = []
     if params[:token] == form_authenticity_token
       params[:event_registrations].each do |event_registration|
-        @event_registrations.find(event_registration[:id]).set_state!(event_registration[:state]) rescue nil  # Lets avoid raising on invalid states
+        begin
+          @event_registrations.find(event_registration[:id]).set_state!(event_registration[:state])
+        rescue => e
+          errors << {
+            registration_id: event_registration[:id],
+            error_message: e.message
+          }
+        end
       end
     end
 
     respond_to do |format|
-      format.json { render :json => {'status' => 'OK'} }
+      if errors.any?
+        format.json { render :json => {'status' => 'OK'} }
+      else
+        # Some or all have raised error
+        format.json { render :json => {'status' => 'FAILED', 'errors' => errors } }
+      end
     end
   end
 
