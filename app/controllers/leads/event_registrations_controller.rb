@@ -15,7 +15,7 @@ class Leads::EventRegistrationsController < ApplicationController
     @event_registrations = @event.event_registrations
 
     errors = []
-    if params[:token] == form_authenticity_token
+    if verified_request?
       params[:event_registrations].each do |event_registration|
         begin
           @event_registrations.find(event_registration[:id]).set_state!(event_registration[:state])
@@ -26,10 +26,14 @@ class Leads::EventRegistrationsController < ApplicationController
           }
         end
       end
+    else
+      errors << {
+        error_message: 'Form authenticity token mismatch'
+      }
     end
 
     respond_to do |format|
-      if errors.any?
+      unless errors.any?
         format.json { render :json => {'status' => 'OK'} }
       else
         # Some or all have raised error

@@ -43,10 +43,11 @@ class EventRegistration < ActiveRecord::Base
     super(:only => [:id, :event_id, :user_id, :accepted, :created_at, :updated_at, :state, :visible])
   end
 
-  def set_state!(state)
-    raise "Invalid State" unless STATE_ALL.include?(state)
+  def set_state!(new_state)
+    raise "Invalid State" unless STATE_ALL.include?(new_state)
+    return if self.state == new_state
 
-    self.state = state
+    self.state = new_state
     self.save!
   end
 
