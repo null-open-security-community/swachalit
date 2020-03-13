@@ -11,6 +11,28 @@ class Leads::EventRegistrationsController < ApplicationController
     end
   end
 
+  def export_csv
+    content = CSV.generate do |csv|
+      csv << ["#","Name","Email","Registered On","Id Type","Id #","State"]
+
+      @event.event_registrations.each do |registration|
+        csv << [
+          registration.id,
+          registration.user&.name,
+          registration.user&.email,
+          registration.created_at,
+          registration.gov_id_type,
+          registration.gov_id_number,
+          registration.state
+        ]
+      end
+    end
+
+    send_data content, 
+      :type => 'text/csv; charset=iso-8859-1; header=present',
+      :disposition => "attachment; filename=event_#{@event.id}_registrations.csv"
+  end
+
   def mass_update
     @event_registrations = @event.event_registrations
 

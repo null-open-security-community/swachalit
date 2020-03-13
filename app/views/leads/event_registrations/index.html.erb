@@ -12,7 +12,7 @@
         <span class='pull-right'>
           <%= link_to "Back to Event", leads_event_path(@event), :class => 'btn btn-sm btn-primary' %>
           <%= link_to "Update Registration State", '#', :class => 'btn btn-sm btn-danger', :id => 'registration_update_btn' %>
-          <%= link_to "Export Report", '#', :class => 'btn btn-sm btn-primary', :id => 'export_report' %>
+          <%= link_to "Export Report", export_csv_leads_event_event_registrations_path(@event), :class => 'btn btn-sm btn-primary', :id => 'export_report' %>
         </span>
       </h4>
     </div>
@@ -80,9 +80,4 @@
     });
     return false;
   }); 
-
-
-  $('#export_report').click(function() {
-    $('.table2excel').TableCSVExport();
-  });
 </script>

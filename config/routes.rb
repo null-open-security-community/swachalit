@@ -41,6 +41,7 @@ NullifyPlatform::Application.routes.draw do
       resources :event_registrations do
         collection do
           put 'mass_update'
+          get 'export_csv'
         end
       end
       resources :event_mailer_tasks do
