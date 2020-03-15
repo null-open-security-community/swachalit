@@ -24,9 +24,8 @@ class EventRegistration < ActiveRecord::Base
 
   validates :event, :user, :presence => true
   validates :user_id, :uniqueness => { :scope => [:event_id], :message => 'has already registered for the event' }
-  validate  :registration_validator
+  validate  :new_registration_validator, :if => :new_record?
 
-  #before_create :set_acceptance!  # DEPRECATED
   before_create :set_default_state!
 
   STATE_PROVISIONAL   = "Provisional"
@@ -44,27 +43,17 @@ class EventRegistration < ActiveRecord::Base
     super(:only => [:id, :event_id, :user_id, :accepted, :created_at, :updated_at, :state, :visible])
   end
 
-  def set_state!(state)
-    raise "Invalid State" unless STATE_ALL.include?(state)
+  def set_state!(new_state)
+    raise "Invalid State" unless STATE_ALL.include?(new_state)
+    return if self.state == new_state
 
-    self.state = state
+    self.state = new_state
     self.save!
   end
 
   def confirmed?
     self.state == STATE_CONFIRMED
   end
-
-  # DEPRECATED
-  # def accepted!
-  #   self.accepted = true
-  #   self.save!
-  # end
-
-  # def rejected!
-  #   self.accepted = false
-  #   self.save!
-  # end
 
   private
 
@@ -76,14 +65,8 @@ class EventRegistration < ActiveRecord::Base
     end
   end
 
-  # By default we set acceptance for non invite only events
-  # DEPRECATED
-  # def set_acceptance!
-  #   self.accepted = !self.event.invite_only?
-  #   true  # This is required else record won't be saved if false is returned
-  # end
-
-  def registration_validator
-    errors.add(:event, "registration not allowed") unless event.registration_allowed? and event.registration_active?
+  def new_registration_validator
+    errors.add(:event, "is not allowed") if !event.registration_allowed?
+    errors.add(:event, "is not active") if !event.registration_active?
   end
 end

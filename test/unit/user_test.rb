@@ -2,6 +2,8 @@ require 'test_helper'
 require 'ostruct'
 
 class UserTest < ActiveSupport::TestCase
+  include ActionDispatch::TestProcess
+
   test "ensure api token expires after password change" do
     u = ::User.first
     assert !u.nil?
@@ -42,4 +44,20 @@ class UserTest < ActiveSupport::TestCase
 
     #assert ::ActionMailer::Base.deliveries.count == (mc + 1)
   end
+
+  test "whitelist in carrierwave uploader" do
+    u = ::User.new
+    u.name = "User1"
+    u.email = "user1@test.local"
+    u.password = u.password_confirmation = "Password1234"
+
+    assert u.save
+
+    u.avatar = fixture_file_upload('1.jpg', 'image/jpg')
+    assert u.save
+
+    u.avatar = fixture_file_upload('1.html', 'text/html')
+    assert !u.save
+  end
+  
 end

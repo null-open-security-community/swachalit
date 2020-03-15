@@ -78,10 +78,12 @@ module ApplicationHelper
     s = s.to_s
     return '#' if s.empty?
 
-    return '' if s =~ /^javascript/i
-    return '' if s =~ /^chrome/i
-    return '' if s =~ /^about/i
-    return "http://#{s}" if s !~ /^http/i   # Force protocol
+    s = s.gsub(/(\r|\n|\s)/, '')
+
+    return '#' if s =~ /\Ajavascript/i
+    return '#' if s =~ /\Achrome/i
+    return '#' if s =~ /\Aabout/i
+    return "http://#{s}" if s !~ /\Ahttp/i   # Force protocol
     
     return s
   end
