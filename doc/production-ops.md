@@ -1,5 +1,7 @@
 # Production Operations
 
+> The information in this document may be deprecated. The production pipeline is managed in Bitbucket but completely rewritten to sync with public docker image and release version.
+
 ## Production
 
 Production deployment is triggered through Git release tag of format:
