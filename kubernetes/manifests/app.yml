@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swachalit
+  tier: app
+  version: master
+spec:
+  selector:
+    matchLabels:
+      app: swachalit
+  template:
+    metadata:
+      labels:
+        app: swachalit
+    spec:
+      containers:
+      - name: swachalit
+        image: null0x001/swachalit:latest
+        envFrom:
+        - secretRef:
+            name: swachalit-env
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8800
