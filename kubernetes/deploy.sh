@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NAMESPACE="swachalit"
-MYSQL_ROOT_PASSWORD=$(openssl rand -base64 48)
+export MYSQL_ROOT_PASSWORD=$(openssl rand -base64 48)
 
 kubectl create namespace $NAMESPACE
 
