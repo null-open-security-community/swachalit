@@ -83,6 +83,7 @@ require File.join(Rails.root.to_s, 'config', 'mailgun')
 require File.join(Rails.root.to_s, 'config', 'misc_config')
 require File.join(Rails.root.to_s, 'config', 'google_api')
 require File.join(Rails.root.to_s, 'config', 'twitter')
+require File.join(Rails.root.to_s, 'config', 'storage')
 require File.join(Rails.root.to_s, 'config', 'slack')
 require File.join(Rails.root.to_s, 'config', 'recaptcha')
 

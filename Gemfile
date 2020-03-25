@@ -92,4 +92,4 @@ gem 'test-unit'
 gem 'omniauth-google-oauth2'
 gem 'icalendar'
 gem 'grape'
-
+gem "fog-aws"
