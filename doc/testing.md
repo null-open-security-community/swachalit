@@ -2,16 +2,10 @@
 
 ## Running Test Cases
 
-```
-RUBYOPT=-W0 RAILS_ENV=test rake test
-```
-
-> The `RUBYOPT` environment variable is required to suppress deprecation warnings.
-
 Running in `docker` environment
 
 ```
-docker-compose -f docker-compose-app.yml run app bash
+docker-compose run app bash
 RUBYOPT=-W0 rake RAILS_ENV=test test
 ```
 
@@ -19,6 +13,14 @@ RUBYOPT=-W0 rake RAILS_ENV=test test
 2. Run test cases
 
 The `docker-compose-app.yml` mounts current directory inside the container so developers can make changes in test code in their IDE and re-run without exiting the container.
+
+Run test cases
+
+```
+RUBYOPT=-W0 RAILS_ENV=test rake test
+```
+
+> The `RUBYOPT` environment variable is required to suppress deprecation warnings.
 
 ## Example Test
 
@@ -44,7 +46,11 @@ Look inside existing test cases in
 
 ### Writing Unit Test
 
+> See examples in `test/unit`
+
 ### Writing Integration Test
+
+> See examples in `test/integration`
 
 ### Authenticated Integration Test
 

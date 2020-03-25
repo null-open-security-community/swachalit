@@ -74,7 +74,7 @@ gem "resque"
 gem 'secure_headers'
 gem 'formtastic'
 #gem 'jquery-ui-rails'
-gem "just-datetime-picker"
+gem 'just-datetime-picker'
 gem 'yaml_db'
 gem 'exception_notification'
 #gem 'resque-web', :require => 'resque_web'
@@ -92,4 +92,4 @@ gem 'test-unit'
 gem 'omniauth-google-oauth2'
 gem 'icalendar'
 gem 'grape'
-gem "fog-aws"
+gem 'fog-aws'

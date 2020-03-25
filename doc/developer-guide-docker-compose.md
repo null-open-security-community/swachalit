@@ -69,6 +69,12 @@ Once both the containers are running, point your browser to `http://localhost:88
 
 > This is enough for almost all development activities. The entire stack is not required.
 
+## Running Test Cases
+
+```
+docker-compose run app rake test RAILS_ENV=test
+```
+
 ## Full Stack Developer Environment
 
 > *Optional:* The full stack is NOT required for developing the core application backend and frontend. This is required only if you are working on background jobs.
