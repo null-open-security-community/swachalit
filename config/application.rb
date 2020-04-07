@@ -90,7 +90,9 @@ require File.join(Rails.root.to_s, 'config', 'recaptcha')
 require File.join(Rails.root.to_s, 'lib', 'scheduler', 'resque_helper')
 require File.join(Rails.root.to_s, 'lib', 'google')
 require File.join(Rails.root.to_s, 'lib', 'integrations', 'twitter')
-require File.join(Rails.root.to_s, 'lib', 'patches')
 require File.join(Rails.root.to_s, 'lib', 'api')
+
+# Ensure this is always loaded last
+require File.join(Rails.root.to_s, 'lib', 'patches')
 
 
