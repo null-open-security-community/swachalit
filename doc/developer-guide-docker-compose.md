@@ -44,6 +44,8 @@ GOOGLE_CLIENT_ID=NOT_REQUIRED_FOR_DEV
 GOOGLE_CLIENT_SECRET=NOT_REQUIRED_FOR_DEV
 
 SECRET_KEY_BASE=SECRET-KEY-DEV-TEST
+
+STORAGE_PROVIDER_DISABLED=true
 ```
 
 Create a file named `.env.mysql` in source root with the following content
