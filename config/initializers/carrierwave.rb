@@ -1,5 +1,5 @@
 CarrierWave.configure do |config|
-  if Rails.env.production?
+  if Rails.env.production? && CFG_STORAGE_PROVIDER_ENABLED
     config.fog_provider = "fog/aws"
     config.fog_credentials = {
       :provider              => CFG_STORAGE_PROVIDER,
