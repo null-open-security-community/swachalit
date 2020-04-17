@@ -1,5 +1,5 @@
-CFG_DEVISE_SENDER_EMAIL = 'no-reply-swachalit@notify.null.co.in'
-CFG_MAILER_DEFAULT_FROM = 'null Swachalit <no-reply-swachalit@notify.null.co.in>'
+CFG_DEVISE_SENDER_EMAIL = ENV["DEVISE_SENDER_MAIL"] || 'no-reply-swachalit@null.co.in'
+CFG_MAILER_DEFAULT_FROM = ENV["MAILER_DEFAULT_FROM"] || 'null Swachalit <no-reply-swachalit@null.co.in>'
 
 CFG_IFTTT_SENDER_EMAIL = ENV["IFTTT_SENDER_EMAIL"] || "info@null.co.in"
 
