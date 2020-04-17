@@ -9,6 +9,10 @@ CFG_NOTIFICATION_ANNOUNCEMENT_DEFAULT_ADDRESSES = [
   'null-co-in@googlegroups.com'
 ]
 
+CFG_EXCEPTION_NOTIFICATION_RECEIVERS = [
+  'abhisek@null.co.in'
+]
+
 CFG_NOTIFICATION_ADMIN_EVENT_CREATE = [
   'aka@null.co.in',
   'abhisek@null.co.in',
