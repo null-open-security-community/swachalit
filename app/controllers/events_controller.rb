@@ -1,13 +1,13 @@
 class EventsController < ApplicationController
-  
+
   def seo_name
-    @event = Event.where(:slug => params[:name]).first()
+    @event = Event.find_by!(slug: params[:name])
 
     respond_to do |format|
       format.html { render :action => 'show' }
     end
   end
-  
+
   def index
     redirect_to upcoming_path
   end
