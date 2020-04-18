@@ -3,7 +3,7 @@ module OmniAuth
     # tell OmniAuth to load our strategy
     # Not used for now
     #autoload :Nullwp, File.join(Rails.root.to_s, 'lib/oauth/nullwp_strategy')
-    
+
     #autoload :Wordpress, File.join(Rails.root.to_s, 'lib/oauth/wordpress')
   end
 end

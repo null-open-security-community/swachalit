@@ -20,7 +20,7 @@ class DeviseLoginTest < ActionDispatch::IntegrationTest
 
     post user_session_path,
       user: { email: user, password: password }
-    
+
     assert_response :redirect
   end
 
@@ -42,5 +42,10 @@ class DeviseLoginTest < ActionDispatch::IntegrationTest
 
     get new_session_proposal_path
     assert_response :redirect
+  end
+
+  test "Omniauth sign-in exception" do
+    get '/auth/test/callback?provider=test'
+    assert_response 400
   end
 end
