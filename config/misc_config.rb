@@ -13,6 +13,8 @@ CFG_EXCEPTION_NOTIFICATION_RECEIVERS = [
   'abhisek@null.co.in'
 ]
 
+CFG_SECURITY_CONTACT_EMAIL = 'security@null.co.in'
+
 CFG_NOTIFICATION_ADMIN_EVENT_CREATE = [
   'aka@null.co.in',
   'abhisek@null.co.in',
