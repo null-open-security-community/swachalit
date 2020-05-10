@@ -27,8 +27,8 @@ Bring up full stack
 docker-compose -f docker-compose-full-stack.yml up
 ```
 
-## SSL/TLS
+## Contributors Guide
 
-SSL/TLS and its corresponding security configuration should be handled at frontend reverse proxy. The reverse proxy should forward `/` to Swachalit running on port 8800.
-
-
+* Read [Wiki on Getting Started with Contribution](https://github.com/null-open-security-community/swachalit/wiki/Contributing-to-Swachalit-DevOps)
+* [Setup a developer environment](doc/developer-guide-docker-compose.md)
+* Head over to [open issues](https://github.com/null-open-security-community/swachalit/issues)
