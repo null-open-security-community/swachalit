@@ -3,6 +3,7 @@
 This repository contains source code of application used to run https://null.co.in
 
 [![CircleCI](https://circleci.com/gh/null-open-security-community/swachalit/tree/master.svg?style=svg)](https://circleci.com/gh/null-open-security-community/swachalit/tree/master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3eeabb4c889ec3e0b285/maintainability)](https://codeclimate.com/github/null-open-security-community/swachalit/maintainability)
 
 ## Developer Documentation
 
