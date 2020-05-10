@@ -1,16 +1,16 @@
 require_relative 'helper'
 
 module API
-  class Event < Grape::API
+  class Chapters < Grape::API
     include ::API::Helper
 
     version 'v1', using: :header, vendor: 'swachalit'
     format :json
 
-    resource :events do
-      desc 'Returns list of upcoming public events'
+    resource :chapters do
+      desc 'Returns list of active chapters'
       get do
-        ::Event.future_public_events
+        ::Chapter.active_chapters
       end
     end
 
