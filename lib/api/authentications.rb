@@ -13,7 +13,7 @@ module API
         user = User.find_for_authentication(email: params[:email])
         if user and user.valid_password?(params[:password])
           token = user.create_api_token(params[:client_name], request)
-          token.activate!
+          token.set_active!
 
           { token: token.token, expire_at: token.expire_at }
         else

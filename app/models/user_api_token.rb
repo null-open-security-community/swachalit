@@ -31,15 +31,15 @@ class UserApiToken < ActiveRecord::Base
     end
   end
 
-  def activate!
-    active = true
-    save!
+  def set_active!
+    self.active = true
+    self.save!
   end
 
   private
 
   def generate_token!
-    self.token = Digest::SHA2.hexdigest("--%d-%s--" % [user.id, Devise.friendly_token]) if self.new_record?
+    self.token = SecureRandom.urlsafe_base64(64) if self.new_record?
   end
 
 end

@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  def as_json
+  def as_json(**args)
     super(:only => [:id, :name])
   end
 
