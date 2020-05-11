@@ -14,6 +14,7 @@ group :development, :test do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
+  gem 'byebug'
 end
 
 group :test do
@@ -62,7 +63,7 @@ gem 'cancan'
 gem 'font-awesome-rails'
 gem 'activeadmin', '~> 1.0'
 # meta_search is superseeded by ransack
-#gem 'meta_search', '~> 1.0' 
+#gem 'meta_search', '~> 1.0'
 gem 'ransack', '~> 1.8'
 gem 'audited-activerecord', '~> 4.0'
 gem 'country_select'

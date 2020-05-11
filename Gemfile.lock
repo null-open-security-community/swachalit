@@ -76,6 +76,7 @@ GEM
     bcrypt (3.1.13)
     buftok (0.2.0)
     builder (3.2.3)
+    byebug (11.1.3)
     cancan (1.6.10)
     carrierwave (1.3.1)
       activemodel (>= 4.0.0)
@@ -433,6 +434,7 @@ DEPENDENCIES
   activerecord-session_store
   acts-as-taggable-on
   audited-activerecord (~> 4.0)
+  byebug
   cancan
   carrierwave
   coffee-rails (>= 4.0)

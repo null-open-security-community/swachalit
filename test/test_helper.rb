@@ -10,12 +10,22 @@ class ActiveSupport::TestCase
   fixtures :all
 
   def get_random_new_event()
-    Event.new({:chapter_id => 1, 
-      :event_type_id => 1, 
-      :venue_id => 1, 
-      :name => "TestEvent #{rand(1000000)}", 
-      :start_time => Time.now + 1.days, 
+    Event.new({:chapter_id => 1,
+      :event_type_id => 1,
+      :venue_id => 1,
+      :name => "TestEvent #{rand(1000000)}",
+      :start_time => Time.now + 1.days,
       :end_time => Time.now + 5.days})
   end
 
+end
+
+class ActionDispatch::IntegrationTest
+  def json_response?
+    "application/json" == @response.content_type
+  end
+
+  def json_response
+    ::JSON.parse(@response.body)
+  end
 end
