@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: swachalit
-  tier: app
-  version: master
+  labels:
+    app: swachalit
+    image: swachalit
 spec:
   selector:
     matchLabels:
@@ -16,9 +17,16 @@ spec:
       containers:
       - name: swachalit
         image: null0x001/swachalit:latest
+        imagePullPolicy: Always
         envFrom:
         - secretRef:
-            name: swachalit-env
+            name: swachalit-secret
+        env:
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_ROOT_PASSWORD
         resources:
           limits:
             memory: "256Mi"

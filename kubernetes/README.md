@@ -1,4 +1,4 @@
-# WIP: Kubernetes Manifests
+# Kubernetes Manifests
 
 ## Requirements
 
@@ -13,21 +13,22 @@ kubectl cluster-info
 
 ## Deployment
 
-Create or copy environment file
+Create a file `.env.app` using example from [Developer Documentation](https://github.com/null-open-security-community/swachalit/blob/master/doc/developer-guide-docker-compose.md)
+
+Create a file `.env.mysql` using below command
 
 ```
-cp ../.env .env
+echo "MYSQL_ROOT_PASSWORD=$(openssl rand -hex 12)" > .env.mysql
 ```
 
-Create resources
+Execute deployment
 
 ```
-./deploy.sh
+kubectl apply -k .
 ```
 
 ## Cleanup
 
 ```
-kubectl delete namespace swachalit
+kubectl delete -k .
 ```
-
