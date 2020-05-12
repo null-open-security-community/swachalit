@@ -29,7 +29,7 @@ spec:
                 key: MYSQL_ROOT_PASSWORD
         resources:
           limits:
-            memory: "256Mi"
+            memory: "512Mi"
             cpu: "500m"
         ports:
         - containerPort: 8800
