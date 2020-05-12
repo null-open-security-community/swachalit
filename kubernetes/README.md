@@ -27,6 +27,10 @@ Execute deployment
 kubectl apply -k .
 ```
 
+## Ingress
+
+Enable ingress by editing `manifests/ingress.yml` as required and enabling in `kustomize.yml`
+
 ## Cleanup
 
 ```
