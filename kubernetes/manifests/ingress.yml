@@ -14,7 +14,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: swachalit-svc
+          serviceName: swachalit
           servicePort: 80
         path: /
   tls:
