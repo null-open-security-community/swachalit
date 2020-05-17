@@ -73,7 +73,7 @@ end
 if Rails.env.development?
     Rails.application.routes.default_url_options[:host] = '127.0.0.1'
 else
-    Rails.application.routes.default_url_options[:host] = 'null.co.in'
+    Rails.application.routes.default_url_options[:host] = ENV['APPLICATION_HOST'] || 'null.co.in'
 end
 
 require 'dotenv/load'
