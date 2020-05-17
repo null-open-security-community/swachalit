@@ -9,7 +9,9 @@ module API
     format :json
 
     resource :chapters do
-      desc 'Returns list of active chapters'
+      desc 'Returns list of active chapters' do
+        success ChapterEntity
+      end
       params do
         optional :all, type: Boolean, desc: 'Show all chapters (including archived)'
       end
