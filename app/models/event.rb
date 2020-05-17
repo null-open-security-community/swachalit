@@ -39,8 +39,9 @@ class Event < ActiveRecord::Base
   after_create  :notify_admin_on_create
   after_save    :setup_scheduled_tasks, :if => lambda { public_changed? }
 
-  scope :future_events, lambda { where('start_time > ?', Time.now - 6.hours) }
+  scope :future_events, lambda { where('end_time > ?', Time.now) }
   scope :future_public_events, lambda { future_events.where(:public => true) }
+  scope :public_events, lambda { where(public: true) }
   scope :archives, lambda { where('public = ? AND can_show_on_archive = ? AND start_time < ?', true, true, Time.now) }
 
   include Scheduler::ResqueSchedulerHelper
