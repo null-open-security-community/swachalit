@@ -79,7 +79,7 @@ NullifyPlatform::Application.routes.draw do
   get  '/api/is_authenticated'    => 'api#check_authentication',  :as => :api_is_authenticated
   get  '/api/user/registrations'  => 'api#user_registrations',    :as => :api_user_registrations
   get  '/api/user/autocomplete'   => 'api#user_autocomplete'
-  
+
   post '/api/slackbot/events'     => 'integrations/slackbot#events',    :as => :api_slackbot_events
 
   ActiveAdmin.routes(self)
@@ -92,6 +92,7 @@ NullifyPlatform::Application.routes.draw do
 
   # Mount Grape APIs
   mount ::API::Swachalit => '/api-v2'
+  mount GrapeSwaggerRails::Engine, at: '/api-v2/swagger'
 
   authenticate :admin_user do
     #mount ResqueWeb::Engine, :at => '/admin/resque', :as => :resque

@@ -15,5 +15,12 @@ module API
     mount ::API::Authentications
     mount ::API::Users
 
+    add_swagger_documentation \
+    mount_path: '/docs',
+    info: {
+      title: 'Swachalit API',
+      description: 'The null Swachalit API'
+    }
+
   end
 end
