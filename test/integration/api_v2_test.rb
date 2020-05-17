@@ -68,4 +68,29 @@ class ApiV2Test < ActionDispatch::IntegrationTest
     get '/api-v2/users/me', {}, { "HTTP_AUTHORIZATION" => "Bearer #{token}" }
     assert_response 401
   end
+
+  test "Users API" do
+    # ActionController request mock!
+    r = OpenStruct.new
+    r.remote_ip = '127.0.0.1'
+    r.user_agent = 'Test Agent'
+    r.headers = {}
+
+    # Lead
+    u = users(:one)
+    token = u.create_api_token('Test-Client', r)
+    token.set_active!
+
+    t = token.token
+
+    # The events that I have participated
+    get '/api-v2/users/events', {}, { "HTTP_AUTHORIZATION" => "Bearer #{t}" }
+    assert_response :ok
+    assert json_response.is_a?(Array)
+
+    # The sessions that I have given
+    get '/api-v2/users/sessions', {}, { "HTTP_AUTHORIZATION" => "Bearer #{t}" }
+    assert_response :ok
+    assert json_response.is_a?(Array)
+  end
 end

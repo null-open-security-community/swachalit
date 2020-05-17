@@ -1,4 +1,6 @@
 require_relative 'helper'
+require_relative 'entities/event_entity'
+require_relative 'entities/event_session_entity'
 
 module API
   class Users < Grape::API
@@ -28,6 +30,22 @@ module API
         end
 
         h
+      end
+
+      desc "Return list of user's registered events" do
+        success EventEntity
+      end
+      get 'events' do
+        present current_user.registered_participation, \
+          with: EventEntity
+      end
+
+      desc "Return list of user's delivered sessions" do
+        success EventSessionEntity
+      end
+      get 'sessions' do
+        present current_user.speaker_sessions, \
+          with: EventSessionEntity
       end
     end
 
