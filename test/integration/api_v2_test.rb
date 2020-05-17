@@ -93,4 +93,11 @@ class ApiV2Test < ActionDispatch::IntegrationTest
     assert_response :ok
     assert json_response.is_a?(Array)
   end
+
+  test "Chapters API" do
+    get '/api-v2/chapters'
+    assert_response :ok
+    assert json_response.is_a?(Array)
+    assert json_response.size > 0
+  end
 end

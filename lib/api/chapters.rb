@@ -1,4 +1,5 @@
 require_relative 'helper'
+require_relative 'entities/chapter_entity'
 
 module API
   class Chapters < Grape::API
@@ -9,8 +10,13 @@ module API
 
     resource :chapters do
       desc 'Returns list of active chapters'
+      params do
+        optional :all, type: Boolean, desc: 'Show all chapters (including archived)'
+      end
       get do
-        ::Chapter.active_chapters
+        chapters = params[:all] ? ::Chapter.all : ::Chapter.active_chapters
+        present chapters, \
+          with: ChapterEntity
       end
     end
 

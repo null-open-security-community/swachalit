@@ -18,6 +18,20 @@ class ActiveSupport::TestCase
       :end_time => Time.now + 5.days})
   end
 
+  def get_user_api_token(user, activate = true)
+    r = OpenStruct.new
+    r.remote_ip = '127.0.0.1'
+    r.user_agent = 'Test Agent'
+    r.headers = {}
+
+    # Lead
+    u = user
+    token = u.create_api_token('Test-Client', r)
+    token.set_active! if activate
+
+    token
+  end
+
 end
 
 class ActionDispatch::IntegrationTest
