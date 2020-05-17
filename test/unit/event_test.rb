@@ -40,7 +40,7 @@ class EventTest < ActiveSupport::TestCase
 
     e.execute_first_reminder()
     e.reload()
-    
+
     assert e.notification_state == ::EventNotification::STATE_FIRST_REMINDER, "state: #{e.notification_state}"
     assert ::ActionMailer::Base.deliveries.count > mc
     mc = ::ActionMailer::Base.deliveries.count
@@ -108,4 +108,21 @@ class EventTest < ActiveSupport::TestCase
     assert !e.descriptive_name.index(chapters(:one).name).nil?
   end
 
+  test "chapter must be active" do
+    e = events(:one)
+    c = e.chapter
+    c.active = false
+    assert c.save
+
+    e.name = "NEW NAME"
+    assert_not e.save
+
+    c = chapters(:one)
+    c.active = false
+    assert c.save
+
+    e = get_random_new_event()
+    e.chapter = c
+    assert_not e.save
+  end
 end

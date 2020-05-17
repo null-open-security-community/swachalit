@@ -3,6 +3,8 @@ class ChaptersController < ApplicationController
   def show
     @chapter = Chapter.find(params[:id])
 
+    flash.alert = 'This chapter is not active currently' unless @chapter.active?
+
     respond_to do |format|
       format.html
     end
