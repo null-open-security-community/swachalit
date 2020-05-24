@@ -17,8 +17,7 @@ services:
       - "8800:8800"
     env_file:
       - .env
+    dns:
+      - 8.8.8.8
 volumes:
   swachalit-mysql:
-
-
-

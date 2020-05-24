@@ -1,0 +1,48 @@
+<%- title "My Sessions - null Community" %>
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='page-header'>
+      <h2>
+        My Sessions
+        <small>Where I am speaking</small>
+        <span class='pull-right'>
+          <%= link_to "Back to Home", '/', :class => 'btn btn-primary' %>
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class='table-responsive'>
+  <table class='table table-condensed'>
+    <tr>
+      <th width='5%'>#</th>
+      <th width='25%'>Name</th>
+      <th width='10%'>Chapter</th>
+      <th width='25%'>Event</th>
+      <th width='25%'>Schedule</th>
+      <th></th>
+    </tr>
+    <% @event_sessions.each do |event_session| %>
+    <tr>
+      <td><%= link_to "##{event_session.id}", event_session_path(event_session) %></td>
+      <td><%= link_to truncate(event_session.name, :length => 30), event_session_path(event_session) %></td>
+      <td><%= link_to event_session.event.chapter.name, chapter_path(event_session.event.chapter) %></td>
+      <td><%= link_to event_session.event.name, event_path(event_session.event) %></td>
+      <td>
+        <%= link_to event_session.start_time %>
+        <% if event_session.start_time > Time.now %>
+          <span class='label label-success'>Upcoming</span>
+        <% else %>
+          <span class='label label-danger'>Done</span>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to edit_event_session_path(event_session), :style => 'text-decoration: none;' do %>
+          <%= fa_icon(:edit) %> Edit Session
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

@@ -8,7 +8,11 @@ NullifyPlatform::Application.routes.draw do
 
   resources :event_mailer_tasks
   resources :user_achievements
-  resources :event_sessions
+  resources :event_sessions do
+    collection do
+      get 'my_sessions', as: :my
+    end
+  end
   resources :session_requests
   resources :session_proposals
   resources :stats

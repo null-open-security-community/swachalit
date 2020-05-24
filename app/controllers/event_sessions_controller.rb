@@ -45,8 +45,13 @@ class EventSessionsController < ApplicationController
 
     # Allow only description update
     evs_params = params[:event_session].symbolize_keys()
-    evs_params.delete_if {|e| 
-      ![:description, :presentation_url, :video_url].include?(e)
+    evs_params.delete_if {|e|
+      ![
+        :name,
+        :description,
+        :presentation_url,
+        :video_url
+      ].include?(e)
     }
 
     respond_to do |format|
@@ -62,4 +67,11 @@ class EventSessionsController < ApplicationController
     end
   end
 
+  def my_sessions
+    @event_sessions = current_user.speaker_sessions
+
+    respond_to do |format|
+      format.html
+    end
+  end
 end

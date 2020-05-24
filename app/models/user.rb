@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
       (ev_session.user) &&
       (ev_session.user.id == self.id) &&
       (ev_session.start_time) &&
-      (Time.now < (ev_session.start_time + 60.days))
+      (Time.now < (ev_session.start_time + EventSession::EDIT_WINDOW))
   end
 
   def is_leader?
