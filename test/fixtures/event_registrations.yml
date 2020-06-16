@@ -7,9 +7,7 @@
 one:
   event: 1
   user: 1
-  visible: True
-  gov_id_type: PAN
-  gov_id_number: 12345678
-  
+  visible: true
+
 two: {}
 #  column: value

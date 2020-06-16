@@ -2,22 +2,6 @@ class EventRegistration < ActiveRecord::Base
   audited
 
   attr_accessible :visible
-  attr_accessible :gov_id_type
-  attr_accessible :gov_id_number
-
-  GOV_ID_TYPE_PASSPORT            = 'Passport'
-  GOV_ID_TYPE_PAN                 = 'PAN'
-  GOV_ID_TYPE_DRIVING_LICENSE     = 'Driving License'
-  GOV_ID_VOTER_ID                 = 'Voter ID'
-  GOV_ID_TYPE_OTHER               = 'Other'
-
-  GOV_ID_TYPE_ALL = [
-    GOV_ID_TYPE_PASSPORT,
-    GOV_ID_TYPE_PAN,
-    GOV_ID_TYPE_DRIVING_LICENSE,
-    GOV_ID_VOTER_ID,
-    GOV_ID_TYPE_OTHER
-  ]
 
   belongs_to :event
   belongs_to :user
