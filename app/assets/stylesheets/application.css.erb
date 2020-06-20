@@ -61,6 +61,55 @@ body {
   text-justify: inter-word;
 }
 
+#map {
+  height: 400px;
+  width: 100%;
+  margin-bottom:4rem!important;
+}
+
+.chapter-card {
+  border: 1px solid #dee2e6 !important;
+  margin-bottom:3rem!important;
+}
+
+.active {
+  background-image: radial-gradient(circle, rgba(125,255,173,0.1), rgba(125,255,173,0.5));
+}
+
+.inactive {
+  background-image: radial-gradient(circle, rgba(255,102,102,0.1), rgba(255,102,102,0.6));
+}
+
+.zoom {
+  transform: scale(1.1);
+}
+
+.fixed-content {
+  position: fixed;
+
+}
+.img {
+  opacity: 0.9;
+}
+.hover figure {
+	opacity: 1;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.hover figure:hover {
+	opacity: .6;
+}
+
+.pagination-cs {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.noDecoration {
+  text-decoration:none;
+}
+
+
 /* Autocomplete JS */
 .autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
 .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
