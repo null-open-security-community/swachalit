@@ -1,8 +1,6 @@
 <h1 class="text-center">Chapters</h1>
 <div id="map" class="mb-5"></div>
-<center>
-  <%= will_paginate @chapters, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination pagination-cs) %>
-</center>
+
 <div class="row mt-5">
   
   <% @chapters.each do |chapter| %>
@@ -12,7 +10,7 @@
       <% cName = 'inactive' %>
     <% end %>
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-5">
-        <%= link_to chapter_path(chapter), class: 'noDecoration' do %>
+        <%= link_to chapter_path(chapter) do %>
           <div class='card chapter-card <%="#{cName}"%>'>
             <div class="img hover text-center">
               <figure><%= image_tag chapter.image_url, :size => '260x150', :class => 'img' %></figure>
@@ -30,7 +28,7 @@
   <% end %>
 </div>
 <center>
-  <%= will_paginate @chapters, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination pagination-cs) %>
+  <%= paginate @chapters %> 
 </center>
 
 
@@ -91,6 +89,5 @@
       }
     </script>
 
-
-<script src="https://maps.googleapis.com/maps/api/js?key=[API_KEY]&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initMap"
     async defer></script>

@@ -1,3 +1,6 @@
+config = YAML.load(File.read(File.join(Rails.root.to_s, "config/redis.yml")))
+config.symbolize_keys!
+
 Geocoder.configure(
   # Geocoding options
   # timeout: 3,                 # geocoding service timeout (secs)
@@ -7,9 +10,9 @@ Geocoder.configure(
   # use_https: false,           # use HTTPS for lookup requests? (if supported)
   # http_proxy: nil,            # HTTP proxy server (user:pass@host:port)
   # https_proxy: nil,           # HTTPS proxy server (user:pass@host:port)
-  # api_key: [API_KEY],               # API key for geocoding service
-  cache: Redis.new,                 # cache object (must respond to #[], #[]=, and #del)
-  # cache_prefix: 'geocoder:',  # prefix (string) to use for all cache keys
+  api_key: ENV["GOOGLE_MAPS_API_KEY"] || "SET-YOUR-API-KEY-HERE",               # API key for geocoding service
+  cache: Redis.new(url: "redis://#{config[:host]}:#{config[:port]}"),              # cache object (must respond to #[], #[]=, and #del)
+  cache_prefix: 'geocoder:'  # prefix (string) to use for all cache keys
 
   # Exceptions that should not be rescued by default
   # (if you want to implement custom error handling);

@@ -1,8 +1,11 @@
 class ChaptersController < ApplicationController
 
   def index
+    @page = (params[:page] || 1).to_i
+    @per_page = 8
+
     all_chapters = Chapter.order(:name)
-    @chapters = all_chapters.paginate(page: params[:page], per_page: 8)
+    @chapters = all_chapters.page(@page).per(@per_page)
     @chapter_address = []
     all_chapters.each do |chap|
       @chapter = chap
