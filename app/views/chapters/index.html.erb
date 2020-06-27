@@ -1,0 +1,93 @@
+<h1 class="text-center">Chapters</h1>
+<div id="map" class="mb-5"></div>
+
+<div class="row mt-5">
+  
+  <% @chapters.each do |chapter| %>
+    <% if chapter.active? %>
+      <% cName = 'active' %>
+    <% else %>
+      <% cName = 'inactive' %>
+    <% end %>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-5">
+        <%= link_to chapter_path(chapter) do %>
+          <div class='card chapter-card <%="#{cName}"%>'>
+            <div class="img hover text-center">
+              <figure><%= image_tag chapter.image_url, :size => '260x150', :class => 'img' %></figure>
+            </div>
+            <div class="card-body text-center">
+              <h4 class="card-title" ><%= chapter.name %> Chapter</h4>
+              <p class="card-text"><%= chapter.city %>,<% if chapter.state.present? && chapter.state!=chapter.city %> <%= chapter.state %>,<% end %> <%= chapter.country %></p>
+              <p class="text-muted"><%= pluralize(chapter.past_events.count, "Past event") %></p>
+              <p class="text-muted"><%= pluralize(chapter.upcoming_events.count, "Upcoming event") %></p>
+              <%= link_to '', chapter_path(chapter), class:'stretched-link' %>	
+            </div>
+          </div>
+        <% end %>
+    </div>
+  <% end %>
+</div>
+<center>
+  <%= paginate @chapters %> 
+</center>
+
+
+    <script>
+      var map;
+      $(document).ready(function() {
+          $(".card" ).hover(
+          function() {
+            $(this).addClass('shadow-lg zoom').css('cursor', 'pointer'); 
+          }, function() {
+            $(this).removeClass('shadow-lg zoom');
+          }
+        );
+        });
+      function initMap() {
+        geocoder = new google.maps.Geocoder();
+        var options = {
+          zoom:2.8,
+          center: {lat: 33.770425,lng: 54.025214}
+        }
+        map = new google.maps.Map(document.getElementById('map'), options);
+
+        <% @chapter_address.each do |address| %>
+          addMarker({
+            coords:{lat:<%= address['cordinates'][0] %>,lng:<%= address['cordinates'][1] %>},
+            content: '<h5><%= address['name'] %> Chapter</h5>',
+            <% if address['active'] %>
+              iconURL: "http://maps.google.com/mapfiles/ms/icons/grn-pushpin.png"
+            <% else %>
+              iconURL: "http://maps.google.com/mapfiles/ms/icons/red-pushpin.png"
+            <% end %>
+          });
+        <% end %>
+        
+        
+
+        function addMarker(props){
+
+          var marker = new google.maps.Marker({
+            position:props.coords,
+            map:map,
+            icon: {
+              url: props.iconURL
+            }
+          });
+
+          // Check content
+          if(props.content){
+            var infoWindow = new google.maps.InfoWindow({
+              content:props.content
+            });
+
+            marker.addListener('click', function(){
+              infoWindow.open(map, marker);
+            });
+          }
+        }
+      }
+    </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initMap"
+    async defer></script>

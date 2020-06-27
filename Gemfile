@@ -84,6 +84,7 @@ gem 'resque-scheduler', :require => 'resque-scheduler'
 gem 'google-api-client', '~> 0.8.2'
 gem 'formtastic-bootstrap'
 gem 'twitter'
+gem 'geocoder'
 #Needed in rails>=4.0 for attr_accessible and attr_protected
 gem 'protected_attributes'
 gem 'activerecord-session_store'
