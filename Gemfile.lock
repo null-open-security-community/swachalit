@@ -447,9 +447,6 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.7)
       rack (>= 1.0)
-    will_paginate (3.3.0)
-    will_paginate-bootstrap4 (0.2.2)
-      will_paginate (~> 3.0, >= 3.0.0)
     yaml_db (0.7.0)
       rails (>= 3.0)
       rake (>= 0.8.7)
@@ -508,7 +505,6 @@ DEPENDENCIES
   twitter
   uglifier (>= 1.0.3)
   unicorn
-  will_paginate-bootstrap4
   yaml_db
 
 BUNDLED WITH

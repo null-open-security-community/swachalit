@@ -1,11 +1,4 @@
 <%- title("null Community Platform") %>
-<!-- <div class='row'>
-  <div class='col-md-12'>
-    <center>
-      <%= link_to(image_tag('hardwear_transparent.png', :style => 'width: 540px; height: auto'), "https://hardwear.io/", :target => '_blank') %>
-    </center>
-  </div>
-</div> -->
 <div class='row'>
   <div class='col-md-12'>
     <div class="jumbotron">
@@ -38,7 +31,7 @@ null is India's largest open security community. Registered as a non-profit soci
       <div class="panel-heading">
         <center>Active Chapters</center>
       </div>
-      <a href='/chapters' style='color: inherit'>
+      <a href='<%= chapters_path %>' style='color: inherit'>
         <div class='panel-body'>
           <center>
             <h1><%= ::Chapter.active_chapters.count %></h1>
@@ -156,4 +149,3 @@ null is India's largest open security community. Registered as a non-profit soci
     </table>
   </div>
 </div>
-

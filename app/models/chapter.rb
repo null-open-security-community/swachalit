@@ -1,6 +1,6 @@
 class Chapter < ActiveRecord::Base
   audited
-  
+
   attr_accessible :name, :description, :birthday, :code, :active
   attr_accessible :country, :city, :state
   attr_accessible :chapter_email, :image
@@ -83,6 +83,16 @@ class Chapter < ActiveRecord::Base
 
   def as_json(*args)
     super(*args).except("created_at", "updated_at")
+  end
+
+  def country_name
+    ISO3166::Country[self.country]&.name
+  end
+
+  def locations
+    if self.city.present? and self.country.present?
+      Geocoder.search [self.city, self.state, self.country_name].compact.join(',')
+    end
   end
 
 end
