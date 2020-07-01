@@ -2,13 +2,7 @@ class ChaptersController < ApplicationController
 
   def index
     @chapters = Chapter.order(:name)
-    @chapter_address = @chapters.map do |chapter|
-      if (a = chapter.locations) and a.first
-        { 'cordinates' => a.first.coordinates, 'active' => chapter.active, 'name' => chapter.name }
-      else
-        nil
-      end
-    end.compact
+    @chapter_address = Chapter.geo_locations
 
     respond_to do |format|
       format.html

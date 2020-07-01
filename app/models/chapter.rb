@@ -95,4 +95,14 @@ class Chapter < ActiveRecord::Base
     end
   end
 
+  def self.geo_locations
+    Chapter.order(:name).map do |chapter|
+      if (a = chapter.locations) and a.first
+        { 'cordinates' => a.first.coordinates, 'active' => chapter.active, 'name' => chapter.name }
+      else
+        nil
+      end
+    end.compact
+  end
+
 end

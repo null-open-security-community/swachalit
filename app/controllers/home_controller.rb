@@ -1,9 +1,7 @@
 class HomeController < ApplicationController
-  
   def index
-    #redirect_to upcoming_path
     @events = Event.future_public_events.order('start_time ASC')
-    
+
     respond_to do |format|
       format.html
     end
@@ -36,7 +34,7 @@ class HomeController < ApplicationController
 
   def calendar
   end
-  
+
   def IRC
   end
 
@@ -57,5 +55,4 @@ class HomeController < ApplicationController
 
   def signup_confirm
   end
-  
 end
