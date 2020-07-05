@@ -91,7 +91,12 @@ class Chapter < ActiveRecord::Base
 
   def locations
     if self.city.present? and self.country.present?
-      Geocoder.search [self.city, self.state, self.country_name].compact.join(',')
+      begin
+        Geocoder.search [self.city, self.state, self.country_name].compact.join(',')
+      rescue SocketError, Redis::CannotConnectError
+        # We get a SocketError when redis is unavailable (Useful for development environment)
+        []
+      end
     end
   end
 
