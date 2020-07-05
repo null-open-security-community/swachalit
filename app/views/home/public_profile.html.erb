@@ -80,7 +80,7 @@
         <span class="row text-right" style="width: 100%; margin: 0">
           <span class="joined-date row">
             Joined - <strong><%= @user.created_at.strftime("%B %d %Y") %></strong>
-            Last active - <strong><%= @user.last_sign_in_at.strftime("%B %d %Y") %></strong>
+            Last active - <strong><%= @user.last_sign_in_at.strftime("%B %d %Y") rescue 'Never' %></strong>
           </span>
         </span>
       </div>
