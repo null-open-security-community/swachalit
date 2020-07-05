@@ -77,17 +77,6 @@
             </div>
           </div>
         </div>
-        <% @user.chapter_leadership_history.each do |leader| %>
-        <div class="post">
-          <div class="post-name"><span class="label label-success">Chapter Lead</span> - <%= leader.chapter.name %>
-          </div>
-          <span class="seperator vertical">|</span>
-          <div class="duration">
-            <%= leader.created_at.strftime('%B %Y') %> -
-            <%= leader.active? ? 'Present' : leader.updated_at.strftime('%B %Y') %>
-          </div>
-        </div>
-        <% end %>
         <span class="row text-right" style="width: 100%; margin: 0">
           <span class="joined-date row">
             Joined - <strong><%= @user.created_at.strftime("%B %d %Y") %></strong>

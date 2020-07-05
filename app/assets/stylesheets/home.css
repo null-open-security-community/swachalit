@@ -43,7 +43,7 @@
 .profile .btn-sm{ padding: 5px 10px; font-size: 12px; line-height: 1.5; border-radius: 3px; }
 
 .profile{ margin: auto; box-sizing: border-box; }
-.profile .content{ position: sticky; top: 50px; height: calc(100vh - 50px); height: -moz-calc(100vh - 50px); height: -webkit-calc(100vh - 50px); box-sizing: border-box; padding: 4rem 4rem 1rem 8rem; overflow: hidden; display: flex; flex-direction: column; color: #222222; box-shadow: 0 0 2px #222; background:linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('../img/bg2.png') no-repeat top left; background-size: cover;}
+.profile .content{ position: sticky; top: 50px; height: calc(100vh - 50px); height: -moz-calc(100vh - 50px); height: -webkit-calc(100vh - 50px); box-sizing: border-box; padding: 4rem 4rem 1rem 8rem; overflow: hidden; display: flex; flex-direction: column; color: #222222; box-shadow: 0 0 2px #222; background:linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1)), url('/static/images/bg2.png') no-repeat top left; background-size: cover;}
 .profile .section-timeline{height: 100%; box-sizing: border-box; padding: 4rem 8rem 1rem 4rem; display: flex; flex-direction: column; }
 
 .profile .content-container{ display: flex; flex-wrap: wrap; height: calc(100vh - 50px); height: -moz-calc(100vh - 50px); height: -webkit-calc(100vh - 50px); align-content: space-between; /*width: 585px; margin: auto; margin-right: 0rem;*/}
