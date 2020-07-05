@@ -89,6 +89,10 @@ class User < ActiveRecord::Base
       (Time.now < (ev_session.start_time + EventSession::EDIT_WINDOW))
   end
 
+  def chapter_leadership_history
+    ChapterLead.leadership_for_user(self)
+  end
+
   def is_leader?
     managed_chapters.count > 0
   end
