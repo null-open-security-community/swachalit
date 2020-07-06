@@ -68,4 +68,7 @@ class HomeController < ApplicationController
 
   def signup_confirm
   end
+
+  def privacy
+  end
 end
