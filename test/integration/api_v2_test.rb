@@ -100,4 +100,21 @@ class ApiV2Test < ActionDispatch::IntegrationTest
     assert json_response.is_a?(Array)
     assert json_response.size > 0
   end
+
+  test "Event API" do
+    get '/api-v2/events'
+    assert_response :ok
+    assert json_response.is_a?(Array)
+    assert json_response.size > 0
+
+    id = json_response[0]["id"].to_i
+
+    get "/api-v2/events/#{id}/event_sessions"
+    assert_response :ok
+    assert json_response.is_a?(Array)
+
+    get "/api-v2/events/#{id}/event_registrations"
+    assert_response :ok
+    assert json_response.is_a?(Array)
+  end
 end

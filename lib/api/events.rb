@@ -9,7 +9,9 @@ module API
     format :json
 
     resource :events do
-      desc 'Returns list of upcoming public events'
+      desc 'Returns list of upcoming public events' do
+        success EventEntity
+      end
       params do
         optional :page, type: Integer, desc: 'Page number for pagination'
         optional :per_page, type: Integer, desc: 'Per page count for pagination'
@@ -27,6 +29,11 @@ module API
 
         present events.page(page).per(per_page), \
           with: EventEntity
+      end
+
+      route_param :event_id do
+        mount ::API::EventSession
+        mount ::API::EventRegistration
       end
     end
 
