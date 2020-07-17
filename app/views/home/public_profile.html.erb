@@ -1,97 +1,122 @@
 <%- title "#{@user.name} - null Community Profile" %>
-<div class='row'>
-  <div class='col-md-12'>
-    <div class='page-header'>
-      <h2>
-        <%= @user.name %>
-        <span class='pull-right'>
-          <small>null Community Profile</small>
-        </span>
-      </h2>
-      <% if @user.managed_chapters.count > 0 %>
-      <p class='lead'>
-        <i class='glyphicon glyphicon-star red'></i>
-        Leader of <%= @user.managed_chapters.first.name rescue '...' %> chapter
-      </p>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class='row'>
-  <div class='col-md-4'>
-    <%= render :partial => 'shared/pp_avatar_social', :locals => { :user => @user } %>
-  </div>
-  <div class='col-md-8'>
-    <div class='row'>
-      <div class="col-md-12"> 
-        <center>
-        <div class="col-md-6"> 
-          <h3 class="bg-info2" style="padding: 0.5em;">Speaker / Champion Count</h3> 
-          <h3 class="bg_info2"><%= @user.speaker_sessions.count %></h3> 
-        </div> 
-        <div class="col-md-6"> <h3 class="bg-info2" style="padding: 0.5em;">Attended</h3> 
-          <h3 class="bg_info2"><%= @user.registered_participation.count %></h3> 
+<div class="profile-container">
+  <div class="row profile">
+    <section class="col-xs-12 col-sm-6 content" style="background-color: #ffffff;">
+      <div class="content-container">
+        <div class="profile-info">
+          <div class="avatar">
+            <div class="row">
+              <%= image_tag(@user.avatar.url, :class => 'img-circle center-block') %>
+            </div>
+          </div>
+          <div class="description text-center">
+            <h1 class="name">
+              <%= @user.name %>
+            </h1>
+            <p class="bio">
+              <%= safe_markdown_html(@user.about_me) %>
+            </p>
+            <ul class="social-links list-inline">
+              <% if @user.has_facebook_profile? %>
+                <li class="facebook">
+                  <%= link_to safe_url(@user.facebook_profile), :target => '_blank' do %>
+                  <%= fa_icon('facebook') %>
+                  <% end %>
+                </li>
+              <% end %>
+              <% if @user.has_twitter_handle? %>
+                <li class="twitter">
+                  <%= link_to safe_url(@user.twitter_handle), :target => '_blank' do %>
+                  <%= fa_icon('twitter') %>
+                  <% end %>
+                </li>
+              <% end %>
+              <% if @user.linkedin_profile? %>
+                <li class="linkedin">
+                  <%= link_to safe_url(@user.linkedin_profile), :target => '_blank' do %>
+                  <%= fa_icon('linkedin') %>
+                  <% end %>
+                </li>
+              <% end %>
+              <% if @user.has_github_profile? %>
+                <li class="github">
+                  <%= link_to safe_url(@user.github_profile), :target => '_blank' do %>
+                  <%= fa_icon('github') %>
+                  <% end %>
+                </li>
+              <% end %>
+              <% if @user.has_homepage? %>
+                <li class="link">
+                  <%= link_to safe_url(@user.homepage), :target => '_blank' do %>
+                  <%= fa_icon('link') %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="session-count row">
+            <div class="col-md-8 col-md-offset-4 heading">
+              <h3>Sessions</h3>
+            </div>
+            <div class="col-12 col-md-12 count">
+              <div class="row">
+                <div class="col-xs-6 col-md-4">
+                  <span class="attended"><%= @user.registered_participation.count %></span>
+                  <span class="session-type">
+                    Attended
+                  </span>
+                </div>
+                <div class="col-xs-0 col-md-1"></div>
+                <div class="col-xs-6 col-md-4">
+                  <span class="delivered"><%= @user.speaker_sessions.count %></span>
+                  <span class="session-type">
+                    Delivered
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        </center>
-      </div>
-      <div class='col-md-12'>
-        <h3 class='bg-info2' style='padding: 0.5em;'>User Brief</h3>
-        <%= render :partial => 'shared/pp_brief' %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class='row'>
-  <div class='col-md-6'>
-    <h4 class='bg-info2' style='padding: 0.5em;'>Session (Speaker | Champion)</h4>
-    <table class='table table-bordered' style='font-size: 90%'>
-      <tr>
-        <th width='65%'>Session</th>
-        <th>Date</th>
-      </tr>
-      <% @user.speaker_sessions.limit(10).each do |sess| %>
-      <% next unless sess.event.public? %>
-      <tr>
-        <td>
-          <%= link_to truncate(sess.name, :length => 32), event_session_path(sess) %> 
-          <span class='label label-success'><%= sess.event.event_type.name %></span>
-          <span class='label label-success'><%= sess.event.chapter.name %></span>
-          <span>
-            <% unless sess.presentation_url.blank? %>
-              <%= link_to "", safe_url(sess.presentation_url), :class => 'fa-file-powerpoint-o fa fa-2x', :target => '_blank' %>&nbsp;
-            <% end %>
-            <% unless sess.video_url.blank? %>
-              <%= link_to "", safe_url(sess.video_url), :class => 'fa-file-video-o fa fa-2x', :target => '_blank' %>&nbsp;
-            <% end %>
+        <span class="row text-right" style="width: 100%; margin: 0">
+          <span class="joined-date row">
+            Joined - <strong><%= @user.created_at.strftime("%B %d %Y") %></strong>
+            Last active - <strong><%= @user.last_sign_in_at.strftime("%B %d %Y") rescue 'Never' %></strong>
           </span>
-        </td>
-        <td>
-          <%= sess.start_time.strftime("%A %B %d %Y") %>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-  <div class='col-md-6'>
-    <h4 class='bg-info2' style='padding: 0.5em;'>Session Participation</h4>
-    <table class='table table-bordered' style='font-size: 90%'>
-      <tr>
-        <th width='65%'>Session</th>
-        <th>Date</th>
-      </tr>
-      <% @user.registered_participation.limit(10).includes(:event).map {|e| e.event }.compact.each do |pe| %>
-      <tr>
-        <td>
-          <%= link_to truncate(pe.name, :length => 32), event_path(pe) %> 
-          <span class='label label-success'><%= pe.event_type.name %></span>
-        </td>
-        <td>
-          <%= pe.start_time.strftime("%A %B %d %Y") %>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+        </span>
+      </div>
+    </section>
+    <section class="col-xs-12 col-sm-6 section-timeline">
+      <div class="timeline-container">
+        <div class="page-header">
+          <h1 class="title">Session</h1>
+          <div class="filters">
+            <button class="btn btn-sm btn-outline-primary" type="button">
+              Attended <span class="badge badge-primary"><%= @user.registered_participation.count %></span>
+            </button>
+            <button class="btn btn-sm btn-outline-success" type="button">
+              Delivered <span class="badge badge-success"><%= @user.speaker_sessions.count %></span>
+            </button>
+          </div>
+        </div>
+        <ul class="session-list">
+          <% @event_participation.each do |x| %>
+          <% next unless x[:event].public? %>
+          <li>
+            <div class="session-badge"><%= x[:type].humanize %></div>
+            <div class="session-info">
+              <div class="event-name">
+                <%= link_to truncate(x[:event].name, :length => 32), event_path(x[:event]) %>
+              </div>
+              <div class="event-date">
+                <%= x[:event].start_time.strftime("%A %B %d %Y") %>
+                <span class="badge badge-success"><%= x[:event].event_type.name %></span>
+                <span class="badge badge-success"><%= x[:event].chapter.name %></span>
+              </div>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </section>
   </div>
 </div>

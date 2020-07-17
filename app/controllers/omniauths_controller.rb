@@ -13,7 +13,7 @@ class OmniauthsController < ApplicationController
 
       redirect_to '/'
     rescue => e
-     render :text => "Failed to sign-in with #{params[:provider]}"
+      render status: 400, text: "Failed to sign-in with #{params[:provider]}"
     end
   end
 
@@ -24,6 +24,6 @@ class OmniauthsController < ApplicationController
   private
 
   def auth_hash
-    request.env['omniauth.auth']
+    request.env['omniauth.auth'] || {}
   end
 end

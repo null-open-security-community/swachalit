@@ -1,9 +1,7 @@
 class HomeController < ApplicationController
-  
   def index
-    #redirect_to upcoming_path
     @events = Event.future_public_events.order('start_time ASC')
-    
+
     respond_to do |format|
       format.html
     end
@@ -36,7 +34,7 @@ class HomeController < ApplicationController
 
   def calendar
   end
-  
+
   def IRC
   end
 
@@ -49,6 +47,19 @@ class HomeController < ApplicationController
 
   def public_profile
     @user = User.find(params[:id])
+    @event_participation = []
+
+    @user.speaker_sessions.each do |sess|
+      @event_participation << { type: 'speaker', event: sess.event }
+    end
+
+    @user.registered_participation.each do |event_registration|
+      @event_participation << { type: 'attendee', event: event_registration.event }
+    end
+
+    @event_participation = @event_participation.sort_by do |x|
+      x[:event].start_time
+    end.reverse
 
     respond_to do |format|
       format.html
@@ -57,5 +68,7 @@ class HomeController < ApplicationController
 
   def signup_confirm
   end
-  
+
+  def privacy
+  end
 end

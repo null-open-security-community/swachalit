@@ -6,11 +6,11 @@
   <meta name="twitter:site" content="@null0x00" />
   <meta name="twitter:title" content="<%= content_for_or_default(:title, 'null: The Open Security Community') %>" />
   <meta name="twitter:description" content="<%= content_for_or_default(:description, "null is India's largest open security community") %>" />
-  <meta name="twitter:image" content="http://null.co.in/assets/null-logo-c178313e4f36cb5d26404c94207a9193.jpeg" />
+  <meta name="twitter:image" content="<%= image_url('null-logo.jpg') %>">
   <meta property="og:title" content="<%= content_for_or_default(:title, 'null: The Open Security Community') %>" />
-  <meta property="og:url" content="http://null.co.in" />
+  <meta property="og:url" content="<%= request.base_url %>" />
   <meta property="og:description" content="<%= content_for_or_default(:description, "null is India's largest open security community") %>" />
-  <meta property="og:image" content="http://www.null.co.in/assets/null-blog-banner_white.png" />
+  <meta property="og:image" content="<%= image_url('null-blog-banner_white.png') %>" />
   <title><%= content_for?(:title) ? content_for(:title) : "null Community Platform" %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>

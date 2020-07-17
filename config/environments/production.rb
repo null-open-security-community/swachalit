@@ -83,9 +83,9 @@ NullifyPlatform::Application.configure do
 end
 
 # Exception notifer for resque jobs are configured in config/initializers/xxx
-NullifyPlatform::Application.config.middleware.use ExceptionNotification::Rack, 
+NullifyPlatform::Application.config.middleware.use ExceptionNotification::Rack,
   :email => {
     :email_prefix => "[Exception] ",
-    :sender_address => %{"Swachalit Notifier" <notifier@swachalit.null.co.in>},
-    :exception_recipients => %w{abhisek@null.co.in aka@null.co.in}
+    :sender_address => CFG_MAILER_DEFAULT_FROM,
+    :exception_recipients => CFG_EXCEPTION_NOTIFICATION_RECEIVERS
   }

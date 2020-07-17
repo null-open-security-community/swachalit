@@ -6,7 +6,7 @@
         <%= link_to event_path(@event_session.event) do %>
           <span class='label label-success'>
             <%= @event_session.event.descriptive_name %>
-          </span>    
+          </span>
         <% end %>
       </small>
     </h2>
@@ -19,9 +19,8 @@
   <div class='col-md-12'>
     <%= form_for @event_session do |f| %>
     <div class='form-group'>
-      <%= f.label :description %> 
-      <small>You can use <a href='#' target='_blank'>Markdown</a> to format description.</small>
-      <%= f.text_area :description, :class => 'form-control' %>
+      <%= f.label :name %>
+      <%= f.text_field :name, :class => 'form-control' %>
     </div>
     <div class='form-group'>
       <label for='presentation_url'>Presentation URL</label>
@@ -34,6 +33,11 @@
       <%= f.text_field :video_url, :class => 'form-control' %>
       <small>Keep it empty if Video is not available at this time.</small><br/>
       <small>For multiple videos, update <i>description</i> with list of URLs</small>
+    </div>
+    <div class='form-group'>
+      <%= f.label :description %>
+      <small>You can use <a href='#' target='_blank'>Markdown</a> to format description.</small>
+      <%= f.text_area :description, :class => 'form-control', :rows => '20' %>
     </div>
 
     <div class='form-group'>

@@ -1,6 +1,9 @@
 class EventSession < ActiveRecord::Base
   audited
 
+  # Time window after end time till when this session is editable
+  EDIT_WINDOW = 30.days
+
   attr_accessible :event_id, :user_id, :name, :description
   attr_accessible :session_type, :tags
   attr_accessible :need_projector, :need_microphone, :need_whiteboard
@@ -63,7 +66,8 @@ class EventSession < ActiveRecord::Base
     if self.start_time and self.end_time
       errors.add(:start_time, 'cannot be before event start') if self.event.start_time > self.start_time
       errors.add(:end_time, 'cannot be after event end') if self.event.end_time < self.end_time
-      errors.add(:end_time, 'cannot modify after Event End Time') if self.event.end_time < (Time.now-30.days)
+      errors.add(:end_time, 'cannot modify beyond 30 days after Event End Time') \
+        if Time.now > (self.event.end_time + EDIT_WINDOW)
     end
   end
 

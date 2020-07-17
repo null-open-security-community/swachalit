@@ -20,6 +20,7 @@ module NullifyPlatform
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    # config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -72,7 +73,7 @@ end
 if Rails.env.development?
     Rails.application.routes.default_url_options[:host] = '127.0.0.1'
 else
-    Rails.application.routes.default_url_options[:host] = 'null.co.in'
+    Rails.application.routes.default_url_options[:host] = ENV['APPLICATION_HOST'] || 'null.co.in'
 end
 
 require 'dotenv/load'
@@ -83,13 +84,14 @@ require File.join(Rails.root.to_s, 'config', 'mailgun')
 require File.join(Rails.root.to_s, 'config', 'misc_config')
 require File.join(Rails.root.to_s, 'config', 'google_api')
 require File.join(Rails.root.to_s, 'config', 'twitter')
+require File.join(Rails.root.to_s, 'config', 'storage')
 require File.join(Rails.root.to_s, 'config', 'slack')
 require File.join(Rails.root.to_s, 'config', 'recaptcha')
 
 require File.join(Rails.root.to_s, 'lib', 'scheduler', 'resque_helper')
 require File.join(Rails.root.to_s, 'lib', 'google')
 require File.join(Rails.root.to_s, 'lib', 'integrations', 'twitter')
-require File.join(Rails.root.to_s, 'lib', 'patches')
 require File.join(Rails.root.to_s, 'lib', 'api')
 
-
+# Ensure this is always loaded last
+require File.join(Rails.root.to_s, 'lib', 'patches')

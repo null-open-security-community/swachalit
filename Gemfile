@@ -14,6 +14,7 @@ group :development, :test do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
+  gem 'byebug'
 end
 
 group :test do
@@ -62,7 +63,7 @@ gem 'cancan'
 gem 'font-awesome-rails'
 gem 'activeadmin', '~> 1.0'
 # meta_search is superseeded by ransack
-#gem 'meta_search', '~> 1.0' 
+#gem 'meta_search', '~> 1.0'
 gem 'ransack', '~> 1.8'
 gem 'audited-activerecord', '~> 4.0'
 gem 'country_select'
@@ -74,7 +75,7 @@ gem "resque"
 gem 'secure_headers'
 gem 'formtastic'
 #gem 'jquery-ui-rails'
-gem "just-datetime-picker"
+gem 'just-datetime-picker'
 gem 'yaml_db'
 gem 'exception_notification'
 #gem 'resque-web', :require => 'resque_web'
@@ -83,6 +84,7 @@ gem 'resque-scheduler', :require => 'resque-scheduler'
 gem 'google-api-client', '~> 0.8.2'
 gem 'formtastic-bootstrap'
 gem 'twitter'
+gem 'geocoder'
 #Needed in rails>=4.0 for attr_accessible and attr_protected
 gem 'protected_attributes'
 gem 'activerecord-session_store'
@@ -92,4 +94,10 @@ gem 'test-unit'
 gem 'omniauth-google-oauth2'
 gem 'icalendar'
 gem 'grape'
-
+gem 'grape-swagger'
+gem 'grape-swagger-entity'
+gem 'grape-swagger-representable'
+gem 'grape-swagger-rails'
+gem 'grape-entity'
+gem 'grape-cancan'
+gem 'fog-aws'

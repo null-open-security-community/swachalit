@@ -44,6 +44,8 @@ GOOGLE_CLIENT_ID=NOT_REQUIRED_FOR_DEV
 GOOGLE_CLIENT_SECRET=NOT_REQUIRED_FOR_DEV
 
 SECRET_KEY_BASE=SECRET-KEY-DEV-TEST
+
+STORAGE_PROVIDER_DISABLED=true
 ```
 
 Create a file named `.env.mysql` in source root with the following content
@@ -68,6 +70,12 @@ Once both the containers are running, point your browser to `http://localhost:88
 **Optional:** Check `script/run_docker_app.sh` to see what commands are executed to start the `Rails` application server and bootstrap swachalit.
 
 > This is enough for almost all development activities. The entire stack is not required.
+
+## Running Test Cases
+
+```
+docker-compose run app rake test RAILS_ENV=test
+```
 
 ## Full Stack Developer Environment
 

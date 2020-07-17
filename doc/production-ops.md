@@ -1,5 +1,11 @@
 # Production Operations
 
+> The information in this document may be deprecated. The production pipeline is managed in Bitbucket but completely rewritten to sync with public docker image and release version.
+
+## SSL/TLS
+
+SSL/TLS and its corresponding security configuration should be handled at frontend reverse proxy. The reverse proxy should forward `/` to Swachalit running on port 8800.
+
 ## Production
 
 Production deployment is triggered through Git release tag of format:

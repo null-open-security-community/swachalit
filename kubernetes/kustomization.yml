@@ -1,0 +1,18 @@
+namespace: swachalit-staging
+commonLabels:
+  env: staging
+  stack: swachalit
+secretGenerator:
+  - name: mysql-secret
+    env: .env.mysql
+  - name: swachalit-secret
+    env: .env.app
+resources:
+  - manifests/namespace.yml
+  - manifests/mysql_app.yml
+  - manifests/mysql_svc.yml
+  - manifests/redis_app.yml
+  - manifests/redis_svc.yml
+  - manifests/swachalit_app.yml
+  - manifests/swachalit_svc.yml
+  # - manifests/ingress.yml

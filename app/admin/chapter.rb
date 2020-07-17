@@ -10,6 +10,9 @@ ActiveAdmin.register Chapter do
     column :code
     column :name
     column :city
+    column :country do |chapter|
+      chapter.country_name
+    end
     column :active
 
     actions

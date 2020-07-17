@@ -1,11 +1,4 @@
 <%- title("null Community Platform") %>
-<!-- <div class='row'>
-  <div class='col-md-12'>
-    <center>
-      <%= link_to(image_tag('hardwear_transparent.png', :style => 'width: 540px; height: auto'), "https://hardwear.io/", :target => '_blank') %>
-    </center>
-  </div>
-</div> -->
 <div class='row'>
   <div class='col-md-12'>
     <div class="jumbotron">
@@ -38,7 +31,7 @@ null is India's largest open security community. Registered as a non-profit soci
       <div class="panel-heading">
         <center>Active Chapters</center>
       </div>
-      <a href='#chapters-event-schedule' style='color: inherit'>
+      <a href='<%= chapters_path %>' style='color: inherit'>
         <div class='panel-body'>
           <center>
             <h1><%= ::Chapter.active_chapters.count %></h1>
@@ -76,6 +69,23 @@ null is India's largest open security community. Registered as a non-profit soci
     </div>
   </div>
 </div>
+
+<div class='row' style='margin-bottom: 1em;'>
+  <h1><center>The Community at a Glance</center></h1>
+  <div class="col-md-12">
+    <div id="chapter-map"></div>
+  </div>
+</div>
+
+<div class='row' style='margin-bottom: 1em;'>
+  <h1><center>Upcoming Events</center></h1>
+  <div class="col-md-12">
+    <%= render :partial => 'events/list', :locals => { :events => @events } %>
+  </div>
+</div>
+
+<%= render partial: 'chapters/chapter_map_loader',
+  locals: { chapter_address: Chapter.geo_locations, map_area_id: 'chapter-map' } %>
 
 <div class='row' style='margin-bottom: 1em;'>
   <h1><center>Engage with <strong>null</strong></center></h1>
@@ -120,40 +130,3 @@ null is India's largest open security community. Registered as a non-profit soci
     </div>
   </div>
 </div>
-
-<div class='row' id='chapters-event-schedule'>
-  <h1><center>Event Schedule</center></h1>
-  <div class='col-md-12'>
-    <table class='table table-bordered'>
-      <tr>
-        <th><h3><center><strong>Chapter</strong></center></h3></th>
-        <th><h3><center><strong>Upcoming Event</strong></center></h3></th>
-      </tr>
-      <% min = 0 %>
-      <% ::Chapter.active_chapters.order('name ASC').each do |chapter| %>
-        <% next if chapter.next_upcoming_event.nil? %>
-        <% min += 1 %>
-        <tr>
-          <td><h4><center><%= link_to(chapter.name, chapter_path(chapter)) %></center></h4></td>
-          <td>
-            <h4><center>
-            <% if chapter.next_upcoming_event %>
-              <%= link_to distance_of_time_in_words(Time.now, chapter.next_upcoming_event.start_time), chapter.next_upcoming_event %>
-            <% else %>
-              No upcoming event.
-            <% end %>
-            </center></h4>
-          </td>
-        </tr>
-      <% end %>
-      <% if min == 0 %>
-      <tr>
-        <td colspan=2>
-          <center>No upcoming meet currently.</center>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-

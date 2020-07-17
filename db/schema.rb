@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190406062427) do
+ActiveRecord::Schema.define(version: 20200616165558) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -134,15 +134,13 @@ ActiveRecord::Schema.define(version: 20190406062427) do
   end
 
   create_table "event_registrations", force: :cascade do |t|
-    t.integer  "event_id",      limit: 4
-    t.integer  "user_id",       limit: 4
-    t.boolean  "visible",                   default: true
+    t.integer  "event_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.boolean  "visible",                default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "accepted"
-    t.string   "state",         limit: 255
-    t.string   "gov_id_type",   limit: 255
-    t.string   "gov_id_number", limit: 255
+    t.string   "state",      limit: 255
   end
 
   create_table "event_sessions", force: :cascade do |t|
@@ -321,7 +319,13 @@ ActiveRecord::Schema.define(version: 20190406062427) do
     t.string   "token",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",                  default: false
+    t.datetime "expire_at"
   end
+
+  add_index "user_api_tokens", ["active"], name: "index_user_api_tokens_on_active", using: :btree
+  add_index "user_api_tokens", ["expire_at"], name: "index_user_api_tokens_on_expire_at", using: :btree
+  add_index "user_api_tokens", ["token"], name: "index_user_api_tokens_on_token", using: :btree
 
   create_table "user_auth_profiles", force: :cascade do |t|
     t.integer  "user_id",    limit: 4

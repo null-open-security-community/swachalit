@@ -1,0 +1,52 @@
+<script>
+  var gChapterMap
+
+  function initMap() {
+    geocoder = new google.maps.Geocoder();
+
+    var options = {
+      zoom: 2.8,
+      center: {
+        lat: 33.770425,
+        lng: 54.025214
+      }
+    }
+
+    gChapterMap = new google.maps.Map(document.getElementById('<%= map_area_id %>'), options)
+    <% chapter_address.each do |address| %>
+      addMarker({
+        coords:{lat:<%= address['cordinates'][0] %>,lng:<%= address['cordinates'][1] %>},
+        content: '<h5><%= address['name'] %> Chapter</h5>',
+        <% if address['active'] %>
+          iconURL: "https://maps.google.com/mapfiles/ms/icons/grn-pushpin.png"
+        <% else %>
+          iconURL: "https://maps.google.com/mapfiles/ms/icons/red-pushpin.png"
+        <% end %>
+      })
+    <% end %>
+
+    function addMarker(props){
+      var marker = new google.maps.Marker({
+        position: props.coords,
+        map: gChapterMap,
+        icon: {
+          url: props.iconURL
+        }
+      });
+
+      // Check content
+      if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+          content: props.content
+        })
+
+        marker.addListener('click', function() {
+          infoWindow.open(gChapterMap, marker)
+        })
+      }
+    }
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= GOOGLE_MAPS_API_KEY %>&callback=initMap"
+    async defer></script>

@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: swachalit-ingress
+spec:
+  rules:
+  - host: ${SWACHALIT_STAGING_HOST}
+    http:
+      paths:
+      - backend:
+          serviceName: swachalit
+          servicePort: 80
+        path: /
+  tls:
+  - hosts:
+    - ${SWACHALIT_STAGING_HOST}
+    secretName: nginx-swachalit-env-letsencrypt

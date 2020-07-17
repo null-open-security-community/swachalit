@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swachalit
+  labels:
+    app: swachalit
+    image: swachalit
+spec:
+  selector:
+    matchLabels:
+      app: swachalit
+  template:
+    metadata:
+      labels:
+        app: swachalit
+    spec:
+      containers:
+      - name: swachalit
+        image: null0x001/swachalit:latest
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: swachalit-secret
+        env:
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_ROOT_PASSWORD
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8800

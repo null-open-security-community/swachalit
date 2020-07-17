@@ -19,6 +19,7 @@ class Event < ActiveRecord::Base
   validates :end_time, :presence => true
 
   validate :time_validator
+  validate :chapter_validator
 
   # ActiveAdmin
   just_define_datetime_picker :start_time, :add_to_attr_accessible => true
@@ -38,8 +39,9 @@ class Event < ActiveRecord::Base
   after_create  :notify_admin_on_create
   after_save    :setup_scheduled_tasks, :if => lambda { public_changed? }
 
-  scope :future_events, lambda { where('start_time > ?', Time.now - 6.hours) }
+  scope :future_events, lambda { where('end_time > ?', Time.now) }
   scope :future_public_events, lambda { future_events.where(:public => true) }
+  scope :public_events, lambda { where(public: true) }
   scope :archives, lambda { where('public = ? AND can_show_on_archive = ? AND start_time < ?', true, true, Time.now) }
 
   include Scheduler::ResqueSchedulerHelper
@@ -199,9 +201,9 @@ class Event < ActiveRecord::Base
 
     c_table = ""
     self.event_sessions.order('start_time ASC').each do |event_session|
-      next if event_session.placeholder? 
-      c_table = c_table + event_session.name + " by " + event_session.user.name + " at " + 
-        event_session.start_time.strftime("%I:%M %p") + " - " + 
+      next if event_session.placeholder?
+      c_table = c_table + event_session.name + " by " + event_session.user.name + " at " +
+        event_session.start_time.strftime("%I:%M %p") + " - " +
         event_session.end_time.strftime("%I:%M %p") + "\n"
     end
 
@@ -255,11 +257,15 @@ class Event < ActiveRecord::Base
     true # Must return true else record won't be saved
   end
 
-  def time_validator()
+  def time_validator
     errors.add(:start_time, 'cannot be nil') if self.start_time.nil?
     errors.add(:end_time, 'cannot be nil') if self.end_time.nil?
     errors.add(:start_time, 'cannot be in the past') if self.start_time && (self.start_time < Time.now)
     errors.add(:end_time, 'cannot be before start time') if (self.start_time && self.end_time) and (self.end_time < self.start_time)
+  end
+
+  def chapter_validator
+    errors.add(:chapter, 'must be active') unless self.chapter&.active?
   end
 
 end

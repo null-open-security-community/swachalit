@@ -32,4 +32,12 @@ class EventsTest < ActionDispatch::IntegrationTest
     get event_path(event)
     assert_response :ok
   end
+
+  test "Event by SEO name" do
+    event = events(:one)
+    assert_raise (ActiveRecord::RecordNotFound) { get '/event/DOES_NOT_EXISTS' }
+
+    get "/event/#{event.slug}"
+    assert_response :success
+  end
 end

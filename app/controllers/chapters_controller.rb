@@ -1,7 +1,18 @@
 class ChaptersController < ApplicationController
 
+  def index
+    @chapters = Chapter.order(:name)
+    @chapter_address = Chapter.geo_locations
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def show
     @chapter = Chapter.find(params[:id])
+
+    flash.alert = 'This chapter is not active currently' unless @chapter.active?
 
     respond_to do |format|
       format.html

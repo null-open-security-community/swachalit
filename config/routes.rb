@@ -8,7 +8,11 @@ NullifyPlatform::Application.routes.draw do
 
   resources :event_mailer_tasks
   resources :user_achievements
-  resources :event_sessions
+  resources :event_sessions do
+    collection do
+      get 'my_sessions', as: :my
+    end
+  end
   resources :session_requests
   resources :session_proposals
   resources :stats
@@ -73,13 +77,14 @@ NullifyPlatform::Application.routes.draw do
   get '/raise_exception_test' => 'home#raise_exception'
   get '/forum', :to => 'home#forum', :as => :forum
   get '/IRC', :to => 'home#IRC', :as => :irc
+  get '/privacy', :to => 'home#privacy', :as => :privacy
 
   post '/api/authenticate'        => 'api#authenticate',          :as => :api_authentication
   post '/api/register'            => 'api#register',              :as => :api_registration
   get  '/api/is_authenticated'    => 'api#check_authentication',  :as => :api_is_authenticated
   get  '/api/user/registrations'  => 'api#user_registrations',    :as => :api_user_registrations
   get  '/api/user/autocomplete'   => 'api#user_autocomplete'
-  
+
   post '/api/slackbot/events'     => 'integrations/slackbot#events',    :as => :api_slackbot_events
 
   ActiveAdmin.routes(self)
@@ -92,6 +97,7 @@ NullifyPlatform::Application.routes.draw do
 
   # Mount Grape APIs
   mount ::API::Swachalit => '/api-v2'
+  mount GrapeSwaggerRails::Engine, at: '/api-v2/swagger'
 
   authenticate :admin_user do
     #mount ResqueWeb::Engine, :at => '/admin/resque', :as => :resque

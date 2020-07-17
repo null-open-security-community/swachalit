@@ -1,0 +1,33 @@
+---
+engines:
+  bundler-audit:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - ruby
+        - javascript
+ratings:
+  paths:
+    - Gemfile.lock
+    - "**.erb"
+    - "**.haml"
+    - "**.rb"
+    - "**.rhtml"
+    - "**.slim"
+    - "**.inc"
+    - "**.js"
+    - "**.jsx"
+    - "**.module"
+exclude_paths:
+  - config/
+  - db/
+  - spec/
+  - vendor/
+  - tmp/
+  - builds/
+  - public/
+  - shared/
+  - log/
+  - backups/

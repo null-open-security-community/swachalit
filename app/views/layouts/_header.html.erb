@@ -90,7 +90,7 @@
           </ul>
         </li>
         <li>
-          <a href='https://blog.null.co.in/' target='_blank'><%= fa_icon('rss') %> Blog</a> 
+          <a href='https://blog.null.co.in/' target='_blank'><%= fa_icon('rss') %> Blog</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -104,6 +104,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<%= public_profile_path(current_user) %>"><%= fa_icon('globe') %> Public Profile</a></li>
+            <li><a href="<%= my_event_sessions_path %>"><%= fa_icon('globe') %> My Sessions</a></li>
             <li><a href="<%= edit_user_registration_path(current_user) %>"><%= fa_icon('gears') %> Edit Profile</a></li>
             <% unless current_user.managed_chapters.count.zero? %>
               <li>
@@ -148,8 +149,8 @@
           </a>
         </li>
         <li>
-          <a href="#">
-            <%= fa_icon('question') %> Support
+          <a href="/api-v2/swagger", target="_blank">
+            <%= fa_icon('code') %> API
           </a>
         </li>
       </ul>

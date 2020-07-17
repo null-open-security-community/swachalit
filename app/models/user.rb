@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  def as_json
+  def as_json(**args)
     super(:only => [:id, :name])
   end
 
@@ -86,7 +86,11 @@ class User < ActiveRecord::Base
       (ev_session.user) &&
       (ev_session.user.id == self.id) &&
       (ev_session.start_time) &&
-      (Time.now < (ev_session.start_time + 60.days))
+      (Time.now < (ev_session.start_time + EventSession::EDIT_WINDOW))
+  end
+
+  def chapter_leadership_history
+    ChapterLead.leadership_for_user(self)
   end
 
   def is_leader?

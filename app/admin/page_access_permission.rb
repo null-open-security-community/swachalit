@@ -16,7 +16,7 @@ ActiveAdmin.register PageAccessPermission do
   form do |f|
     f.inputs "Permission Info" do
       f.input :page
-      f.input :user, :as => :select, :collection => User.order('name ASC').map {|u| ["#{u.name} <#{u.email}>", u.id] }
+      f.input :user, :as => :select, :collection => [ f.object.user ].compact(), :input_html => { :class => 'need-user-autocomplete' }
       f.input :permission_type, :as => :select, :collection => ::PageAccessPermission::PERM_ALL
 
       f.actions

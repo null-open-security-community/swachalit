@@ -23,11 +23,9 @@
   <table class='table table2excel table-condensed'>
     <tr>
       <th width='5%'>#</th>
-      <th width='20%'>Name</th>
-      <th width='20%'>Email</th>
+      <th width='30%'>Name</th>
+      <th width='30%'>Email</th>
       <th width='20%'>Registered On</th>
-      <th width='10%'>Id Type</th>
-      <th width='10%'>Id #</th>
       <th>State</th>
     </tr>
     <% @event_registrations.each do |event_registration| %>
@@ -39,8 +37,6 @@
       </td>
       <td><%= event_registration.user.email rescue 'Error' %></td>
       <td><%= event_registration.created_at.strftime('%Y-%m-%d %I:%M %p') %></td>
-      <td><%= event_registration.gov_id_type %></td>
-      <td><%= event_registration.gov_id_number %></td>
       <td>
         <%= select_tag "evr_state_#{event_registration.id}", options_for_select(EventRegistration::STATE_ALL, event_registration.state), {:class => 'event_registration_select', 'data-registration-id' => event_registration.id} %>
       </td>
@@ -51,7 +47,7 @@
 <script src="/static/javascripts/table2CSV.js"></script>
 <script type='text/javascript'>
   $('#registration_update_btn').click(function() {
-    var update_map = { 
+    var update_map = {
       'event_registrations': []
     };
 
@@ -75,9 +71,9 @@
         alert('Successfully updated records.');
       },
       'error': function(err) {
-        alert('Failed to update records.');    
+        alert('Failed to update records.');
       }
     });
     return false;
-  }); 
+  });
 </script>
