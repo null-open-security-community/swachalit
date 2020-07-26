@@ -12,12 +12,7 @@ NullifyPlatform::Application.routes.draw do
     collection do
       get 'my_sessions', as: :my
     end
-    member do
-      post "like", to: "event_sessions#like"
-      post "dislike", to: "event_sessions#dislike"
-    end
   end
-  resources :event_session_comments, only:[:create, :edit, :update, :destroy]
   resources :session_requests
   resources :session_proposals
   resources :stats
