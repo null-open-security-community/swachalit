@@ -22,7 +22,6 @@ class EventSession < ActiveRecord::Base
   just_define_datetime_picker :end_time, :add_to_attr_accessible => true
 
   acts_as_taggable
-  acts_as_votable
 
   belongs_to :event
   belongs_to :user
