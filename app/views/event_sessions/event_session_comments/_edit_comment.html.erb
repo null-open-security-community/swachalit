@@ -1,0 +1,18 @@
+<div class="row edit-form">
+  <%= form_for @event_session_comment do |f| %>
+    <div class='form-group col-md-10'>
+      <%= f.text_field :comment_body, :class => 'form-control' %>
+    </div>
+    <div class='form-group col-md-2 d-flex flex-column'>
+      <div><%= f.submit 'Save', :class => 'btn btn-sm btn-primary' %></div>
+      <div><a class="text-muted underline cancel-comment-edit">Cancel</a></div>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  $('.cancel-comment-edit').click(function (){
+    $('#comment-<%=@event_session_comment.id%>').find('.media-heading').show();
+    $('#comment-<%=@event_session_comment.id%>').find('.comment-body').html('<%= @event_session_comment.comment_body %>');
+  });
+</script>
