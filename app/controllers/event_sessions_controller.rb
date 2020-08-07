@@ -26,8 +26,6 @@ class EventSessionsController < ApplicationController
 
   def show
     @event_session = EventSession.find(params[:id])
-    @event_session_comments = EventSessionComment.where(event_session_id: params[:id])
-    @event_session_comment = EventSessionComment.new
   
     respond_to do |format|
       format.html

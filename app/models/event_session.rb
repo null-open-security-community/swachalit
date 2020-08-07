@@ -27,6 +27,8 @@ class EventSession < ActiveRecord::Base
   belongs_to :event
   belongs_to :user
 
+  has_many :event_session_comments
+
   validates :event_id, :user_id, :name, :description, :presence => true
   validates :start_time, :end_time, :presence => true
   validate :date_time_validator, :unless => :is_admin_update

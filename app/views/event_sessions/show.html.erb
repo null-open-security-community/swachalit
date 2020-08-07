@@ -75,93 +75,11 @@
         <%= link_to "", safe_url(@event_session.video_url), :class => 'fa-file-video-o fa fa-5x', :target => '_blank' %>
     </p>
     <% end %>
-    <div class="reaction">
-      <%= link_to like_event_session_path(@event_session), :id=>"like", :method=>"post", data: { toggle: 'tooltip', placement: 'top', title: 'Sign in to like this session'}, remote: true do %>
-        <%= fa_icon "thumbs-up" %><span id="like-size"><%= @event_session.get_likes.size %></span>
-      <% end %>
-      <%= link_to dislike_event_session_path(@event_session), :id=>"dislike", :method=>"post", data: { toggle: 'tooltip', placement: 'top', title: 'Sign in to dislike this session'}, remote: true do %>
-        <%= fa_icon "thumbs-down" %><span id="dislike-size"><%= @event_session.get_dislikes.size %></span>
-      <% end %>
-      <span class="reaction-inactive">
-        <%= fa_icon "comments" %> <%= @event_session_comments.length %>
-      </span>
-    </div>
-    <% if user_signed_in? %>
-      <%= form_for @event_session_comment do |f| %>
-        <div class="comment flex-container">
-          <div class="add-comment-item">
-            <%= link_to(image_tag(current_user.avatar.url, :class => 'img', :size => '40x40'), public_profile_path(current_user)) %>
-          </div>
-          <div class="add-comment-item new-comment-input" >
-            <%= f.text_field :comment_body, :class => 'form-control', placeholder: "Add a comment..." %>
-            <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.hidden_field :event_session_id, value: @event_session.id %>
-          </div>
-          <div>
-            <%= f.submit 'Add Comment', :class => 'btn btn-sm btn-primary' %>
-          </div>
-
-        </div>
-      <% end %>
-    <% else %>
-    <div class="text-center text-muted event-session-signin-warning">
-      You need to be signed in to add comments.
-    </div>
-    <% end %>
-    <div class="comment">
-      <% @event_session_comments.each do |comment| %>
-        <% user = User.find(comment.user_id) %>
-        <div class="media" id="comment-<%=comment.id%>">
-          <div class="media-left media-top">
-            <%= link_to(image_tag(user.avatar.url, :class => 'img', :size => '50x50'), public_profile_path(user)) %>
-          </div>
-          <div class="media-body">
-            <div class="media-heading"><span class="h4"><%= link_to public_profile_path(user) do %> <%= user.name %> <% end %></span> <span class="text-muted"> <%= time_ago_in_words(comment.created_at) %> </span> </div>
-            <div class="h5 comment-body"> <%= comment.comment_body%> </div>
-            <div>
-              <% if user_signed_in? && user==current_user  %>
-                <%= link_to 'Edit', edit_event_session_comment_path(comment), class: "text-muted underline event-session-comment-option", remote: true %> <%= link_to 'Delete', event_session_comment_path(comment), method: "delete", data: { confirm: "Are you sure you want to delete the comment?" }, class: "text-muted underline event-session-comment-option" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <hr>    
-      <% end %>
-    </div>
+    <%= render partial: 'event_sessions/reaction' %>
   </div>
 </div>
 <script src="/static/javascripts/jquery.oembed.js"></script>
 <script>
-$(window).on("load", function(){
-  $('#like').addClass("reaction-inactive");
-  <% if user_signed_in? %>
-    <% if current_user.voted_up_on? @event_session %>
-      $('#like').removeClass();
-      $('#like').addClass("reaction-active");
-    <% end %>
-  <% end %>
-  $('#dislike').addClass("reaction-inactive");
-  <% if user_signed_in? %>
-    <% if current_user.voted_down_on? @event_session %>
-      $('#dislike').removeClass();
-      $('#dislike').addClass("reaction-active");
-    <% end %>
-  <% end %>
-});
-
-$("#show-comments").click(function() {
-  $("#show-comments").toggleClass("reaction-inactive reaction-active");
-});
-<% unless user_signed_in? %>
-  $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
-  });
-<% end %>
-$(".reaction-inactive").hover(function(){
-  $(this).css("color","#11536E");
-  }, function(){
-  $(this).css("color","#6d6d6d");
-});
 $(function(){
   $("a.embed").oembed();
 });
