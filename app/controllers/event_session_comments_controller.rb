@@ -13,7 +13,7 @@ class EventSessionCommentsController < ApplicationController
   end
 
   def edit
-    @event_session_comment = EventSessionComment.find(params[:id])
+    @event_session_comment = current_user.event_session_comments.find(params[:id])
     @event_session = EventSession.find(@event_session_comment.event_session_id)
 
     respond_to do |format|
@@ -23,7 +23,7 @@ class EventSessionCommentsController < ApplicationController
   end
 
   def update
-    @event_session_comment = EventSessionComment.find(params[:id])
+    @event_session_comment = current_user.event_session_comments.find(params[:id])
     @event_session = EventSession.find(@event_session_comment.event_session_id)
 
     if @event_session_comment.update(comment_params)
@@ -34,7 +34,7 @@ class EventSessionCommentsController < ApplicationController
   end
 
   def destroy
-    @event_session_comment = EventSessionComment.find(params[:id])
+    @event_session_comment = current_user.event_session_comments.find(params[:id])
     @event_session = EventSession.find(@event_session_comment.event_session_id)
     if @event_session_comment.destroy
       redirect_to event_session_path(@event_session), :notice => "Comment deleted successfully"

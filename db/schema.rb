@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20200711061102) do
   create_table "event_session_comments", force: :cascade do |t|
     t.integer  "event_session_id", limit: 4
     t.integer  "user_id",          limit: 4
-    t.text   "comment_body",     limit: 255
+    t.string   "comment_body",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
