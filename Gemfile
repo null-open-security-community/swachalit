@@ -20,6 +20,7 @@ end
 group :test do
   gem 'rails-perftest'
   gem 'ruby-prof'
+  gem 'brakeman'
 end
 
 group :production do

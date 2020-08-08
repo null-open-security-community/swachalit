@@ -29,3 +29,8 @@ jobs:
         RUBYOPT=-W0 rake db:create
         RUBYOPT=-W0 rake db:migrate
         RUBYOPT=-W0 SECRET_KEY_BASE=Test-Run-123 rake test
+    - name: Brakeman SAST
+      env:
+        RAILS_ENV: test
+      run: |
+        bundle exec brakeman -w2
