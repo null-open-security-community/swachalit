@@ -33,4 +33,9 @@ jobs:
       env:
         RAILS_ENV: test
       run: |
-        bundle exec brakeman -w2
+        bundle exec brakeman -A -4 -w2 -o brakeman-sast-report.html
+    - name: Archive Brakeman SAST Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: brakeman-sast-report
+        path: brakeman-sast-report.html

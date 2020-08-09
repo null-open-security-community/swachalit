@@ -1,0 +1,3034 @@
+<!DOCTYPE HTML SYSTEM>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Brakeman Report</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+    function toggle(context) {
+      var elem = document.getElementById(context);
+
+      if (elem.style.display != "block")
+        elem.style.display = "block";
+      else
+        elem.style.display = "none";
+
+      elem.parentNode.scrollIntoView();
+    }
+
+    $(document).ready(function() {
+      $('table').DataTable({
+        searching: false,
+        paging:    false,
+        info:      false
+      });
+    });
+  </script>
+  <style>
+    /* CSS style used for HTML reports */
+
+body {
+  font-family: sans-serif;
+  color: #161616;
+}
+
+a {
+  color: #161616;
+}
+
+p {
+  font-weight: bold;
+  font-size: 11pt;
+  color: #2D0200;
+ }
+
+ th {
+   background-color: #980905;
+   border-bottom: 5px solid #530200;
+   color: white;
+   font-size: 11pt;
+   padding: 1px 8px 1px 8px;
+ }
+
+ td {
+   border-bottom: 2px solid white;
+   font-family: monospace;
+   padding: 5px 8px 1px 8px;
+ }
+
+ table {
+   background-color: #FCF4D4;
+   border-collapse: collapse;
+ }
+
+ h1 {
+   color: #2D0200;
+   font-size: 14pt;
+ }
+
+ h2 {
+   color: #2D0200;
+   font-size: 12pt;
+ }
+
+ span.high-confidence {
+   font-weight:bold;
+   color: red;
+ }
+
+ span.med-confidence {
+ }
+
+ span.weak-confidence {
+   color:gray;
+ }
+
+ div.warning_message {
+   cursor: pointer;
+ }
+
+ div.warning_message:hover {
+   background-color: white;
+ }
+
+ table caption {
+   background-color: #FFE;
+   padding: 2px;
+ }
+
+ table.context {
+   margin-top: 5px;
+   margin-bottom: 5px;
+   border-left: 1px solid #90e960;
+   color: #212121;
+ }
+
+ tr.context {
+   background-color: white;
+ }
+
+ tr.first {
+   border-top: 1px solid #7ecc54;
+   padding-top: 2px;
+ }
+
+ tr.error {
+  background-color: #f4c1c1 !important
+ }
+
+ tr.near_error {
+  background-color: #f4d4d4 !important
+ }
+
+ tr.alt {
+   background-color: #e8f4d4;
+ }
+
+ td.context {
+   padding: 2px 10px 0px 6px;
+   border-bottom: none;
+ }
+
+ td.context_line {
+   padding: 2px 8px 0px 7px;
+   border-right: 1px solid #b3bda4;
+   border-bottom: none;
+   color: #6e7465;
+ }
+
+ pre.context {
+   margin-bottom: 1px;
+ }
+
+ .user_input {
+   background-color: #fcecab;
+ }
+
+ div.render_path {
+   display: none;
+   background-color: #ffe;
+   padding: 5px;
+   margin: 2px 0px 2px 0px;
+ }
+
+ div.template_name {
+   cursor: pointer;
+ }
+
+ div.template_name:hover {
+   background-color: white;
+ }
+
+ span.code {
+   font-family: monospace;
+ }
+
+ span.filename {
+   font-family: monospace;
+ }
+
+  </style>
+</head>
+<body>
+
+<h1>Brakeman Report</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Application Path</th>
+      <th>Rails Version</th>
+      <th>Brakeman Version</th>
+      <th>Report Time</th>
+      <th>Checks Performed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/app</td>
+      <td>4.2.11.3</td>
+      <td>4.9.0
+      <td>
+        2020-08-09 07:26:22 +0000<br><br>
+        2.553355452 seconds
+      </td>
+      <td>BasicAuth, BasicAuthTimingAttack, CSRFTokenForgeryCVE, ContentTag, CookieSerialization, CreateWith, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, DivideByZero, DynamicFinders, EscapeFunction, Evaluation, Execute, FileAccess, FileDisclosure, FilterSkipping, ForceSSL, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONEncoding, JSONEntityEscape, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, MimeTypeDoS, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NestedAttributesBypass, NumberToCurrency, PageCachingCVE, PermitAttributes, QuoteTableName, Redirect, RegexDoS, Render, RenderDoS, RenderInline, ResponseSplitting, ReverseTabnabbing, RouteDoS, SQL, SQLCVEs, SSLVerify, SafeBufferManipulation, SanitizeMethods, Secrets, SelectTag, SelectVulnerability, Send, SendFile, SessionManipulation, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, SprocketsPathTraversal, StripTags, SymbolDoS, SymbolDoSCVE, TemplateInjection, TranslateBug, UnsafeReflection, UnscopedFind, ValidationRegex, WeakHash, WithoutProtection, XMLDoS, YAMLParsing</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2 id='summary'>Summary</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Scanned/Reported</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Controllers</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>Models</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>Templates</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <td>Errors</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Security Warnings</td>
+      <td>24 <span class='high-confidence'>(2)</span></td>
+    </tr>
+  
+    <tr>
+      <td>Ignored Warnings</td>
+      <td>4</td>
+    </tr>
+  
+  </tbody>
+</table>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Warning Type</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>Denial of Service</td>
+      <td>1</td>
+    </tr>
+  
+    <tr>
+      <td>Missing Encryption</td>
+      <td>1</td>
+    </tr>
+  
+    <tr>
+      <td>Reverse Tabnabbing</td>
+      <td>20</td>
+    </tr>
+  
+    <tr>
+      <td>Weak Hash</td>
+      <td>2</td>
+    </tr>
+  
+  </tbody>
+</table>
+<br>
+<h2>Security Warnings</h2>  
+<table>
+  <thead>
+    <tr>
+      <th>Confidence</th>
+      <th>Class</th>
+      <th>Method</th>
+      <th>Warning Type</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td>EventSessionsController</td>
+      <td>update</td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/denial_of_service/">Denial of Service</a></td>
+      <td><div class='warning_message' onClick="toggle('context2');toggle('message2');toggle('full_message2')" >Symbol conversion from unsafe string in parameter value near line 47: <span class="code"><span class="user_input">params[:event_session]</span>.symbolize_keys</span><table id='context2' class='context' style='display:none'><caption>app/controllers/event_sessions_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>43</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  def update</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>44</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    # Resource loaded and authorized by CanCan</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>46</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    # Allow only description update</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>47</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    evs_params = params[:event_session].symbolize_keys()</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>48</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    evs_params.delete_if {|e|</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>49</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      ![</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>50</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        :name,</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>51</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        :description,</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>52</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        :presentation_url,</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='high-confidence'>High</span></td>
+      <td></td>
+      <td></td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/missing_encryption/">Missing Encryption</a></td>
+      <td><div class='warning_message' onClick="toggle('context1');toggle('message1');toggle('full_message1')" >The application does not force use of HTTPS: <span class="code">config.force_ssl</span> is not enabled near line 1<table id='context1' class='context' style='display:none'><caption>config/environments/production.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first error'>
+          <td class='context_line'>
+            <pre class='context'>1</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>NullifyPlatform::Application.configure do</pre>
+          </td>
+        </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>2</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  # Settings specified here will take precedence over those in config/application.rb</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>4</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  # Code is not reloaded between requests</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>5</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  config.cache_classes = true</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>OmniAuth::Strategies::Nullwp</td>
+      <td>callback_phase</td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/weak_hash/">Weak Hash</a></td>
+      <td><div class='warning_message' onClick="toggle('context4');toggle('message4');toggle('full_message4')" ><span id='message4' style='display:block'>Weak hashing algorithm used: SHA1 near line 24: ...</span><span id='full_message4' style='display:none'>Weak hashing algorithm used: SHA1 near line 24: <span class="code">Digest::SHA1.hexdigest(&quot;a mix of  #{secret}, #{request.params[&quot;uid&quot;]}, #{request.params[&quot;username&quot;]}, #{request.params[&quot;avatar&quot;]}&quot;)</span></span><table id='context4' class='context' style='display:none'><caption>lib/oauth/nullwp_strategy.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>19</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>        r.finish</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      def callback_phase</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        uid, username, avatar, token = request.params[&quot;uid&quot;], request.params[&quot;username&quot;], request.params[&quot;avatar&quot;], request.params[&quot;token&quot;]</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        sha1 = Digest::SHA1.hexdigest(&quot;a mix of  #{@secret}, #{uid}, #{username}, #{avatar}&quot;)</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        # check if the request comes from Pixelation or not</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        if sha1 == token</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          @uid, @username, @avatar = uid, username, avatar</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          # OmniAuth takes care of the rest</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>User</td>
+      <td>gravatar_url</td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/weak_hash/">Weak Hash</a></td>
+      <td><div class='warning_message' onClick="toggle('context3');toggle('message3');toggle('full_message3')" >Weak hashing algorithm used: MD5 near line 133: <span class="code">Digest::MD5.hexdigest(self.email.to_s.strip.downcase)</span><table id='context3' class='context' style='display:none'><caption>app/models/user.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>128</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  def to_param</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>129</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &quot;#{self.id} #{self.name}&quot;.parameterize</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>130</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>132</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def gravatar_url</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>133</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    g_hash_code = Digest::MD5.hexdigest(self.email.to_s.strip.downcase)</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>134</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &quot;https://secure.gravatar.com/avatar/#{g_hash_code}&quot;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>135</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>137</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def delete_api_tokens_if_password_changed?</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>138</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    if encrypted_password_changed?</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+  </tbody>
+</table>
+<p>View Warnings</p>
+<table>
+  <thead>
+    <tr>
+      <th>Confidence</th>
+      <th>Template</th>
+      <th>Warning Type</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          chapters/show
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context11');toggle('message11');toggle('full_message11')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 24: <span class="code">link_to(safe_url(@chapter.twitter_handle), :target =&gt; &quot;_blank&quot;)</span><table id='context11' class='context' style='display:none'><caption>app/views/chapters/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>19</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>        &lt;div class=&#39;col-md-12&#39;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;center&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>21</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;ul class=&#39;nav navbar-nav&#39;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @chapter.has_twitter_handle? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= link_to safe_url(@chapter.twitter_handle), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= fa_icon(&#39;twitter 4x&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @chapter.has_facebook_profile? %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          chapters/show
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context12');toggle('message12');toggle('full_message12')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 31: <span class="code">link_to(safe_url(@chapter.facebook_profile), :target =&gt; &quot;_blank&quot;)</span><table id='context12' class='context' style='display:none'><caption>app/views/chapters/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>26</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                  &lt;% end %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @chapter.has_facebook_profile? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= link_to safe_url(@chapter.facebook_profile), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= fa_icon(&#39;facebook 4x&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>35</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>36</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @chapter.has_github_profile? %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          chapters/show
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context13');toggle('message13');toggle('full_message13')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 38: <span class="code">link_to(safe_url(@chapter.github_profile), :target =&gt; &quot;_blank&quot;)</span><table id='context13' class='context' style='display:none'><caption>app/views/chapters/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>33</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                  &lt;% end %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>35</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>36</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @chapter.has_github_profile? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>37</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>38</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= link_to safe_url(@chapter.github_profile), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>39</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= fa_icon(&#39;github 4x&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>40</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>41</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>42</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>43</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;/ul&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          event_sessions/index
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context14');toggle('message14');toggle('full_message14')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 60: <span class="code">link_to(&quot;&quot;, safe_url(event_session.video_url), :class =&gt; &quot;fa-file-video-o fa fa-2x&quot;, :target =&gt; &quot;_blank&quot;)</span><table id='context14' class='context' style='display:none'><caption>app/views/event_sessions/index.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>55</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>      &lt;td&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>56</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;%= link_to event_session.user.name, public_profile_path(event_session.user) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>57</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>58</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>59</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% unless event_session.video_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>60</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= link_to &quot;&quot;, safe_url(event_session.video_url), :class =&gt; &#39;fa-file-video-o fa fa-2x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>61</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>           &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>62</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% unless event_session.presentation_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>63</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= link_to &quot;&quot;, safe_url(event_session.presentation_url), :class =&gt; &#39;fa-file-powerpoint-o fa fa-2x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>64</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>65</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/td&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          event_sessions/index
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context15');toggle('message15');toggle('full_message15')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 63: <span class="code">link_to(&quot;&quot;, safe_url(event_session.presentation_url), :class =&gt; &quot;fa-file-powerpoint-o fa fa-2x&quot;, :target =&gt; &quot;_blank&quot;)</span><table id='context15' class='context' style='display:none'><caption>app/views/event_sessions/index.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>58</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>      &lt;td&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>59</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% unless event_session.video_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>60</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= link_to &quot;&quot;, safe_url(event_session.video_url), :class =&gt; &#39;fa-file-video-o fa fa-2x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>61</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>           &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>62</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% unless event_session.presentation_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>63</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= link_to &quot;&quot;, safe_url(event_session.presentation_url), :class =&gt; &#39;fa-file-powerpoint-o fa fa-2x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>64</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>65</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>66</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;/tr&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>67</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>68</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;tr&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          event_sessions/show
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context16');toggle('message16');toggle('full_message16')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 28: <span class="code">link_to(&quot;&quot;, safe_url(@event_session.presentation_url), :class =&gt; &quot;embed&quot;, :target =&gt; &quot;_blank&quot;)</span><table id='context16' class='context' style='display:none'><caption>app/views/event_sessions/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>23</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  &lt;div class=&#39;col-md-8&#39;&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;div class=&#39;row&#39;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;div class=&#39;col-md-6&#39;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% unless @event_session.presentation_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= link_to &quot;&quot;, safe_url(@event_session.presentation_url), :class =&gt; &#39;embed&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;/p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;div class=&#39;col-md-6&#39;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% unless @event_session.video_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          event_sessions/show
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context17');toggle('message17');toggle('full_message17')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 35: <span class="code">link_to(&quot;&quot;, safe_url(@event_session.video_url), :class =&gt; &quot;embed&quot;, :target =&gt; &quot;_blank&quot;)</span><table id='context17' class='context' style='display:none'><caption>app/views/event_sessions/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>30</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>        &lt;% end %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;div class=&#39;col-md-6&#39;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% unless @event_session.video_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>35</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= link_to &quot;&quot;, safe_url(@event_session.video_url), :class =&gt; &#39;embed&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>36</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;/p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>37</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>38</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>39</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>40</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;h3&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          event_sessions/show
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context18');toggle('message18');toggle('full_message18')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 71: <span class="code">link_to(&quot;&quot;, safe_url(@event_session.presentation_url), :class =&gt; &quot;fa-file-powerpoint-o fa fa-5x&quot;, :target =&gt; &quot;_blank&quot;)</span><table id='context18' class='context' style='display:none'><caption>app/views/event_sessions/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>66</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>      Starts at &lt;strong&gt;&lt;%= @event_session.start_time.strftime(&quot;%A %B %d %Y, %I:%M %p&quot;) %&gt;&lt;/strong&gt;. The sessions runs for &lt;strong&gt;&lt;%= distance_of_time_in_words(@event_session.end_time, @event_session.start_time) %&gt;&lt;/strong&gt;.</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>67</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;/p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>68</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;h3&gt;Resources&lt;/h3&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>69</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% unless @event_session.presentation_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>70</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>71</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;%= link_to &quot;&quot;, safe_url(@event_session.presentation_url), :class =&gt; &#39;fa-file-powerpoint-o fa fa-5x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>72</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>73</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &amp;nbsp;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>74</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% unless @event_session.video_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>75</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;%= link_to &quot;&quot;, safe_url(@event_session.video_url), :class =&gt; &#39;fa-file-video-o fa fa-5x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>76</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;/p&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          event_sessions/show
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context19');toggle('message19');toggle('full_message19')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 75: <span class="code">link_to(&quot;&quot;, safe_url(@event_session.video_url), :class =&gt; &quot;fa-file-video-o fa fa-5x&quot;, :target =&gt; &quot;_blank&quot;)</span><table id='context19' class='context' style='display:none'><caption>app/views/event_sessions/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>70</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    &lt;p&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>71</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;%= link_to &quot;&quot;, safe_url(@event_session.presentation_url), :class =&gt; &#39;fa-file-powerpoint-o fa fa-5x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>72</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>73</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &amp;nbsp;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>74</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% unless @event_session.video_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>75</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;%= link_to &quot;&quot;, safe_url(@event_session.video_url), :class =&gt; &#39;fa-file-video-o fa fa-5x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>76</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;/p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>77</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>78</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>79</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>&lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>80</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>&lt;script src=&quot;/static/javascripts/jquery.oembed.js&quot;&gt;&lt;/script&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          <div class="template_name" onClick="toggle('callers9')" >
+            <div>
+              events/_event (Template:events/show)
+            </div>
+            <div class="render_path" id="callers9" >
+              EventsController#seo_name &rarr; Template:events/show &rarr; events/_event
+            </div>
+          </div>
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context5');toggle('message5');toggle('full_message5')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 89: <span class="code">link_to(&quot;&quot;, safe_url((Unresolved Model).new.presentation_url), :class =&gt; &quot;fa-file-powerpoint-o fa fa-2x&quot;, :target =&gt; &quot;_blank&quot;)</span><table id='context5' class='context' style='display:none'><caption>app/views/events/_event.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>84</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>          &lt;td&gt;&lt;%= link_to ev_session.speaker_name, public_profile_path(ev_session.speaker) %&gt;&lt;/td&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>85</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>86</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;td&gt;&lt;%= ev_session.start_time.strftime(&quot;%I:%M %p&quot;) %&gt;&lt;/td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>87</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;td&gt;&lt;%= ev_session.end_time.strftime(&quot;%I:%M %p&quot;) %&gt;&lt;/td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>88</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;td&gt;&lt;% unless ev_session.presentation_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>89</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= link_to &quot;&quot;, safe_url(ev_session.presentation_url), :class =&gt; &#39;fa-file-powerpoint-o fa fa-2x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>90</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>91</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% unless ev_session.video_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>92</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= link_to &quot;&quot;, safe_url(ev_session.video_url), :class =&gt; &#39;fa-file-video-o fa fa-2x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>93</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>           &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>94</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;/td&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          <div class="template_name" onClick="toggle('callers10')" >
+            <div>
+              events/_event (Template:events/show)
+            </div>
+            <div class="render_path" id="callers10" >
+              EventsController#seo_name &rarr; Template:events/show &rarr; events/_event
+            </div>
+          </div>
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context6');toggle('message6');toggle('full_message6')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 92: <span class="code">link_to(&quot;&quot;, safe_url((Unresolved Model).new.video_url), :class =&gt; &quot;fa-file-video-o fa fa-2x&quot;, :target =&gt; &quot;_blank&quot;)</span><table id='context6' class='context' style='display:none'><caption>app/views/events/_event.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>87</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>        &lt;td&gt;&lt;%= ev_session.end_time.strftime(&quot;%I:%M %p&quot;) %&gt;&lt;/td&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>88</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;td&gt;&lt;% unless ev_session.presentation_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>89</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= link_to &quot;&quot;, safe_url(ev_session.presentation_url), :class =&gt; &#39;fa-file-powerpoint-o fa fa-2x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>90</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>91</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% unless ev_session.video_url.blank? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>92</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= link_to &quot;&quot;, safe_url(ev_session.video_url), :class =&gt; &#39;fa-file-video-o fa fa-2x&#39;, :target =&gt; &#39;_blank&#39; %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>93</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>           &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>94</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;/td&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>95</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/tr&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>96</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>97</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;/table&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          home/public_profile
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context20');toggle('message20');toggle('full_message20')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 22: <span class="code">link_to(safe_url(@user.facebook_profile), :target =&gt; &quot;_blank&quot;)</span><table id='context20' class='context' style='display:none'><caption>app/views/home/public_profile.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>17</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>              &lt;%= safe_markdown_html(@user.about_me) %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>18</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;/p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>19</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;ul class=&quot;social-links list-inline&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @user.has_facebook_profile? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>21</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;li class=&quot;facebook&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= link_to safe_url(@user.facebook_profile), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= fa_icon(&#39;facebook&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @user.has_twitter_handle? %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          home/public_profile
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context21');toggle('message21');toggle('full_message21')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 29: <span class="code">link_to(safe_url(@user.twitter_handle), :target =&gt; &quot;_blank&quot;)</span><table id='context21' class='context' style='display:none'><caption>app/views/home/public_profile.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>24</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                  &lt;% end %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @user.has_twitter_handle? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;li class=&quot;twitter&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= link_to safe_url(@user.twitter_handle), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= fa_icon(&#39;twitter&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @user.linkedin_profile? %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          home/public_profile
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context22');toggle('message22');toggle('full_message22')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 36: <span class="code">link_to(safe_url(@user.linkedin_profile), :target =&gt; &quot;_blank&quot;)</span><table id='context22' class='context' style='display:none'><caption>app/views/home/public_profile.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>31</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                  &lt;% end %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @user.linkedin_profile? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>35</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;li class=&quot;linkedin&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>36</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= link_to safe_url(@user.linkedin_profile), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>37</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= fa_icon(&#39;linkedin&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>38</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>39</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>40</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>41</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @user.has_github_profile? %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          home/public_profile
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context23');toggle('message23');toggle('full_message23')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 43: <span class="code">link_to(safe_url(@user.github_profile), :target =&gt; &quot;_blank&quot;)</span><table id='context23' class='context' style='display:none'><caption>app/views/home/public_profile.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>38</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                  &lt;% end %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>39</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>40</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>41</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @user.has_github_profile? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>42</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;li class=&quot;github&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>43</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= link_to safe_url(@user.github_profile), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>44</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= fa_icon(&#39;github&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>45</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>46</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>47</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>48</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @user.has_homepage? %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          home/public_profile
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context24');toggle('message24');toggle('full_message24')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 50: <span class="code">link_to(safe_url(@user.homepage), :target =&gt; &quot;_blank&quot;)</span><table id='context24' class='context' style='display:none'><caption>app/views/home/public_profile.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>45</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>                  &lt;% end %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>46</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>47</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>48</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% if @user.has_homepage? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>49</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;li class=&quot;link&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>50</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= link_to safe_url(@user.homepage), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>51</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;%= fa_icon(&#39;link&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>52</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                  &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>53</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>                &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>54</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>55</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>            &lt;/ul&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          shared/_pp_avatar_social (Template:event_sessions/show)
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context7');toggle('message7');toggle('full_message7')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 8: <span class="code">link_to(safe_url(@event_session.user.twitter_handle), :target =&gt; &quot;_blank&quot;)</span><table id='context7' class='context' style='display:none'><caption>app/views/shared/_pp_avatar_social.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>3</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>&lt;/div&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>4</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>&lt;div class=&#39;row&#39;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>5</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;ul class=&#39;nav navbar-nav&#39;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>6</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% if user.has_twitter_handle? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>7</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>8</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;%= link_to safe_url(user.twitter_handle), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>9</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= fa_icon(&#39;twitter 4x&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>10</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>11</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>12</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>13</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% if user.has_facebook_profile? %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          shared/_pp_avatar_social (Template:event_sessions/show)
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context8');toggle('message8');toggle('full_message8')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 15: <span class="code">link_to(safe_url(@event_session.user.facebook_profile), :target =&gt; &quot;_blank&quot;)</span><table id='context8' class='context' style='display:none'><caption>app/views/shared/_pp_avatar_social.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>10</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>        &lt;% end %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>11</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>12</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>13</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% if user.has_facebook_profile? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>14</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>15</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;%= link_to safe_url(user.facebook_profile), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>16</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= fa_icon(&#39;facebook 4x&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>17</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>18</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>19</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% if user.has_github_profile? %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          shared/_pp_avatar_social (Template:event_sessions/show)
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context9');toggle('message9');toggle('full_message9')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 22: <span class="code">link_to(safe_url(@event_session.user.github_profile), :target =&gt; &quot;_blank&quot;)</span><table id='context9' class='context' style='display:none'><caption>app/views/shared/_pp_avatar_social.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>17</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>        &lt;% end %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>18</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>19</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% if user.has_github_profile? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>21</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;%= link_to safe_url(user.github_profile), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= fa_icon(&#39;github 4x&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% if user.has_homepage? %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>
+        
+          shared/_pp_avatar_social (Template:event_sessions/show)
+        
+      </td>
+      <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/reverse_tabnabbing/">Reverse Tabnabbing</a></td>
+      <td><div class='warning_message' onClick="toggle('context10');toggle('message10');toggle('full_message10')" >When opening a link in a new tab without setting <span class="code">rel: &quot;noopener noreferrer&quot;</span>, the new tab can control the parent tab&#39;s location. For example, an attacker could redirect to a phishing page. near line 29: <span class="code">link_to(safe_url(@event_session.user.homepage), :target =&gt; &quot;_blank&quot;)</span><table id='context10' class='context' style='display:none'><caption>app/views/shared/_pp_avatar_social.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>24</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>        &lt;% end %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% if user.has_homepage? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;%= link_to safe_url(user.homepage), :target =&gt; &#39;_blank&#39; do %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>30</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= fa_icon(&#39;home 4x&#39;) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>31</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>32</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;/li&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>33</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>34</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;/ul&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+  </tbody>
+</table>
+<div onClick="toggle('ignored_table');">  <h2>4 Ignored Warnings (click to see them)</h2 ></div>
+<div>
+  <table style="display:none" id="ignored_table">
+    <thead>
+      <tr>
+        <th>Confidence</th>
+        <th>File</th>
+        <th>Warning Type</th>
+        <th>Message</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <tr>
+        <td><span class='high-confidence'>High</span></td>
+        <td>app/models/job.rb</td>
+        <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/attribute_restriction/">Attribute Restriction</a></td>
+        <td><div class='warning_message' onClick="toggle('context27');toggle('message27');toggle('full_message27')" >Mass assignment is not restricted using <span class="code">attr_accessible</span> near line 1<table id='context27' class='context' style='display:none'><caption>app/models/job.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first error'>
+          <td class='context_line'>
+            <pre class='context'>1</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>class Job &lt; ActiveRecord::Base</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>3</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  serialize :params</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>4</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  serialize :response</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>6</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  STATE_NEW         = 100</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+        <td>Internally used model for creating async job</td>
+      </tr>
+    
+      <tr>
+        <td><span class='high-confidence'>High</span></td>
+        <td>app/models/user_api_token.rb</td>
+        <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/attribute_restriction/">Attribute Restriction</a></td>
+        <td><div class='warning_message' onClick="toggle('context28');toggle('message28');toggle('full_message28')" >Mass assignment is not restricted using <span class="code">attr_accessible</span> near line 1<table id='context28' class='context' style='display:none'><caption>app/models/user_api_token.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first error'>
+          <td class='context_line'>
+            <pre class='context'>1</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>class UserApiToken &lt; ActiveRecord::Base</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>3</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  belongs_to :user</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>5</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  validates :client_name, :presence =&gt; true</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>6</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  validates :user_agent,  :presence =&gt; true</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+        <td>Internally created resource</td>
+      </tr>
+    
+      <tr>
+        <td><span class='med-confidence'>Medium</span></td>
+        <td>app/views/venues/_venue.html.erb</td>
+        <td><a rel="noreferrer" href="https://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross-Site Scripting</a></td>
+        <td><div class='warning_message' onClick="toggle('context26');toggle('message26');toggle('full_message26')" >Unescaped model attribute near line 8: <span class="code">Event.find_by!(:slug =&gt; params[:name]).venue.map_embedd_code.to_s</span><table id='context26' class='context' style='display:none'><caption>app/views/venues/_venue.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>3</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    &lt;address&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>4</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;%= markdown_html(venue.address.to_s) %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>5</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;/address&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>6</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>7</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;div class=&#39;col-md-7&#39;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>8</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;%= venue.map_embedd_code.to_s.html_safe %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>9</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>10</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>&lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+        <td>This is required as a feature. Attack can be triggered by chapter leads only.</td>
+      </tr>
+    
+      <tr>
+        <td><span class='med-confidence'>Medium</span></td>
+        <td>Gemfile.lock</td>
+        <td><a rel="noreferrer" href="https://groups.google.com/g/rubyonrails-security/c/NOjKiGeXUgw">Cross-Site Request Forgery</a></td>
+        <td><div class='warning_message' onClick="toggle('context25');toggle('message25');toggle('full_message25')" >Rails 4.2.11.3 has a vulnerability that may allow CSRF token forgery. Upgrade to Rails 5.2.4.3 or patch near line 308<table id='context25' class='context' style='display:none'><caption>Gemfile.lock</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>303</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>      rack (&gt;= 0.4)</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>304</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    rack-protection (1.5.5)</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>305</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      rack</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>306</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    rack-test (0.6.3)</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>307</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      rack (&gt;= 1.0)</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>308</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    rails (4.2.11.3)</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>309</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      actionmailer (= 4.2.11.3)</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>310</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      actionpack (= 4.2.11.3)</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>311</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      actionview (= 4.2.11.3)</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>312</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      activejob (= 4.2.11.3)</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>313</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      activemodel (= 4.2.11.3)</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+        <td>Ignoring for now. Tracked as issue #59</td>
+      </tr>
+    
+    </tbody>
+  </table>
+</div>
+</body></html>
