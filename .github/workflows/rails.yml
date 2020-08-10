@@ -33,7 +33,7 @@ jobs:
       env:
         RAILS_ENV: test
       run: |
-        bundle exec brakeman -4 -w2 -o brakeman-sast-report.html
+        bundle exec brakeman -4 -w2 -o brakeman-sast-report.html -o /dev/stdout
     - name: Archive Brakeman SAST Report
       uses: actions/upload-artifact@v2
       with:
