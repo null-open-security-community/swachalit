@@ -13,7 +13,8 @@ class OmniauthsController < ApplicationController
 
       redirect_to '/'
     rescue => e
-      render status: 400, text: "Failed to sign-in with #{params[:provider]}"
+      render status: 400,
+        text: "Failed to sign-in with %s" % [CGI.escape(params[:provider])]
     end
   end
 

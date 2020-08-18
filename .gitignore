@@ -21,3 +21,6 @@
 /ubuntu-xenial-16.04-cloudimg-console.log
 
 .byebug_history
+
+brakeman-sast-report.html
+brakeman-sast-report.txt
