@@ -75,8 +75,6 @@ NullifyPlatform::Application.routes.draw do
   get '/calendar'       => 'home#calendar', :as => :calendar
   get '/profile/:id'    => 'home#public_profile', :as => :public_profile
   get '/raise_exception_test' => 'home#raise_exception'
-  get '/forum', :to => 'home#forum', :as => :forum
-  get '/IRC', :to => 'home#IRC', :as => :irc
   get '/privacy', :to => 'home#privacy', :as => :privacy
 
   post '/api/authenticate'        => 'api#authenticate',          :as => :api_authentication
