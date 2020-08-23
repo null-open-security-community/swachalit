@@ -90,6 +90,9 @@ NullifyPlatform::Application.routes.draw do
   # Omniauth Callback
   match '/auth/:provider/callback'  => 'omniauths#create', via: [:get, :post]
 
+  # Static routes
+  get '/forum', :to => 'home#forum', :as => :forum
+
   # Resque Web
   # ResqueWeb::Engine.eager_load!
 
