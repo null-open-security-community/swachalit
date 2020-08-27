@@ -35,11 +35,6 @@ class HomeController < ApplicationController
   def calendar
   end
 
-  def IRC
-  end
-
-  def forum
-  end
 
   def raise_exception
     raise "This is a test for exception notification"
@@ -70,5 +65,8 @@ class HomeController < ApplicationController
   end
 
   def privacy
+  end
+
+  def forum
   end
 end
