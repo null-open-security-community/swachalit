@@ -46,6 +46,16 @@ class EventSession < ActiveRecord::Base
     end
   end
 
+  # Finder method to find a session for comments
+  # This allow us scope for restricting comments with settings
+  def self.find_for_comments(id)
+    EventSession.find(id)
+  end
+
+  def self.find_for_voting(id)
+    EventSession.find(id)
+  end
+
   def as_json
     super(:only => [:id, :name, :description, :session_type, :tags, :start_time, :end_time,
       :presentation_url, :video_url], :methods => [ :user ])

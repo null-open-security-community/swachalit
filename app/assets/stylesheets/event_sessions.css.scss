@@ -8,29 +8,36 @@
   margin-top:4rem!important;
   margin-right:5rem!important;
 }
+
 .reaction-active {
   margin-right:1rem!important;
   color: none;
 }
+
 .reaction-inactive {
   margin-right:1rem!important;
   color:#6d6d6d;
 }
+
 .comment {
   margin-top: 3rem;
 }
+
 .flex-container {
   display: flex;
 }
+
 .add-comment-item {
   padding-right: 1rem;
 }
 .new-comment-input {
   flex-grow:1!important;
 }
+
 .underline {
   text-decoration: underline!important;
 }
+
 .event-session-comment-option {
   margin-right: 2rem;
 }
