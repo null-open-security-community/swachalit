@@ -85,7 +85,7 @@ class EventSessionsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to @event_session }
+      format.html { redirect_to event_session_path(@event_session) }
       format.js { render 'vote' }
     end
   end
@@ -100,7 +100,7 @@ class EventSessionsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {redirect_to @event_session}
+      format.html { redirect_to event_session_path(@event_session) }
       format.js { render 'vote' }
     end
   end
