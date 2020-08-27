@@ -23,6 +23,12 @@
     <span class='pull-right'>
       <form class="form-inline" method="get">
         <div class="input-group">
+          <span class="label label-info" style="margin-right: 0.5em;">
+            Show sessions with reference (Presentation or Video)
+          </span>
+          <%= check_box_tag "has_a_reference", 1, @has_a_reference.to_i.positive? %>
+        </div>
+        <div class="input-group">
           <div class="input-group-addon">Query</div>
           <%= text_field_tag :q, @query, :class => 'form-control' %>
         </div>

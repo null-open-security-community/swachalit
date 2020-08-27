@@ -13,6 +13,9 @@ class EventSessionsController < ApplicationController
     @event_sessions = @event_sessions.
       where('event_sessions.name LIKE ?', '%' + @query + '%') unless (@query = params[:q]).blank?
 
+    @event_sessions = @event_sessions.has_a_reference if \
+      (@has_a_reference = params[:has_a_reference].to_i).positive?
+
     @event_sessions = @event_sessions.
       order('event_sessions.start_time DESC').
       includes(:event).includes(:user)
