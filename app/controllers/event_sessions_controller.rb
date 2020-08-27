@@ -26,7 +26,7 @@ class EventSessionsController < ApplicationController
 
   def show
     @event_session = EventSession.find(params[:id])
-
+  
     respond_to do |format|
       format.html
     end
@@ -72,6 +72,34 @@ class EventSessionsController < ApplicationController
 
     respond_to do |format|
       format.html
+    end
+  end
+
+  def like
+    @event_session = EventSession.find(params[:id])
+    if current_user.voted_up_on? @event_session
+      @event_session.unliked_by current_user
+    else
+      current_user.likes @event_session
+    end
+
+    respond_to do |format|
+      format.html {redirect_to @event_session}
+      format.js {render 'vote'}
+    end 
+  end
+
+  def dislike
+    @event_session = EventSession.find(params[:id])
+    if current_user.voted_down_on? @event_session
+      @event_session.undisliked_by current_user
+    else
+      current_user.dislikes @event_session
+    end
+    
+    respond_to do |format|
+      format.html {redirect_to @event_session}
+      format.js {render 'vote'}
     end
   end
 end

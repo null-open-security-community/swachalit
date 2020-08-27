@@ -22,9 +22,12 @@ class EventSession < ActiveRecord::Base
   just_define_datetime_picker :end_time, :add_to_attr_accessible => true
 
   acts_as_taggable
+  acts_as_votable
 
   belongs_to :event
   belongs_to :user
+
+  has_many :event_session_comments
 
   validates :event_id, :user_id, :name, :description, :presence => true
   validates :start_time, :end_time, :presence => true

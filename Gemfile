@@ -89,6 +89,7 @@ gem 'geocoder'
 #Needed in rails>=4.0 for attr_accessible and attr_protected
 gem 'protected_attributes'
 gem 'activerecord-session_store'
+gem 'acts_as_votable'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'dotenv'
 gem 'test-unit'

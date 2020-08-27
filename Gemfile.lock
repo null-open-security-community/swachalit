@@ -55,6 +55,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (5.0.0)
       activerecord (>= 4.2.8)
+    acts_as_votable (0.12.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     arbre (1.1.1)
@@ -459,6 +460,7 @@ DEPENDENCIES
   activeadmin (~> 1.0)
   activerecord-session_store
   acts-as-taggable-on
+  acts_as_votable
   audited-activerecord (~> 4.0)
   brakeman
   byebug

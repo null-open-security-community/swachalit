@@ -15,8 +15,11 @@ class User < ActiveRecord::Base
 
   validates :name, :presence => true
 
+  acts_as_voter
+
   has_many :event_sessions, :dependent => :restrict_with_error
   has_many :event_registrations, :dependent => :restrict_with_error
+  has_many :event_session_comments, :dependent => :restrict_with_error
   has_many :chapter_leads, :dependent => :destroy
   has_many :user_api_tokens, :dependent => :destroy
   has_many :user_auth_profiles, :dependent => :destroy
