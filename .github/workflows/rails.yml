@@ -20,11 +20,18 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential libpq-dev nodejs \
         libsqlite3-dev default-libmysqlclient-dev libxml2-dev
+    - uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
     - name: Build and test with Rake
       env:
         RAILS_ENV: test
       run: |
         gem install bundler
+        bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
         RUBYOPT=-W0 rake db:create
         RUBYOPT=-W0 rake db:migrate
