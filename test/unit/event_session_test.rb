@@ -21,5 +21,10 @@ class EventSessionTest < ActiveSupport::TestCase
     assert es.save
 
     assert EventSession.has_a_reference.count == 0
+
+    es.video_url = ""
+    assert es.save
+
+    assert EventSession.has_a_reference.count == 0
   end
 end

@@ -38,7 +38,8 @@ class EventSession < ActiveRecord::Base
   }
 
   scope :has_a_reference, lambda {
-    where('NOT(presentation_url IS NULL AND video_url IS NULL)')
+    where('NOT(presentation_url IS NULL AND video_url IS NULL)'). \
+    where("NOT(presentation_url = '' AND video_url = '')")
   }
 
   def initialize(*args)
