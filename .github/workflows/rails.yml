@@ -33,9 +33,9 @@ jobs:
         gem install bundler
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
-        RUBYOPT=-W0 rake db:create
-        RUBYOPT=-W0 rake db:migrate
-        RUBYOPT=-W0 SECRET_KEY_BASE=Test-Run-123 rake test
+        RUBYOPT=-W0 bundle exec rake db:create
+        RUBYOPT=-W0 bundle exec rake db:migrate
+        RUBYOPT=-W0 SECRET_KEY_BASE=Test-Run-123 bundle exec rake test
     - name: Brakeman SAST
       env:
         RAILS_ENV: test
