@@ -99,7 +99,8 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<%= public_profile_path(current_user) %>"><%= fa_icon('globe') %> Public Profile</a></li>
-            <li><a href="<%= my_event_sessions_path %>"><%= fa_icon('globe') %> My Sessions</a></li>
+            <li><a href="<%= my_event_sessions_path %>"><%= fa_icon('bullseye') %> My Sessions</a></li>
+            <li><a href="<%= session_proposals_path(user_id: current_user.id) %>"><%= fa_icon('bullhorn') %> My Proposals</a></li>
             <li><a href="<%= edit_user_registration_path(current_user) %>"><%= fa_icon('gears') %> Edit Profile</a></li>
             <% unless current_user.managed_chapters.count.zero? %>
               <li>

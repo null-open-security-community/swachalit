@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :chapter_leads, :dependent => :destroy
   has_many :user_api_tokens, :dependent => :destroy
   has_many :user_auth_profiles, :dependent => :destroy
+  has_many :session_proposals, :dependent => :restrict_with_error
 
   before_save :delete_api_tokens_if_password_changed?
   #after_create :deliver_confirmation_mail!
