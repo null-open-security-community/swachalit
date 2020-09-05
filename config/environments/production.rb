@@ -82,7 +82,7 @@ NullifyPlatform::Application.configure do
   }
 end
 
-# Exception notifer for resque jobs are configured in config/initializers/xxx
+# Deprecated in favour of Sentry - Check config/initializers/exception_notification.rb
 NullifyPlatform::Application.config.middleware.use ExceptionNotification::Rack,
   :email => {
     :email_prefix => "[Exception] ",

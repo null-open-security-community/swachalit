@@ -15,7 +15,7 @@ ExceptionNotification.configure do |config|
   # Adds a condition to decide when an exception must be ignored or not.
   # The ignore_if method can be invoked multiple times to add extra conditions.
   config.ignore_if do |exception, options|
-    not Rails.env.production?
+    (not Rails.env.production?) or CFG_SENTRY_ENABLED
   end
 
   # Notifiers =================================================================

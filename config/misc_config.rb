@@ -20,3 +20,6 @@ CFG_NOTIFICATION_ADMIN_EVENT_CREATE = [
   'abhisek@null.co.in',
   'anant@null.co.in'
 ]
+
+CFG_SENTRY_DSN = ENV["SENTRY_DSN"]
+CFG_SENTRY_ENABLED = !CFG_SENTRY_DSN.to_s.empty?
