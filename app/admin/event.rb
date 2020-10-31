@@ -40,7 +40,7 @@ ActiveAdmin.register Event do
         * e.t.c <br/>
         <br/>
         <strong>Re-scheduling Event Tasks</strong>: If you have made any significant change in the event such
-        as changing the data/time e.t.c and you want to refresh the scheduled tasks, you must unpublish and 
+        as changing the data/time e.t.c and you want to refresh the scheduled tasks, you must unpublish and
         re-publish the event by changing the public flag accordingly. However do note that tasks that are already
         executed will not be re-scheduled.
       </p>
@@ -68,6 +68,10 @@ ActiveAdmin.register Event do
       f.input :registration_start_time, :as => :just_datetime_picker
       f.input :registration_end_time, :as => :just_datetime_picker
       f.input :registration_instructions, :hint => 'This will appear as instruction to users who attempt to register for this event. You can use Markdown HTML here.'
+    end
+
+    f.inputs "Media" do
+      f.file_field :image, hint: 'Image will be rendered as part of page open graph image'
     end
 
     f.inputs "Notifications" do

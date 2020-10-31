@@ -12,6 +12,7 @@ class EventSession < ActiveRecord::Base
   attr_accessible :presentation_url
   attr_accessible :video_url
   attr_accessible :placeholder
+  attr_accessible :image
 
   # This is required to skip validation for admin user
   attr_accessor :is_admin_update
@@ -32,6 +33,8 @@ class EventSession < ActiveRecord::Base
   validates :event_id, :user_id, :name, :description, :presence => true
   validates :start_time, :end_time, :presence => true
   validate :date_time_validator, :unless => :is_admin_update
+
+  mount_uploader :image, ImageUploader
 
   scope :public_sessions, lambda {
     joins(:event).where(:events => { :public => true })

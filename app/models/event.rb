@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
   attr_accessible :notifications_sent_at, :announced_at
   attr_accessible :notification_state
   attr_accessible :max_registration
+  attr_accessible :image
 
   validates :venue_id, :presence => true
   validates :chapter_id, :presence => true
@@ -46,6 +47,8 @@ class Event < ActiveRecord::Base
 
   include Scheduler::ResqueSchedulerHelper
   delegate :url_helpers, to: 'Rails.application.routes'
+
+  mount_uploader :image, ImageUploader
 
   def descriptive_name
     [

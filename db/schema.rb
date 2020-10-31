@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200711061102) do
+ActiveRecord::Schema.define(version: 20201031151646) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20200711061102) do
     t.string   "presentation_url", limit: 255
     t.boolean  "placeholder",                    default: false
     t.string   "video_url",        limit: 255
+    t.string   "image",            limit: 255
   end
 
   add_index "event_sessions", ["slug"], name: "index_event_sessions_on_slug", using: :btree
@@ -211,6 +212,7 @@ ActiveRecord::Schema.define(version: 20200711061102) do
     t.string   "calendar_event_id",         limit: 255
     t.string   "notification_state",        limit: 255
     t.integer  "max_registration",          limit: 4
+    t.string   "image",                     limit: 255
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", using: :btree

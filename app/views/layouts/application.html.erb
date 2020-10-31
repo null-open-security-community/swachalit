@@ -4,14 +4,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@null0x00" />
-  <meta name="twitter:title" content="<%= content_for_or_default(:title, 'null: The Open Security Community') %>" />
-  <meta name="twitter:description" content="<%= content_for_or_default(:description, "null is India's largest open security community") %>" />
-  <meta name="twitter:image" content="<%= image_url('null-logo.jpg') %>">
-  <meta property="og:title" content="<%= content_for_or_default(:title, 'null: The Open Security Community') %>" />
+  <meta name="twitter:title" content="<%= content_for_or_default(:title, CFG_APP_TITLE) %>" />
+  <meta name="twitter:description" content="<%= content_for_or_default(:description, CFG_APP_DESCRIPTION) %>" />
+  <meta name="twitter:image" content="<%= image_url(content_for_or_default(:image_url, CFG_APP_TWITTER_IMAGE)) %>">
+  <meta property="og:title" content="<%= content_for_or_default(:title, CFG_APP_TITLE) %>" />
   <meta property="og:url" content="<%= request.base_url %>" />
-  <meta property="og:description" content="<%= content_for_or_default(:description, "null is India's largest open security community") %>" />
-  <meta property="og:image" content="<%= image_url('null-blog-banner_white.png') %>" />
-  <title><%= content_for?(:title) ? content_for(:title) : "null Community Platform" %></title>
+  <meta property="og:description" content="<%= content_for_or_default(:description, CFG_APP_DESCRIPTION) %>" />
+  <meta property="og:image" content="<%= image_url(content_for_or_default(:image_url, CFG_APP_DEFAULT_PAGE_IMAGE)) %>" />
+  <title><%= content_for_or_default(:title, CFG_APP_TITLE) %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>

@@ -36,10 +36,7 @@
             <div class='form-group'>
               <%= f.label :avatar %>
               <%= f.file_field :avatar %>
-              <small>
-                The file will be uploaded and stored "as is" without processing.
-                Ensure EXIF data is not exposing sensitve information.
-              </small>
+              <%= exif_warning %>
             </div>
           </div>
           <div class='col-md-6'>
@@ -87,4 +84,3 @@
     </div>
   </div>
 </div>
-

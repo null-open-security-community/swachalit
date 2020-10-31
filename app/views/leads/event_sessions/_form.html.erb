@@ -1,9 +1,9 @@
 <%= semantic_form_for([:leads, @event, @event_session]) do |f| %>
   <%= resource_error_messages!(@event_session) %>
-  
+
   <%= f.inputs do %>
     <%#= f.input :user, :as => :select, :collection => User.order('name ASC').map {|u| ["#{u.name} [#{u.id}] <#{truncate(u.email, :length => 10)}>", u.id] } %>
-    <%= f.input :user_id, :label => '&nbsp;', :as => :string, 
+    <%= f.input :user_id, :label => '&nbsp;', :as => :string,
       :input_html => { :style => 'display:none' } %>
 
     <div class="string input required stringish form-group" id="event_session_user_input">
@@ -23,8 +23,12 @@
     <%= f.input :need_whiteboard %>
     <%= f.input :presentation_url %>
     <%= f.input :video_url %>
-
     <%= f.input :placeholder, :hint => 'For misc. sessions like break, introduction etc.' %>
+  <% end %>
+
+  <%= f.inputs "Media" do %>
+    <%= f.file_field :image, hint: 'Image will be rendered as part of page open graph image' %>
+    <%= exif_warning %>
   <% end %>
 
   <br/>

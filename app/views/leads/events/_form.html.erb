@@ -29,7 +29,11 @@
     <%= f.input :ready_for_notifications %>
     <%= f.input :ready_for_reminders %>
   <% end %>
-  
+  <%= f.inputs "Media" do %>
+    <%= f.file_field :image, hint: 'Image will be rendered as part of page open graph image' %>
+    <%= exif_warning %>
+  <% end %>
+
   <% unless @event.new_record? %>
   <br/>
   <%= f.inputs "Event Publishing" do %>
