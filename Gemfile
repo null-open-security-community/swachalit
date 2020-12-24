@@ -20,6 +20,7 @@ end
 group :test do
   gem 'rails-perftest'
   gem 'ruby-prof'
+  gem 'brakeman'
 end
 
 group :production do
@@ -88,6 +89,7 @@ gem 'geocoder'
 #Needed in rails>=4.0 for attr_accessible and attr_protected
 gem 'protected_attributes'
 gem 'activerecord-session_store'
+gem 'acts_as_votable'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'dotenv'
 gem 'test-unit'
@@ -101,3 +103,4 @@ gem 'grape-swagger-rails'
 gem 'grape-entity'
 gem 'grape-cancan'
 gem 'fog-aws'
+gem 'sentry-raven'

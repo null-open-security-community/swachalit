@@ -1,4 +1,5 @@
 <%- title("Showing Event Session - null Community") %>
+<%- page_image(@event.image_url) %>
 <div class='row'>
   <div class='col-md-12'>
     <div class='page-header'>
@@ -54,5 +55,8 @@
     <p>
       Starts at <strong><%= @event_session.start_time.strftime("%A %B %d %Y, %I:%M %p") %></strong>. The sessions runs for <strong><%= distance_of_time_in_words(@event_session.end_time, @event_session.start_time) %></strong>.
     </p>
+
+    <h3>Image</h3>
+    <p><%= image_tag @event_session.image_url, style: 'max-width:50%; max-height:50%;' %></p>
   </div>
 </div>

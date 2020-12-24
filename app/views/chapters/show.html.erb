@@ -81,7 +81,7 @@
     <% if @chapter.upcoming_events.empty? %>
     <div class='alert alert-danger'>No upcoming event for this chapter.</div>
     <% else %>
-    <%= render :partial => 'events/list', :locals => 
+    <%= render :partial => 'events/list', :locals =>
       { :events => @chapter.upcoming_events.order('start_time ASC') } %>
     <% end %>
   </div>
@@ -101,8 +101,8 @@
     <% if @chapter.past_events.empty? %>
     <div class='alert alert-danger'>No past event for this chapter.</div>
     <% else %>
-    <%= render :partial => 'events/list', :locals => 
-      { :events => @chapter.past_events.order('start_time DESC') } %>
+    <%= render :partial => 'events/list', :locals =>
+      { :events => @chapter.past_events.order('start_time DESC'), :enable_datatable => true } %>
     <% end %>
   </div>
 </div>

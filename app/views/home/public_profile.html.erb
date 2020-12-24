@@ -90,10 +90,10 @@
         <div class="page-header">
           <h1 class="title">Session</h1>
           <div class="filters">
-            <button class="btn btn-sm btn-outline-primary" type="button">
+            <button class="btn btn-sm btn-outline-primary" type="button" id="btn-attended">
               Attended <span class="badge badge-primary"><%= @user.registered_participation.count %></span>
             </button>
-            <button class="btn btn-sm btn-outline-success" type="button">
+            <button class="btn btn-sm btn-outline-success" type="button" id="btn-delivered">
               Delivered <span class="badge badge-success"><%= @user.speaker_sessions.count %></span>
             </button>
           </div>
@@ -101,7 +101,7 @@
         <ul class="session-list">
           <% @event_participation.each do |x| %>
           <% next unless x[:event].public? %>
-          <li>
+          <li class="entry-type-<%= x[:type] %>">
             <div class="session-badge"><%= x[:type].humanize %></div>
             <div class="session-info">
               <div class="event-name">
@@ -120,3 +120,14 @@
     </section>
   </div>
 </div>
+
+<script>
+  $('#btn-delivered').click(function () {
+    // TODO: Implement click toggle
+    return false;
+  })
+  $('#btn-attended').click(function () {
+    // TODO: Implement click toggle
+    return false;
+  })
+</script>

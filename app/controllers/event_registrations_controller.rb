@@ -38,7 +38,7 @@ class EventRegistrationsController < ApplicationController
         end
 
       else
-        format.html do 
+        format.html do
           render :action => 'new'
         end
 
@@ -53,7 +53,7 @@ class EventRegistrationsController < ApplicationController
   def destroy
     @event_registration = @event.event_registrations.find(params[:id])
     @event_registration.destroy() if current_user.id == @event_registration.user_id
-    
+
     respond_to do |format|
       format.html do
         redirect_to event_path(@event), :notice => 'You have successfully unregistered with the event.'

@@ -70,7 +70,7 @@ NullifyPlatform::Application.configure do
   config.eager_load = true
   config.active_record.raise_in_transactional_callbacks = true
 
-  config.action_mailer.default_url_options = { :host => 'www.null.co.in' }
+  config.action_mailer.default_url_options = { :host => ENV['APPLICATION_HOST'] || 'null.co.in' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :authentication => MAIL_SMTP_AUTHENTICATION,
@@ -82,7 +82,7 @@ NullifyPlatform::Application.configure do
   }
 end
 
-# Exception notifer for resque jobs are configured in config/initializers/xxx
+# Deprecated in favour of Sentry - Check config/initializers/exception_notification.rb
 NullifyPlatform::Application.config.middleware.use ExceptionNotification::Rack,
   :email => {
     :email_prefix => "[Exception] ",

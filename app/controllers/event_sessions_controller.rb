@@ -13,6 +13,9 @@ class EventSessionsController < ApplicationController
     @event_sessions = @event_sessions.
       where('event_sessions.name LIKE ?', '%' + @query + '%') unless (@query = params[:q]).blank?
 
+    @event_sessions = @event_sessions.has_a_reference if \
+      (@has_a_reference = params[:has_a_reference].to_i).positive?
+
     @event_sessions = @event_sessions.
       order('event_sessions.start_time DESC').
       includes(:event).includes(:user)
@@ -72,6 +75,36 @@ class EventSessionsController < ApplicationController
 
     respond_to do |format|
       format.html
+    end
+  end
+
+  def like
+    @event_session = EventSession.find_for_voting(params[:id])
+
+    if current_user.voted_up_on? @event_session
+      @event_session.unliked_by current_user
+    else
+      current_user.likes @event_session
+    end
+
+    respond_to do |format|
+      format.html { redirect_to event_session_path(@event_session) }
+      format.js { render 'vote' }
+    end
+  end
+
+  def dislike
+    @event_session = EventSession.find_for_voting(params[:id])
+
+    if current_user.voted_down_on? @event_session
+      @event_session.undisliked_by current_user
+    else
+      current_user.dislikes @event_session
+    end
+
+    respond_to do |format|
+      format.html { redirect_to event_session_path(@event_session) }
+      format.js { render 'vote' }
     end
   end
 end

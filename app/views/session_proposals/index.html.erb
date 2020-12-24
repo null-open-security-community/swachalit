@@ -1,0 +1,34 @@
+<div class='row'>
+  <div class="col-md-12">
+    <h1>Session Proposals</h1>
+    <table class="table table-condensed">
+      <tr>
+        <th width='10%'>#</th>
+        <th width='20%'>Chapter</th>
+        <th width='20%'>Event Type</th>
+        <th width='40%'>Name</th>
+        <th></th>
+      </tr>
+      <% @session_proposals.each do |session_proposal| %>
+      <tr>
+        <td><%= session_proposal.id %></td>
+        <td><%= session_proposal.chapter.name %></td>
+        <td><%= session_proposal.event_type.name %></td>
+        <td><%= session_proposal.session_topic %></td>
+        <td>
+          <% if session_proposal.user_id == current_user.id %>
+            <%= link_to edit_session_proposal_path(session_proposal), :style => 'text-decoration: none;' do %>
+              <%= fa_icon(:edit) %> Edit Proposal
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+      <tr>
+        <td colspan=5>
+          <%= paginate @session_proposals %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -36,7 +36,7 @@ module API
         success EventEntity
       end
       get 'events' do
-        present current_user.registered_participation, \
+        present current_user.registered_participation.map(&:event), \
           with: EventEntity
       end
 

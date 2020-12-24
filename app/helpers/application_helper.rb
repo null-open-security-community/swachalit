@@ -1,6 +1,18 @@
 module ApplicationHelper
-  def title(page_title)
+  def title(t)
+    page_title(t)
+  end
+
+  def page_title(page_title)
     content_for(:title) { page_title }
+  end
+
+  def page_description(desc)
+    content_for(:description) { desc }
+  end
+
+  def page_image(img_path)
+    content_for(:image_url) { img_path }
   end
 
   def content_for_or_default(key, default)
@@ -84,14 +96,21 @@ module ApplicationHelper
     return '#' if s =~ /\Achrome/i
     return '#' if s =~ /\Aabout/i
     return "http://#{s}" if s !~ /\Ahttp/i   # Force protocol
-    
+
     return s
   end
 
   def user_attendance_brief(user)
     t = user.event_registrations.absent.count > 0 ? 'danger' : 'info'
-    ("<span class='label label-#{t}'>A:%d/T:%d</span>" % 
+    ("<span class='label label-#{t}'>A:%d/T:%d</span>" %
       [user.event_registrations.absent.count, user.event_registrations.count]).html_safe
+  end
+
+  def exif_warning
+    content_tag(:small) do
+      %q|The file will be uploaded and stored "as is" without processing.
+      Ensure EXIF data is not exposing sensitve information.|
+    end
   end
 
 end

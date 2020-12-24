@@ -1,3 +1,48 @@
 // Place all the styles related to the event_sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/* Event Sessions */
+
+.reaction {
+  font-size:22px;
+  margin-top:4rem!important;
+  margin-right:5rem!important;
+}
+
+.reaction-active {
+  margin-right:1rem!important;
+  color: none;
+}
+
+.reaction-inactive {
+  margin-right:1rem!important;
+  color:#6d6d6d;
+}
+
+.comment {
+  margin-top: 3rem;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.add-comment-item {
+  padding-right: 1rem;
+}
+.new-comment-input {
+  flex-grow:1!important;
+}
+
+.underline {
+  text-decoration: underline!important;
+}
+
+.event-session-comment-option {
+  margin-right: 2rem;
+}
+
+.event-session-signin-warning {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}

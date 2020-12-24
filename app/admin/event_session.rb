@@ -16,7 +16,7 @@ ActiveAdmin.register EventSession do
   form do |f|
     f.inputs "Event Session" do
       f.input :event
-      f.input :user, :as => :select, :collection => [ f.object.user ].compact(), :input_html => { :class => 'need-user-autocomplete' }      
+      f.input :user, :as => :select, :collection => [ f.object.user ].compact(), :input_html => { :class => 'need-user-autocomplete' }
       f.input :name
       f.input :description
       f.input :need_projector
@@ -27,6 +27,10 @@ ActiveAdmin.register EventSession do
       f.input :video_url
       f.input :start_time, :as => :just_datetime_picker
       f.input :end_time, :as => :just_datetime_picker
+    end
+
+    f.inputs "Media" do
+      f.file_field :image, hint: 'Image will be rendered as part of page open graph image'
     end
 
     f.actions

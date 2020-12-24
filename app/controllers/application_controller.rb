@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |exception|
     render :status => 401, :text => 'Access Denied!'
@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_raven_context
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
@@ -47,4 +48,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_raven_context
+    Raven.user_context(id: session[:current_user_id])
+    Raven.extra_context(params: params.to_unsafe_h, url: request.url)
+  end
 end

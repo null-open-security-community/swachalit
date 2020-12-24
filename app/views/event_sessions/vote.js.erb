@@ -1,0 +1,21 @@
+$('#like').removeClass();
+$('#dislike').removeClass();
+
+$('#like-size').html("<%= @event_session.get_likes.size %>");
+$('#like').addClass("reaction-inactive");
+<% if current_user.voted_up_on? @event_session %>
+  $('#like').removeClass();
+  $('#like').addClass("reaction-active");
+  $('#like').css("color", "none!important");
+<% end %>
+$('#like').blur();
+$('#like').hideFocus = true;
+
+$('#dislike-size').html("<%= @event_session.get_dislikes.size %>");
+$('#dislike').addClass("reaction-inactive");
+<% if current_user.voted_down_on? @event_session %>
+  $('#dislike').removeClass();
+  $('#dislike').addClass("reaction-active");
+<% end %>
+$('#dislike').blur();
+$('#dislike').hideFocus = true;
