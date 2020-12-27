@@ -16,9 +16,22 @@ class UsersTest < ActionDispatch::IntegrationTest
     assert_response :ok
   end
 
-  test "Authenticated users should change password from profile page" do
+  test "Unauthenticated user can not access edit passsword page" do
+    get edit_user_password_path
+    assert_redirected_to new_user_session_path
+  end
+  
+  test "Authenticated users should change password from profile page only" do
     sign_in users(:one)
     get new_user_password_path
     assert_redirected_to root_path
   end
+
+  test "Authenticated users should edit password from profile page only" do
+    sign_in users(:one)
+    get edit_user_password_path
+    assert_redirected_to root_path
+  end
+
+  test ""
 end
