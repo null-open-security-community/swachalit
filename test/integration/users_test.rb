@@ -33,4 +33,12 @@ class UsersTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
+  #TODO: Do we need to test updates on /users/password?
+  # test "Authenticated users can edit password" do
+  #   sign_in users(:one)
+  #   user = users(:one)
+  #   put user_password_path, user:user
+  #   assert_response :ok
+  # end
+
 end
