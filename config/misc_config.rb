@@ -29,5 +29,5 @@ CFG_APP_DESCRIPTION = "null is India's largest open security community"
 CFG_APP_DEFAULT_PAGE_IMAGE = 'null-blog-banner_white.png'   ## Image must exists in /assets/images
 CFG_APP_TWITTER_IMAGE = 'null-logo.jpg'
 
-CFG_VOLUNTEER_FORM_URL = 'https://docs.google.com/forms/d/1lEMrKAfE7OtHk9wqReVeGTZZtADE9K6bSuRPxRr2Tio/edit'
+CFG_VOLUNTEER_FORM_URL = 'https://docs.google.com/forms/d/1suH85wxJ6P9vmwIUjuSWbvXxIFoh05wGPpEvByssxNg/edit'
 CFG_GOOGLE_GROUPS_URL = 'https://groups.google.com/forum/#!forum/null-co-in'
