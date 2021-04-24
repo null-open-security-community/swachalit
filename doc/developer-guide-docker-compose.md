@@ -6,7 +6,11 @@
 2. Docker Compose
 3. Visual Studio Code
 
-> *Note:* If you are on Windows, you might want to use the [Vagrantfile](https://github.com/null-open-security-community/swachalit/blob/master/Vagrantfile) with [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html). Refer to [Setting up Development Environment with Vagrant](vagrant.md)
+### Windows
+
+If you are on Windows but not on latest versions *(1903)* of Windows 10, you need to to use the [Vagrantfile](https://github.com/null-open-security-community/swachalit/blob/master/Vagrantfile) with [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](https://www.vagrantup.com/downloads.html). Refer to [Setting up Development Environment with Vagrant](vagrant.md). 
+
+If you are using relatively latest 64 bit Windows 10 version *(1903 or higher)*, you may consider using [Docker for Desktop](https://docs.docker.com/docker-for-windows/install-windows-home/) with [WSL2 backend](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
 ## Clone Repository
 

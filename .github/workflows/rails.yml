@@ -23,9 +23,9 @@ jobs:
     - uses: actions/cache@v2
       with:
         path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        key: ${{ runner.os }}-gems-v2-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
-          ${{ runner.os }}-gems-
+          ${{ runner.os }}-gems-v2-
     - name: Build and test with Rake
       env:
         RAILS_ENV: test
