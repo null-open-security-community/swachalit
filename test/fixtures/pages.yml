@@ -1,5 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one: {}
+one: 
+  id: 1
+  name: "page-1"
+  description: 'Test page 1'
+  navigation_name: 'page1'
+  content: "This is test page 1"
+  published: true
+
 
 two: {}
