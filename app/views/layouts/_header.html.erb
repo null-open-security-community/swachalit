@@ -54,7 +54,7 @@
             </li>
           </ul>
         </li>
-        <li>
+<!--        <li>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li>
@@ -74,7 +74,7 @@
             </li>
           </ul>
         </li>
-        <li>
+-->        <li>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <% Page.published.order('title ASC').each do |page| %>
@@ -82,6 +82,11 @@
               <%= link_to page.navigation_name, page_path(page) %>
             </li>
             <% end %>
+            <li>
+              <a href="/api-v2/swagger", target="_blank">
+              <%= fa_icon('code') %> API
+              </a>
+            </li>
           </ul>
         </li>
         <li>
@@ -131,14 +136,14 @@
           </ul>
         </li>
         <% else %>
-        <li>
+<!--        <li>
           <%= link_to '/users/sign_up', :style => 'font-weight: bolder' do %>
             <%= fa_icon(:group) %> Join the null Community
           <% end %>
         </li>
-        <li>
+-->        <li>
           <%= link_to new_session_path(User) do %>
-            <%= fa_icon('sign-in') %> Login
+            <%= fa_icon('sign-in') %> Login / Register
           <% end %>
         </li>
         <% end %>
@@ -147,11 +152,12 @@
             <%= fa_icon('book') %> About
           </a>
         </li>
-        <li>
+<!--        <li>
           <a href="/api-v2/swagger", target="_blank">
             <%= fa_icon('code') %> API
           </a>
         </li>
+-->
       </ul>
     </nav>
   </div>
