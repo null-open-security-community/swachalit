@@ -54,27 +54,7 @@
             </li>
           </ul>
         </li>
-<!--        <li>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li>
-              <%= link_to calendar_path do %>
-                <%= fa_icon('calendar-o') %> Calendar
-              <% end %>
-            </li>
-            <li>
-              <%= link_to 'https://www.twitter.com/null0x00', :target => '_blank' do %>
-                <%= fa_icon(:twitter) %> Twitter
-              <% end %>
-            </li>
-            <li>
-              <%= link_to forum_path do %>
-                <%= fa_icon(:jsfiddle) %> Forum
-              <% end %>
-            </li>
-          </ul>
-        </li>
--->        <li>
+ <li>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <% Page.published.order('title ASC').each do |page| %>
@@ -136,12 +116,7 @@
           </ul>
         </li>
         <% else %>
-<!--        <li>
-          <%= link_to '/users/sign_up', :style => 'font-weight: bolder' do %>
-            <%= fa_icon(:group) %> Join the null Community
-          <% end %>
-        </li>
--->        <li>
+       <li>
           <%= link_to new_session_path(User) do %>
             <%= fa_icon('sign-in') %> Login / Register
           <% end %>
@@ -152,12 +127,7 @@
             <%= fa_icon('book') %> About
           </a>
         </li>
-<!--        <li>
-          <a href="/api-v2/swagger", target="_blank">
-            <%= fa_icon('code') %> API
-          </a>
-        </li>
--->
+
       </ul>
     </nav>
   </div>
