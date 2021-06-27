@@ -36,7 +36,8 @@ class Event < ActiveRecord::Base
   has_many :event_registrations, :dependent => :destroy
 
   before_create :set_automatic_values!  # Defaults
-  after_create  :slugify!
+  #after_create  :slugify!
+  before_create :slugify!
   after_create  :notify_admin_on_create
   after_save    :setup_scheduled_tasks, :if => lambda { public_changed? }
 
@@ -147,7 +148,7 @@ class Event < ActiveRecord::Base
   # ActiveRecord :on_create
   def slugify!
     self.slug = "#{self.chapter.name} #{self.name.parameterize} #{self.id}".parameterize
-    self.save()
+    #self.save()
   end
 
   def external_url()
