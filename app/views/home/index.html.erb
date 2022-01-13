@@ -29,6 +29,9 @@ null is open, professional, inclusive, responsible, and most importantly complet
         <%= link_to chapters_path, class: 'btn btn-lg btn-primary' do %>
           <%= fa_icon("book") %> Find a Chapter Near You
         <% end %>
+        <%= link_to "https://linktr.ee/nullcommunity", class: 'btn btn-lg btn-primary', target: '_blank' do %>
+          <%= fa_icon("book") %> Social Network Links
+        <% end %>
       </center>
     </div>
   </div>
@@ -120,7 +123,7 @@ null is open, professional, inclusive, responsible, and most importantly complet
         <p class='lead text-justify' style='min-height: 360px;'>
           null is purely driven by volunteers. Volunteers support and contribute in making the community the way it is. Benefits of being a volunteer include a cool @null.co.in email address, access to null events, mentorship opportunities with the best in the Industry and more. So become a volunteer, now!
         </p>
-        <%= link_to 'https://docs.google.com/forms/d/1w6I4lcYraiaGd9YvJ6fkmKrJyM7n9V0OmmXtyFeqUT4/viewform', :class => 'btn btn-danger btn-block', :target => '_blank' do %>
+        <%= link_to CFG_VOLUNTEER_FORM_URL, :class => 'btn btn-danger btn-block', :target => '_blank' do %>
           <%= fa_icon('user-plus') %> Become a Volunteer
         <% end %>
       </div>
