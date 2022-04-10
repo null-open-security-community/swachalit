@@ -1,8 +1,8 @@
-name: Production Deployment
+name: Container Image Builder
 
 on:
   push:
-    branches: [ master, migrate-to-github-packages ]
+    branches: [ master ]
 
 env:
   REGISTRY: ghcr.io
