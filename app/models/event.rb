@@ -147,7 +147,7 @@ class Event < ActiveRecord::Base
   # ActiveRecord :on_create
   def slugify!
     self.slug = "#{self.chapter.name} #{self.name.parameterize} #{self.id}".parameterize
-    #self.save()
+    self.save()
   end
 
   def external_url()
