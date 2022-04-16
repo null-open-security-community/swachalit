@@ -46,7 +46,7 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Export Docker Image to File
-      run: docker save $REGISTRY/$IMAGE_NAME:$GITHUB_SHA /tmp/swachalit-docker-current.tar
+      run: docker save $REGISTRY/$IMAGE_NAME -o /tmp/swachalit-docker-current.tar
 
     - name: Copy to Artefacts S3
       run: aws s3 cp /tmp/swachalit-docker-current.tar ${{ env.AWS_S3_PATH }}
