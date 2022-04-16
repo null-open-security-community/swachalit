@@ -2,7 +2,7 @@ name: Container Image Builder
 
 on:
   push:
-    branches: [ master, artefact-publish-s3 ]
+    branches: [ master ]
 
 env:
   REGISTRY: ghcr.io
