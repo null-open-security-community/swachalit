@@ -1,0 +1,52 @@
+name: Container Image Builder
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  AWS_REGION: us-east-1
+  AWS_ACCESS_ROLE: arn:aws:iam::800803827403:role/github-oidc-impersonation-role
+  AWS_S3_PATH: s3://null-public-artefacts-prod-815d7ba4fb5d08af/swachalit/current/docker-build.tar
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Log in to the Container registry
+      uses: docker/login-action@v1
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build Container Image
+      run: docker build -t $REGISTRY/$IMAGE_NAME:$GITHUB_SHA .
+
+    - name: Tag Latest Container Images
+      run: docker tag $REGISTRY/$IMAGE_NAME:$GITHUB_SHA $REGISTRY/$IMAGE_NAME:latest
+
+    - name: Push Container Image
+      run: docker push $REGISTRY/$IMAGE_NAME
+
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ env.AWS_ACCESS_ROLE }}
+        role-session-name: aws-github-oidc-session
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Export Docker Image to File
+      run: docker save $REGISTRY/$IMAGE_NAME -o /tmp/swachalit-docker-current.tar
+
+    - name: Copy to Artefacts S3
+      run: aws s3 cp /tmp/swachalit-docker-current.tar ${{ env.AWS_S3_PATH }}
