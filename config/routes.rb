@@ -67,12 +67,16 @@ NullifyPlatform::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   #ActiveAdmin.routes(self)
 
+  as :user do
+    patch '/users/confirmation', :to => 'devise/confirmations#update', :via => :patch, :as => :update_user_confirmation
+  end
+  
   devise_for :users, :controllers => {
     :registrations => 'registrations',
     :passwords => 'passwords',
     :confirmations => 'confirmations'
-  }
-
+  } 
+  
   get '/signup/confirm' => 'home#signup_confirm', :as => :signup_confirm
   get '/upcoming'       => 'home#upcoming', :as => :upcoming
   get '/archives'       => 'home#archives', :as => :archives
