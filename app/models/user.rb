@@ -146,6 +146,10 @@ class User < ActiveRecord::Base
     true
   end
 
+  def self.find_by_public_confirmation_token(public_confirmation_token)
+    confirmation_token = Devise.token_generator.digest(self, :confirmation_token, public_confirmation_token)
+    find_by_confirmation_token(confirmation_token)
+ end
   # Devise stopped sending initial confirmation mail after Rails 4.x upgrade
   # Here we force confirmation mail delivery if not already delivered
   # def deliver_confirmation_mail!

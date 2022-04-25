@@ -3,9 +3,10 @@
 en:
   devise:
     confirmations:
-      confirmed: "Your account was successfully confirmed. You are now signed in."
+      confirmed: "Your account was successfully confirmed."
       send_instructions: "You will receive an email with instructions about how to confirm your account in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes."
+      invalid_password: "Password is not valid. You can reset your password by using use 'Forgot your password?' link."
     failure:
       already_authenticated: "You are already signed in."
       inactive: "Your account was not activated yet."
