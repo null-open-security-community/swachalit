@@ -91,32 +91,4 @@ unless Rails.env.production?
       published: true
     })
   end
-
-  ## Past data
-  10.times do |i|
-    e = Event.create({
-      venue_id: i+1,
-      chapter_id: i+1,
-      event_type_id: 1+rand(3),
-      name: "Past Event Test-#{i}",
-      public: true,
-      can_show_on_homepage: true,
-      can_show_on_archive: true,
-      accepting_registration: true,
-      max_registration: 100,
-      start_time: Time.now + 1.hour - i.days,
-      end_time: Time.now - i.days + 6.hour,
-      registration_start_time: Time.now - i.days,
-      registration_end_time: Time.now + i.days + 1.year
-    })
-    e.save(:validate => false)
-    e.event_sessions.create({
-      user_id: 1,
-      name: "Past Event Session #{i}",
-      description: "Past Event Description #{i}",
-      placeholder: false,
-      start_time: e.start_time + 1.hour,
-      end_time: e.start_time + 2.hour
-    })
-  end
 end
