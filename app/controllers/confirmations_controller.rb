@@ -3,7 +3,9 @@ class ConfirmationsController < Devise::ConfirmationsController
 
   def show
     self.resource = resource_class.find_by_confirmation_token(params[:confirmation_token]) if params[:confirmation_token].present?
-    if self.resource.confirmed?
+    if self.resource.nil?
+      redirect_to new_user_confirmation_path, :alert => find_message(:invalid_token)
+    elsif self.resource.confirmed?
       redirect_to new_user_session_path, :notice => find_message(:confirmed)
     end
   end
@@ -12,8 +14,9 @@ class ConfirmationsController < Devise::ConfirmationsController
     token = params[:user][:confirmation_token]
     self.resource = resource_class.find_by_confirmation_token(token)
     
-    if self.resource.valid_password?(params[:user][:password])
-      #super.show   ## this is not working
+    if self.resource.nil?
+      redirect_to new_user_confirmation_path, :alert => find_message(:invalid_token)
+    elsif self.resource.valid_password?(params[:user][:password])      
       resource_class.confirm_by_token(token)
       redirect_to new_user_session_path, :notice => find_message(:confirmed)
     else
