@@ -23,7 +23,7 @@ class DeviseConformatinTest < ActionDispatch::IntegrationTest
   test "Confirmation completes after password verification" do
     email = 'newuser-fc591ba5dac844d0@example.com'
     name = 'newuser-fc591ba5dac844d0'
-    password = 'Test1234'
+    password = get_random_string
   
     post user_registration_path,
       user: { name: name, email: email, password: password, password_confirmation: password }
@@ -43,8 +43,8 @@ class DeviseConformatinTest < ActionDispatch::IntegrationTest
   test "Confirmation fails on incorrect password" do
     email = 'newuser-fc591ba5dac844d0@example.com'
     name = 'newuser-fc591ba5dac844d0'
-    password = 'Test1234'
-  
+    password = get_random_string()
+    
     post user_registration_path,
       user: { name: name, email: email, password: password, password_confirmation: password }
     assert_response :redirect
@@ -53,7 +53,7 @@ class DeviseConformatinTest < ActionDispatch::IntegrationTest
     token = u.confirmation_token
 
     put confirm_with_password_path,
-      user: {password: 'WrongPassword', confirmation_token: token}
+      user: {password: 'WrongPass', confirmation_token: token}
     assert_redirected_to "/users/confirmation?confirmation_token=#{token}"
 
     u = ::User.where(email: email).first()
