@@ -32,6 +32,13 @@ class ActiveSupport::TestCase
     token
   end
 
+  def get_random_string(length=10)
+    charset = [*'a'..'z', *0..9, *'A'..'Z']
+    # Can't go beyond charset size
+    len = length > charset.size ? charset.size : length
+    charset.shuffle[0..(len-1)].join
+  end
+
 end
 
 class ActionDispatch::IntegrationTest
