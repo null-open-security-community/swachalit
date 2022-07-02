@@ -9,7 +9,8 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   AWS_REGION: us-east-1
   AWS_ACCESS_ROLE: arn:aws:iam::800803827403:role/github-oidc-impersonation-role
-  AWS_S3_PATH: s3://null-public-artefacts-prod-815d7ba4fb5d08af/swachalit/current/docker-build.tar
+  AWS_S3_BUCKET: null-public-artefacts-prod-815d7ba4fb5d08af
+  AWS_S3_KEY: swachalit/current/docker-build.tar
 
 jobs:
   build-and-push-image:
@@ -49,4 +50,12 @@ jobs:
       run: docker save $REGISTRY/$IMAGE_NAME -o /tmp/swachalit-docker-current.tar
 
     - name: Copy to Artefacts S3
-      run: aws s3 cp /tmp/swachalit-docker-current.tar ${{ env.AWS_S3_PATH }}
+      run: |
+        aws s3 cp /tmp/swachalit-docker-current.tar \
+          s3://${{ env.AWS_S3_BUCKET }}/${{ env.AWS_S3_KEY }}
+
+    - name: Set public tag to S3 artefact
+      run: |
+        aws s3api put-object-tagging \
+          --bucket ${{ env.AWS_S3_BUCKET }} --key ${{ env.AWS_S3_KEY }} \
+          --tagging 'TagSet=[{Key=public,Value=yes}]'
