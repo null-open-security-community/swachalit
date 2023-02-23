@@ -13,8 +13,8 @@ set :repository, 'https://abhisek@bitbucket.org/null0x00/null-automation-framewo
 set :user, "abhisek"
 set :use_sudo, false
 
-role :app, "null.co.in"
-role :web, "null.co.in"
+role :app, "null.community"
+role :web, "null.community"
 
 namespace :deploy do
   task :start do ; end

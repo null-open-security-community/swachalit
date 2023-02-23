@@ -1,6 +1,6 @@
 # null Swachalit
 
-This repository contains source code of application used to run https://null.co.in
+This repository contains source code of application used to run https://null.community
 
 [![CircleCI](https://circleci.com/gh/null-open-security-community/swachalit/tree/master.svg?style=svg)](https://circleci.com/gh/null-open-security-community/swachalit/tree/master)
 ![Build and Test](https://github.com/null-open-security-community/swachalit/workflows/Rails%20Build%20and%20Test/badge.svg)

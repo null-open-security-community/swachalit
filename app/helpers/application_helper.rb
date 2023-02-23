@@ -74,11 +74,11 @@ module ApplicationHelper
     end
   end
 
-  def twitter_icon(url = 'http://www.null.co.in', size = '40x40')
+  def twitter_icon(url = 'https://www.null.community', size = '40x40')
     sm_icon_with_link('twitter', url, size)
   end
 
-  def facebook_icon(url = 'http://www.null.co.in', size = '40x40')
+  def facebook_icon(url = 'https://www.null.community', size = '40x40')
     sm_icon_with_link('facebook', url, size)
   end
 
@@ -95,7 +95,7 @@ module ApplicationHelper
     return '#' if s =~ /\Ajavascript/i
     return '#' if s =~ /\Achrome/i
     return '#' if s =~ /\Aabout/i
-    return "http://#{s}" if s !~ /\Ahttp/i   # Force protocol
+    return "https://#{s}" if s !~ /\Ahttp/i   # Force protocol
 
     return s
   end
