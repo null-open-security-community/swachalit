@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Ruby 2.6
       uses: ruby/setup-ruby@v1
       with:
@@ -20,7 +20,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential libpq-dev nodejs \
         libsqlite3-dev default-libmysqlclient-dev libxml2-dev
-    - uses: actions/cache@v2
+    - uses: actions/cache@v3
       with:
         path: vendor/bundle
         key: ${{ runner.os }}-gems-v2-${{ hashFiles('**/Gemfile.lock') }}
@@ -42,7 +42,7 @@ jobs:
       run: |
         bundle exec brakeman -4 -w2 -o brakeman-sast-report.html -o /dev/stdout
     - name: Archive Brakeman SAST Report
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: brakeman-sast-report
         path: brakeman-sast-report.html
