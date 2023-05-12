@@ -6,7 +6,7 @@ gem 'rails', '~> 4.2'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
-  gem 'sqlite3', '~> 1.3.6'
+  gem 'sqlite3', '~> 1.5.4'
 
   # From assets group
   gem 'sassc-rails'
