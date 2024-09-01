@@ -1,5 +1,11 @@
 FROM ruby:2.6.2-slim
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs libsqlite3-dev default-libmysqlclient-dev libxml2-dev
+
+RUN echo "deb http://archive.debian.org/debian/ stretch main" > /etc/apt/sources.list && \
+    echo "deb http://archive.debian.org/debian-security stretch/updates main" >> /etc/apt/sources.list && \
+    apt-get update -y
+
+RUN apt-get update -y --allow-insecure-repositories && \
+    apt-get install -y build-essential libpq-dev nodejs libsqlite3-dev default-libmysqlclient-dev libxml2-dev
 
 WORKDIR /app
 
