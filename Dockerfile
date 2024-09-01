@@ -1,8 +1,4 @@
-FROM ruby:2.6.2-slim
-
-RUN echo "deb http://archive.debian.org/debian/ stretch main" > /etc/apt/sources.list && \
-    echo "deb http://archive.debian.org/debian-security stretch/updates main" >> /etc/apt/sources.list && \
-    apt-get update -y
+FROM ruby:2.6.8-slim-bullseye
 
 RUN apt-get update -y && \
     apt-get install -y build-essential libpq-dev nodejs libsqlite3-dev default-libmysqlclient-dev libxml2-dev
