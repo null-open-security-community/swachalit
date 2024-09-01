@@ -10,6 +10,15 @@
 </div>
 <!-- Chapter cards -->
 <div class="chapters-row">
+<!-- Search container and input -->
+<div class="search-container">
+  <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search chapters...">
+  </div>
+</div>
+<!-- Chapter cards -->
+<div class="chapters-row">
   <% @chapters.each do |chapter| %>
     <div class="chapter-card <%= chapter.active? ? 'chapter-active' : 'chapter-inactive' %>">
       <div class="chapter-img-container">
