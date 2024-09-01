@@ -63,15 +63,117 @@ body {
   text-justify: inter-word;
 }
 
-#chapter-map {
+<%# #chapter-map {
   height: 400px;
   width: 100%;
   margin-bottom:4rem!important;
+} %>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+<%# search chapters Input css %>
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+.search-wrapper {
+  position: relative;
+  width: 250px;
+}
+#searchInput {
+  width: 100%;
+  padding: 10px 15px 10px 40px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #3498db;
+  background-color: transparent;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+#searchInput:focus {
+  border-color: #2980b9;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #7f8c8d;
+}
+ 
+<%# chapters css  %>
+.chapters-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 30px;
 }
 
 .chapter-card {
-  border: 1px solid #dee2e6 !important;
-  margin-bottom:3rem!important;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+}
+
+.chapter-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.chapter-img-container {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+.chapter-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.chapter-card:hover .chapter-img {
+  transform: scale(1.1);
+}
+
+.card-body {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  color: #2c3e50;
+}
+.card-text {
+  font-size: 14px;
+  color: #34495e;
+  margin-bottom: 15px;
+}
+.text-muted {
+  font-size: 13px;
+  color: #7f8c8d;
+}
+
+.chapter-status {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .chapter-active {
@@ -81,27 +183,61 @@ body {
 .chapter-inactive {
   background-image: radial-gradient(circle, rgba(255,102,102,0.1), rgba(255,102,102,0.6));
 }
-
-.chapter-zoom {
-  transform: scale(1.1);
+.chapter-active .chapter-status {
+  background-color: #2ecc71;
+  color: white;
+}
+.chapter-inactive .chapter-status {
+  background-color: #e74c3c;
+  color: white;
 }
 
-.chapter-fixed-content {
-  position: fixed;
+.chapter-details {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid #ecf0f1;
+}
+<%# events css  %>
+.event-count {
+  display: flex;
+  align-items: center;
+}
+.event-icon {
+  margin-right: 5px;
+  font-size: 16px;
+}
+<%# learn more css  %>
+.learn-more {
+  background-color: #3498db;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+.learn-more:hover {
+  background-color: #2980b9;
 }
 
-.chapter-img {
-  opacity: 0.9;
+<%# upcoming events css  %>
+.upcoming-events {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.upcoming-events .event-icon {
+  margin-right: 8px;
+}
+.upcoming-events .text-muted {
+  color: #6c757d;
 }
 
-.chapter-hover figure {
-	opacity: 1;
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
-}
-.chapter-hover figure:hover {
-	opacity: .6;
-}
+
 
 
 /* Autocomplete JS */

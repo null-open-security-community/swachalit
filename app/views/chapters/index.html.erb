@@ -1,42 +1,61 @@
 <h1 class="text-center">Chapters</h1>
 <div id="chapter-map" class="mb-5"></div>
 
-<div class="row mt-5">
+<!-- Search container and input -->
+<div class="search-container">
+  <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search chapters...">
+  </div>
+</div>
+<!-- Chapter cards -->
+<div class="chapters-row">
   <% @chapters.each do |chapter| %>
-    <% if chapter.active? %>
-      <% cName = 'chapter-active' %>
-    <% else %>
-      <% cName = 'chapter-inactive' %>
-    <% end %>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-5">
-        <%= link_to chapter_path(chapter) do %>
-          <div class='card chapter-card <%= cName %>'>
-            <div class="chapter-img chapter-hover text-center">
-              <figure><%= image_tag chapter.image_url, :size => '260x150', :class => 'chapter-img' %></figure>
-            </div>
-            <div class="card-body text-center">
-              <h4 class="card-title" ><%= chapter.name %> Chapter</h4>
-              <p class="card-text"><%= chapter.city %>,<% if chapter.state.present? && chapter.state!=chapter.city %> <%= chapter.state %>,<% end %> <%= chapter.country %></p>
-              <p class="text-muted"><%= pluralize(chapter.past_events.count, "Past event") %></p>
-              <p class="text-muted"><%= pluralize(chapter.upcoming_events.count, "Upcoming event") %></p>
-              <%= link_to '', chapter_path(chapter), class:'stretched-link' %>
-            </div>
+    <div class="chapter-card <%= chapter.active? ? 'chapter-active' : 'chapter-inactive' %>">
+      <div class="chapter-img-container">
+        <img src="<%= chapter.image_url %>" alt="<%= chapter.name %>" class="chapter-img">
+      </div>
+      <div class="chapter-status">
+        <%= chapter.active? ? 'Active' : 'Inactive' %>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title"><%= chapter.name %></h3>
+        <p class="card-text"><%= chapter.city %>,<% if chapter.state.present? && chapter.state!=chapter.city %> <%= chapter.state %>,<% end %> <%= chapter.country %></p>
+        <div class="upcoming-events">
+          <span class="event-icon">🔜</span>
+          <span class="text-muted"><%= chapter.upcoming_events.count %> upcoming events</span>
+        </div>
+        <div class="chapter-details">
+          <div class="event-count">
+            <span class="event-icon">📅</span>
+            <span class="text-muted"><%= chapter.past_events.count %> past events</span>
           </div>
-        <% end %>
+          <a href="<%= chapter_path(chapter) %>" class="learn-more">Learn More</a>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
 
+<!-- JavaScript code for dynamic functionality -->
 <script>
-  $(document).ready(function() {
-    $(".chapter-card" ).hover(
-      function() {
-        $(this).addClass('shadow-lg chapter-zoom').css('cursor', 'pointer')
-      }, function() {
-        $(this).removeClass('shadow-lg chapter-zoom')
-      }
-    )
-  })
+  (function () {
+    const existingCards = document.querySelectorAll(".chapter-card");
+    // Add search functionality
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", function() {
+      const searchQuery = this.value.toLowerCase();
+      existingCards.forEach((card) => {
+        const title = card.querySelector(".card-title").textContent.toLowerCase();
+        const location = card.querySelector(".card-text").textContent.toLowerCase();
+        if (title.includes(searchQuery) || location.includes(searchQuery)) {
+          card.style.display = "";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  })();
 </script>
 
 <%= render partial: 'chapters/chapter_map_loader',
