@@ -40,23 +40,41 @@
 <!-- JavaScript code for dynamic functionality -->
 <script>
   (function () {
-    const existingCards = document.querySelectorAll(".chapter-card");
-    // Add search functionality
+    const existingCards = Array.from(document.querySelectorAll(".chapter-card"));
     const searchInput = document.getElementById("searchInput");
-    searchInput.addEventListener("input", function() {
-      const searchQuery = this.value.toLowerCase();
-      existingCards.forEach((card) => {
-        const title = card.querySelector(".card-title").textContent.toLowerCase();
-        const location = card.querySelector(".card-text").textContent.toLowerCase();
-        if (title.includes(searchQuery) || location.includes(searchQuery)) {
-          card.style.display = "";
-        } else {
-          card.style.display = "none";
-        }
+
+    // Create a search index
+    const searchIndex = existingCards.map(card => ({
+      element: card,
+      title: card.querySelector(".card-title").textContent.toLowerCase(),
+      location: card.querySelector(".card-text").textContent.toLowerCase()
+    }));
+
+    // Debounce function
+    const debounce = (func, delay) => {
+      let timeoutId;
+      return (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func.apply(null, args), delay);
+      };
+    };
+
+    // Optimized search function
+    const performSearch = debounce((query) => {
+      const searchQuery = query.toLowerCase();
+      
+      requestAnimationFrame(() => {
+        searchIndex.forEach(item => {
+          const isVisible = item.title.includes(searchQuery) || item.location.includes(searchQuery);
+          item.element.style.display = isVisible ? "" : "none";
+        });
       });
+    }, 250);
+
+    searchInput.addEventListener("input", function() {
+      performSearch(this.value);
     });
   })();
 </script>
-
 <%= render partial: 'chapters/chapter_map_loader',
   locals: { chapter_address: @chapter_address, map_area_id: 'chapter-map' } %>
