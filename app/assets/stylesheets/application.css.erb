@@ -68,6 +68,31 @@ body {
   width: 100%;
   margin-bottom:4rem!important;
 }
+/*go to top button css */
+.back-to-top {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1030;
+  background-color: #333;
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 18px;
+  transition: all 0.3s ease-in-out;
+}
+
+.back-to-top:hover {
+  background-color: #555;
+}
+
+.back-to-top.show {
+  display: block;
+}
 
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');

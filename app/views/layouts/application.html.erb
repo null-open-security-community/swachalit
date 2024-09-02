@@ -22,8 +22,30 @@
   <div id='main-content' class='container'>
     <%= yield %>
   </div>
+  <!-- Back to top button -->
+  <%= link_to "#", id: "back-to-top", class: "back-to-top", data: { toggle: "tooltip", placement: "top", title: "Back to top" } do %>
+    <i class="fa fa-chevron-up"></i>
+  <% end %>
   <%= render :partial => 'layouts/footer' %>
   <%= render :partial => 'layouts/analytics' %>
   <%= render :partial => 'layouts/postscripts' %>
+  <script>
+  $(document).ready(function() {
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+      $('.back-to-top').addClass('show');
+    } else {
+      $('.back-to-top').removeClass('show');
+    }
+  });
+
+  $('.back-to-top').click(function() {
+    $('html, body').animate({ scrollTop: 0 }, 'slow');
+    return false;
+  });
+  });
+
+  </script>
+
 </body>
 </html>
