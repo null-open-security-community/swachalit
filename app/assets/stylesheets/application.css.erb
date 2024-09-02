@@ -69,31 +69,35 @@ body {
   margin-bottom:4rem!important;
 }
 /*go to top button css */
-.back-to-top {
-  display: none;
+#back-to-top {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 1030;
   background-color: #333;
   color: #fff;
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  line-height: 40px;
+  text-decoration : none;
   text-align: center;
-  font-size: 18px;
-  transition: all 0.3s ease-in-out;
+  line-height: 40px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.5s;
 }
 
-.back-to-top:hover {
+#back-to-top.show {
+  opacity: 1;
+}
+
+#back-to-top:hover {
   background-color: #555;
 }
 
-.back-to-top.show {
-  display: block;
+#back-to-top:before {
+  content: "\f077";
+  font-family: "FontAwesome";
 }
-
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
