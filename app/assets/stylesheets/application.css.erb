@@ -68,7 +68,36 @@ body {
   width: 100%;
   margin-bottom:4rem!important;
 }
+/*go to top button css */
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-decoration : none;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
 
+#back-to-top.show {
+  opacity: 1;
+}
+
+#back-to-top:hover {
+  background-color: #555;
+}
+
+#back-to-top:before {
+  content: "\f077";
+  font-family: "FontAwesome";
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
@@ -194,7 +223,13 @@ body {
 .chapter-active .chapter-status {
   background-color: #2ecc71;
   color: white;
+.chapter-active .chapter-status {
+  background-color: #2ecc71;
+  color: white;
 }
+.chapter-inactive .chapter-status {
+  background-color: #e74c3c;
+  color: white;
 .chapter-inactive .chapter-status {
   background-color: #e74c3c;
   color: white;
@@ -244,6 +279,8 @@ body {
 .upcoming-events .text-muted {
   color: #6c757d;
 }
+
+
 
 
 
