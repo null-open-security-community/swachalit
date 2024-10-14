@@ -1,42 +1,70 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Attribute Restriction",
-      "warning_code": 19,
-      "fingerprint": "1cf3bec221ae16ea2aef4df2a86d8a14037324a24673f02bef23f0e96d4d5ea1",
-      "check_name": "ModelAttributes",
-      "message": "Mass assignment is not restricted using `attr_accessible`",
-      "file": "app/models/user_api_token.rb",
-      "line": 1,
-      "link": "https://brakemanscanner.org/docs/warning_types/attribute_restriction/",
-      "code": null,
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "116243e2d3a0f162abaa037ce24a6ac22c05d75c8a2d56b4b7253bba7d8e4d06",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/event_session.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":tag_ids",
       "render_path": null,
       "location": {
         "type": "model",
-        "model": "UserApiToken"
+        "model": "EventSession"
       },
       "user_input": null,
-      "confidence": "High",
-      "note": "Internally created resource"
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
     },
     {
-      "warning_type": "Attribute Restriction",
-      "warning_code": 19,
-      "fingerprint": "2ff265b528b1956ee20610a9f57f9d9bec192b3072cc28cd435dacfe830de9a6",
-      "check_name": "ModelAttributes",
-      "message": "Mass assignment is not restricted using `attr_accessible`",
-      "file": "app/models/job.rb",
-      "line": 1,
-      "link": "https://brakemanscanner.org/docs/warning_types/attribute_restriction/",
-      "code": null,
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "1f82b6545e1fac17b4516cad3220a31fb7d5ad7f27e6dd28e0dc5d36529888a1",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/venue.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":chapter_id",
       "render_path": null,
       "location": {
         "type": "model",
-        "model": "Job"
+        "model": "Venue"
       },
       "user_input": null,
-      "confidence": "High",
-      "note": "Internally used model for creating async job"
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "2f6f4c26efbb9eee21e37dcb3a238f4d3e82c664fd216e25cb4bc889c04c5f3d",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/session_proposal.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":chapter_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "SessionProposal"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
     },
     {
       "warning_type": "Cross-Site Scripting",
@@ -63,7 +91,7 @@
         {
           "type": "template",
           "name": "events/show",
-          "line": 83,
+          "line": 84,
           "file": "app/views/events/show.html.erb",
           "rendered": {
             "name": "events/_event",
@@ -87,7 +115,296 @@
       },
       "user_input": null,
       "confidence": "Medium",
+      "cwe_id": [
+        79
+      ],
       "note": "This is required as a feature. Attack can be triggered by chapter leads only."
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "52fdc5b409eb2daa97cf62d56e716e2bd8947acad4e971c4af01badcc895b86e",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/event_automatic_notification_task.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":event_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "EventAutomaticNotificationTask"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "59470c0712caeff746803a32377c6961766908c825af7e01ec84cf51454987a9",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/page_access_permission.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":page_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "PageAccessPermission"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "5fec68df529ac7b37ff6aaa43aa17d0d57c0dda1b99b8f217bb976e910127ece",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/event_announcement_mailer_task.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":event_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "EventAnnouncementMailerTask"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "7e930b8ae760399dd5a82937a959447ccd80ab167c83893726ac6b72df1175fd",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/event.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":chapter_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "Event"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "86224745a621bcec5218c7d9204736ba5ff61ba718472a8b397f32a5aaad8339",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/session_proposal.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":event_type_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "SessionProposal"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "90ea9edce92f7d4c16a6ea55eee5fe56681b7e854c01be4a75ad215d81d18272",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/event.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":venue_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "Event"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "a1e4f55bbeaa4be3d28895c361e81d7185c61884fa79a1fb8347495a9e61d6c7",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/event.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":event_type_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "Event"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "a636a9703a27b9594ab5e4ecdd7b770f5af2a36a7854c4948df83b19b34baa1f",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/session_proposal.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":user_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "SessionProposal"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "a85a9bb585938dd7f5b71562e9183cf98613b6c7e8f81a4dfd39a354ea5d88dd",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/event_mailer_task.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":event_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "EventMailerTask"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "af73b10aa045413a22e4c98b98f68c1f0178ab2846d8adde0d961a053850bc83",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/chapter_lead.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":chapter_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "ChapterLead"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "bd378d5859f884800913fa7a3c07399cca98618a0dc3e4243d00dc7bc5121382",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/event_session_comment.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":event_session_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "EventSessionComment"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "bfd71c55fc299f89d6893ed53556ba5ba181eae52b6a39b3a316bf2108754129",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/chapter_lead.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":user_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "ChapterLead"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "c30f685d2f0bfe2133a26f4ee86719efd816b825e84adbb2db80c22bf2a38db4",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/session_request.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":chapter_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "SessionRequest"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
     },
     {
       "warning_type": "Cross-Site Request Forgery",
@@ -96,16 +413,104 @@
       "check_name": "CSRFTokenForgeryCVE",
       "message": "Rails 4.2.11.3 has a vulnerability that may allow CSRF token forgery. Upgrade to Rails 5.2.4.3 or patch",
       "file": "Gemfile.lock",
-      "line": 308,
+      "line": 339,
       "link": "https://groups.google.com/g/rubyonrails-security/c/NOjKiGeXUgw",
       "code": null,
       "render_path": null,
       "location": null,
       "user_input": null,
       "confidence": "Medium",
+      "cwe_id": [
+        352
+      ],
       "note": "Ignoring for now. Tracked as issue #59"
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "c9fdc2b53218365bca1e783b38e8a7c8b751c0b65ce467024dd1c7e5652f8c72",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/event_session.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":user_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "EventSession"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Unmaintained Dependency",
+      "warning_code": 120,
+      "fingerprint": "d84924377155b41e094acae7404ec2e521629d86f97b0ff628e3d1b263f8101c",
+      "check_name": "EOLRails",
+      "message": "Support for Rails 4.2.11.3 ended on 2017-04-27",
+      "file": "Gemfile.lock",
+      "line": 339,
+      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [
+        1104
+      ],
+      "note": "Ignoring for now till we upgrade"
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "e6adde7245eb592fc02bc01239f7a4988076fcb17d7940dd2fc614df2f7c8dbb",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/page_access_permission.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":user_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "PageAccessPermission"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 60,
+      "fingerprint": "eded29c8375a3439b333f8df54c0fe15411c0050389a5ba37a1cc1b4e6ce4367",
+      "check_name": "ModelAttrAccessible",
+      "message": "Potentially dangerous attribute available for mass assignment",
+      "file": "app/models/event_session.rb",
+      "line": null,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": ":event_id",
+      "render_path": null,
+      "location": {
+        "type": "model",
+        "model": "EventSession"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
     }
   ],
-  "updated": "2020-08-08 10:26:36 +0000",
-  "brakeman_version": "4.9.0"
+  "updated": "2024-10-14 19:57:36 +0000",
+  "brakeman_version": "5.4.1"
 }
