@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Ruby 2.6
       uses: ruby/setup-ruby@v1
       with:
@@ -20,7 +20,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential libpq-dev nodejs \
         libsqlite3-dev default-libmysqlclient-dev libxml2-dev
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       with:
         path: vendor/bundle
         key: ${{ runner.os }}-gems-v2-${{ hashFiles('**/Gemfile.lock') }}
@@ -30,7 +30,7 @@ jobs:
       env:
         RAILS_ENV: test
       run: |
-        gem install bundler
+        gem install bundler -v 2.4.21
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
         RUBYOPT=-W0 bundle exec rake db:create
