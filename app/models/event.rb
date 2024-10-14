@@ -236,7 +236,7 @@ class Event < ActiveRecord::Base
     c_event.last_modified = self.updated_at
     c_event.uid = "swachalit-event-#{self.id}"
     c_event.url = url_helpers.event_url(self)
-    c_event.organizer = Icalendar::Values::CalAddress.new("https://null.co.in", cn: 'null Open Security Community')
+    c_event.organizer = Icalendar::Values::CalAddress.new("https://null.community", cn: 'null Open Security Community')
 
     return c_event
   end
