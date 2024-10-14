@@ -1,6 +1,6 @@
 services:
   db:
-    image: mysql:5.5
+    image: mysql:5.7.44
     volumes:
       - swachalit-mysql:/var/lib/mysql
     env_file:
