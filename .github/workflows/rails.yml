@@ -42,7 +42,7 @@ jobs:
       run: |
         bundle exec brakeman -4 -w2 -o brakeman-sast-report.html -o /dev/stdout
     - name: Archive Brakeman SAST Report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: brakeman-sast-report
         path: brakeman-sast-report.html
