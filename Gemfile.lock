@@ -275,7 +275,7 @@ GEM
       mustermann (~> 1.0.0)
     mysql2 (0.5.2)
     naught (1.1.0)
-    nokogiri (1.15.2)
+    nokogiri (1.15.1)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     oauth2 (1.4.1)
