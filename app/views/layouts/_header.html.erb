@@ -1,14 +1,20 @@
 <header class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="banner">
   <div class="container">
     <div class="navbar-header">
-      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+      <a href="/" class="navbar-brand">n|u</a>
+      
+      <button class="navbar-toggle pull-right" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/" class="navbar-brand">n|u</a>
+      <div class="razorpay-form visible-xs pull-right" style="margin-right: 20px; margin-top: 2px;">
+        <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_GCUjGV4SIkhf9a" async> </script> </form>
+      </div>
     </div>
+    
+    
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
         <li>
@@ -60,7 +66,7 @@
             </li>
           </ul>
         </li>
- <li>
+        <li>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <% Page.published.order('title ASC').each do |page| %>
@@ -80,7 +86,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
+        <li class="hidden-xs">
           <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_GCUjGV4SIkhf9a" async> </script> </form>
         </li>
         <% if user_signed_in? %>
@@ -122,7 +128,7 @@
           </ul>
         </li>
         <% else %>
-       <li>
+        <li>
           <%= link_to new_session_path(User) do %>
             <%= fa_icon('sign-in') %> Login / Register
           <% end %>
@@ -133,7 +139,6 @@
             <%= fa_icon('book') %> About
           </a>
         </li>
-
       </ul>
     </nav>
   </div>
